@@ -1,2 +1,4 @@
 The system shall provide probability (in percentage) of the user enrolling into a class during the first week of the quarter based on previous waitlist data on the given course and professor.
 The system shall provide probability (in percentage) of the user enrolling into a class before registration starts based on the amount of students interested in a given class.
+The system shall provide space for other students to leave comments on professors’ tendencies to select students off the waitlist.
+
