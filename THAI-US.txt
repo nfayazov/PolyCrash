@@ -1,3 +1,5 @@
 1. As a Cal Poly student, I want to view the probability of getting into a certain class, so that I can make better informed decisions about which classes I should crash so that I am most likely to get into the class.
+
 2. As a student at Cal Poly, I want to know which classes out of all my waitlists will have the best probability to successfully crash, so that I can put my priorities to crash that specific class.
+
 3. As a coordinator for a department, I want to know which specific classes that students prioritize the most, so that I can organize more of those classes in high demand. 
