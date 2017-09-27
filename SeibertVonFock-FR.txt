@@ -2,3 +2,5 @@
 
 2. The system shall calculate the current quarter’s demand for a class.
 
+3. The system shall give recommendations of courses to take based off the student's major and it's prediction of the student's  chance to enroll in that class.
+
