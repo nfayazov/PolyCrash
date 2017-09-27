@@ -1,2 +1,4 @@
 1. The system shall calculate the chance to successfully enroll in a class for the current quarter.
 
+2. The system shall calculate the current quarter’s demand for a class.
+
