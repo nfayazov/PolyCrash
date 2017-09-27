@@ -1,0 +1,2 @@
+The system shall provide probability (in percentage) of the user enrolling into a class during the first week of the quarter based on previous waitlist data on the given course and professor.
+
