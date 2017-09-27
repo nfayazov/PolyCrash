@@ -1,3 +1,4 @@
 1. As a student, I want to be able to see an estimate of what chance I have to enroll in a class, so that I can prioritize what classes to attempt to enroll in and plan out my schedule.
 
+2. As a student, I want to be able to see recommendations of courses I should be taking and when, so that I can see all the options that are possible and plan out my graduation plan.
 
