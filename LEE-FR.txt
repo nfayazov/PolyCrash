@@ -1,5 +1,0 @@
-ystem shall notify the user when their waitlist position in a course changes by sending them an automated email listing the related class section and new waitlist position within an hour of the waitlist change.
-
-The system shall provide alternative course recommendations to a student based on the requirements of the student’s major, the student’s completed classes, and currently available courses when a student is currently waitlisted for a class.
-
-The system shall read a database of registration data from past quarters to determine estimated chances of acquiring a seat in a course from the waitlist. This calculation will take into consideration the student’s current waitlist position and the number of students enrolled from the waitlist previously.
