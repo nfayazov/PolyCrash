@@ -1,4 +1,0 @@
-User Stories
-1. As a Cal Poly student, I want to be notified when my position on a class’ waitlist changes, so that I am kept up to date about my chances of getting into a certain class. 
-2. As a Cal Poly student, I want to be given other recommended courses that will fulfill my degree requirements and currently have seats available, so that I can enroll in a class that is relevant to my degree. 
-3. As a Cal Poly student, I want to view the probability of getting into a certain class from my position on the waitlist, so that I can make better informed decisions about which classes I should crash so that I am most likely to get into the class.  

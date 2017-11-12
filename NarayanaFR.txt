@@ -1,5 +1,0 @@
-Functional Requirements
-1. The system shall send an email to the user within 60 seconds of a change to the user’s waitlist position on Student Center. 
-2. The system shall display courses that the user must still take to graduate and the number of seats available in those class sections. 
-3. The system shall calculate the chances the user has of receiving a seat in a particular class section and display that result to the user. 
-
