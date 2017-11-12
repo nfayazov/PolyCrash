@@ -1,0 +1,6 @@
+1. The system shall calculate the student’s probability to successfully crash each class with his or her waitlist number and the number of other students prioritizing the specific section by computing a weighted mean of the two numbers. 
+
+2. The system shall send automated emails within 60 seconds after a student’s waitlist number changes. 
+
+3. The system shall have a public comments section for students to input their crashing experiences and how their professor prioritizes who they give permission numbers to.
+

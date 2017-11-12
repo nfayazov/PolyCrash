@@ -1,0 +1,3 @@
+As a user, I want to be able to to see what chances I have of getting into a given class based on my rotation before registration opens, so that I know in advance what classes am I likely to be enrolled in next quarter.
+As a user, I want to be able to to see what chances I have of getting into a given class based on my rotation before registration opens, so that I know in advance what classes am I likely to be enrolled in next quarter. 
+As a user, I want to see comments left by other students about a given professor regarding the tendencies of letting students enroll from the waitlist, so that I know more about how the professor adds students from the waitlist.

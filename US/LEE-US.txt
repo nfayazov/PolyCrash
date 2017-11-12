@@ -1,0 +1,5 @@
+As a user, I want to know my chances of getting into waitlisted courses, so that I can prioritize which classes to crash.
+
+As a user, I want to view consolidated course options with short or no waitlists, so that I can make informed decisions on my enrollments.
+
+As a user, I want to be notified when I change waitlist positions, so that I am consistently updated on my waitlist status.
