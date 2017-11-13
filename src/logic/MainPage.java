@@ -1,6 +1,8 @@
 package logic;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -40,7 +42,7 @@ public class MainPage extends Application{
 		BorderPane border = new BorderPane();
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
-		Scene scene = new Scene(border);
+		Scene scene = new Scene(border, 600, 480);
 		stage.setScene(scene);
 		stage.setTitle("Main Page");
 		stage.show();
@@ -52,11 +54,43 @@ public class MainPage extends Application{
 	}
 	
 	private Hyperlink[] getSideLinks() {
+		Hyperlink profileLink = new Hyperlink("Profile");
+		Hyperlink homeLink = new Hyperlink("Home");
+		Hyperlink browseCoursesLink = new Hyperlink("Browse Courses");
+		Hyperlink exitLink = new Hyperlink("Exit");
+		
+		profileLink.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e) {
+				System.out.println("Clicked on profile");;
+			}
+		});
+		
+		homeLink.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e) {
+				System.out.println("Clicked on profile");;
+			}
+		});
+		
+		browseCoursesLink.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e) {
+				System.out.println("Clicked on browse courses");;
+			}
+		});
+		
+		exitLink.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e) {
+				System.out.println("Clicked on exit");
+				System.exit(0);
+			}
+		});
+
 		Hyperlink sideLinks[] = {
-				new Hyperlink("Home"),
-				new Hyperlink("Schedule"),
-				new Hyperlink("Browse Classes")
+				profileLink,
+				homeLink,
+				browseCoursesLink,
+				exitLink
 			};
+		
 		return sideLinks;
 	}
 	
@@ -69,6 +103,7 @@ public class MainPage extends Application{
 			//navBar.setMargin(sideLinks[i], new Insets(0, 0, 0, 8));
 			navBar.getChildren().add(sideLinks[i]);
 		}
+		navBar.setStyle("-fx-background-color: " + getDarkGreen());
 		return navBar;
 	}
 }
