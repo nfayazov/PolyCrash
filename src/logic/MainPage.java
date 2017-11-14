@@ -108,10 +108,13 @@ public class MainPage extends Application{
 		
 	}
 	
+	
+	
+	
 	private VBox getNavBar() {
 		VBox navBar = new VBox();
 		navBar.setPadding(new Insets(10));
-		navBar.setSpacing(10);
+		navBar.setSpacing(100);
 		//Hyperlink sideLinks[] = getSideLinks();
 		Button sideButtons[] = getSideButtons();
 		
@@ -120,6 +123,8 @@ public class MainPage extends Application{
 			navBar.getChildren().add(sideButtons[i]);
 		}
 		navBar.setStyle("-fx-background-color: " + getDarkGreen());
+		navBar.setPrefWidth(200);
+		navBar.setAlignment(Pos.CENTER);
 		return navBar;
 	}
 }
