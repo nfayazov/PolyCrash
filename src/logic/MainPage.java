@@ -42,7 +42,7 @@ public class MainPage extends Application{
 		BorderPane border = new BorderPane();
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
-		Scene scene = new Scene(border, 600, 480);
+		Scene scene = new Scene(border, 960, 700);
 		stage.setScene(scene);
 		stage.setTitle("Main Page");
 		stage.show();
@@ -53,55 +53,71 @@ public class MainPage extends Application{
 		return "#004d00";
 	}
 	
-	private Hyperlink[] getSideLinks() {
-		Hyperlink profileLink = new Hyperlink("Profile");
-		Hyperlink homeLink = new Hyperlink("Home");
-		Hyperlink browseCoursesLink = new Hyperlink("Browse Courses");
-		Hyperlink exitLink = new Hyperlink("Exit");
+	private Button[] getSideButtons() {
+		Button profileButton = new Button();
+		profileButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/profileIcon_64px.png"))));
 		
-		profileLink.setOnAction(new EventHandler<ActionEvent>(){
+		Button homeButton = new Button();
+		homeButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/calendarIcon_64px.png"))));
+
+		Button browseCoursesButton = new Button();
+		browseCoursesButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/searchIcon_64px.png"))));
+
+		Button exitButton = new Button();
+		exitButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/exitIcon_64px.png"))));
+
+		
+		profileButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
 				System.out.println("Clicked on profile");;
 			}
 		});
 		
-		homeLink.setOnAction(new EventHandler<ActionEvent>(){
+		homeButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
 				System.out.println("Clicked on profile");;
 			}
 		});
 		
-		browseCoursesLink.setOnAction(new EventHandler<ActionEvent>(){
+		browseCoursesButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
 				System.out.println("Clicked on browse courses");;
 			}
 		});
 		
-		exitLink.setOnAction(new EventHandler<ActionEvent>(){
+		exitButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
 				System.out.println("Clicked on exit");
 				System.exit(0);
 			}
 		});
-
-		Hyperlink sideLinks[] = {
-				profileLink,
-				homeLink,
-				browseCoursesLink,
-				exitLink
+		
+		Button sideButtons[] = {
+				profileButton,
+				homeButton,
+				browseCoursesButton,
+				exitButton
 			};
 		
-		return sideLinks;
+		for(int i = 0; i < sideButtons.length; i++) {
+			sideButtons[i].setStyle("-fx-background-color: transparent");
+
+		}
+		
+		return sideButtons;
+		
 	}
 	
 	private VBox getNavBar() {
 		VBox navBar = new VBox();
 		navBar.setPadding(new Insets(10));
-		Hyperlink sideLinks[] = getSideLinks();
+		navBar.setSpacing(10);
+		//Hyperlink sideLinks[] = getSideLinks();
+		Button sideButtons[] = getSideButtons();
 		
-		for(int i = 0; i < sideLinks.length; i++) {
+		for(int i = 0; i < sideButtons.length; i++) {
 			//navBar.setMargin(sideLinks[i], new Insets(0, 0, 0, 8));
-			navBar.getChildren().add(sideLinks[i]);
+			navBar.getChildren().add(sideButtons[i]);
 		}
 		navBar.setStyle("-fx-background-color: " + getDarkGreen());
 		return navBar;
