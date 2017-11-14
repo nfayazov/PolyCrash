@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -33,6 +34,8 @@ import javafx.stage.Stage;
 
 
 public class MainPage extends Application{
+	final static String DARK_GREEN = "#004d00";
+	final static String LIGHT_GREEN = "#80ff80";
 	public static void main(String[] args) {
 		launch(MainPage.class, args);
 	}
@@ -92,7 +95,7 @@ public class MainPage extends Application{
 			}
 		});
 		
-		Button sideButtons[] = {
+		final Button sideButtons[] = {
 				profileButton,
 				homeButton,
 				browseCoursesButton,
@@ -101,7 +104,19 @@ public class MainPage extends Application{
 		
 		for(int i = 0; i < sideButtons.length; i++) {
 			sideButtons[i].setStyle("-fx-background-color: transparent");
-
+			sideButtons[i].setPrefSize(500, 500);
+			final int tmp = i;
+			sideButtons[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent t) {
+					sideButtons[tmp].setStyle("-fx-background-color: " + LIGHT_GREEN);
+				}
+			});
+			sideButtons[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent t) {
+					sideButtons[tmp].setStyle("-fx-background-color: transparent");
+				}
+			});
+			
 		}
 		
 		return sideButtons;
@@ -113,18 +128,12 @@ public class MainPage extends Application{
 	
 	private VBox getNavBar() {
 		VBox navBar = new VBox();
-		navBar.setPadding(new Insets(10));
-		navBar.setSpacing(100);
-		//Hyperlink sideLinks[] = getSideLinks();
 		Button sideButtons[] = getSideButtons();
-		
 		for(int i = 0; i < sideButtons.length; i++) {
-			//navBar.setMargin(sideLinks[i], new Insets(0, 0, 0, 8));
 			navBar.getChildren().add(sideButtons[i]);
 		}
-		navBar.setStyle("-fx-background-color: " + getDarkGreen());
+		navBar.setStyle("-fx-background-color: " + DARK_GREEN);
 		navBar.setPrefWidth(200);
-		navBar.setAlignment(Pos.CENTER);
 		return navBar;
 	}
 }
