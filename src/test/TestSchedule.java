@@ -8,9 +8,9 @@ public class TestSchedule {
 	@Test
 	public void MyTestNumCourses() {
 		Schedule s = new Schedule();
-		s.addCourse("CSC-307");
-		s.addCourse("CPE 357");
-		s.addCourse("CSC 349");
+		s.addCourse("CSC-307", 1);
+		s.addCourse("CPE 357", 2);
+		s.addCourse("CSC 349", 1);
 		assertEquals(s.getNumCourses(), 3);
 	}
 	
