@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -33,9 +34,7 @@ import javafx.stage.Stage;
 
 
 
-public class MainPage extends Application{
-	final static String DARK_GREEN = "#004d00";
-	final static String LIGHT_GREEN = "#80ff80";
+public class MainPage extends Application implements Page{
 	public static void main(String[] args) {
 		launch(MainPage.class, args);
 	}
@@ -97,7 +96,7 @@ public class MainPage extends Application{
 		
 		homeButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-				System.out.println("Clicked on profile");;
+				System.out.println("Clicked on home button");;
 				defaultButtonColors[1] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 1) {
@@ -149,9 +148,6 @@ public class MainPage extends Application{
 			
 		}
 		
-
-		
-		
 		return sideButtons;
 		
 	}
@@ -168,5 +164,11 @@ public class MainPage extends Application{
 		navBar.setStyle("-fx-background-color: " + DARK_GREEN);
 		navBar.setPrefWidth(200);
 		return navBar;
+	}
+
+
+	public Node getNode() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

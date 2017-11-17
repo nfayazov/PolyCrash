@@ -9,14 +9,14 @@ import logic.MainPage;
 
 public class TestMainPage {
 	
-	/*
+	
 	@Test
 	public void MyTestNavBar() throws Exception {
 		MainPage TestNavBar = new MainPage();
 		int numChildren = TestNavBar.getNumNavBarLinks();
 		assertEquals(3, numChildren);
 	}
-	*/
+	
 	
 	@Test
 	public void MyTestGreenColor() {
