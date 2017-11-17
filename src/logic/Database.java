@@ -7,15 +7,18 @@ import java.io.FileNotFoundException;
 public class Database {
 
 	static int NUM_STUDENTS = 1000;
+	static int NUM_COURSES = 100;
 
-	public HashSet<Student> db;
+	private HashSet<Student> studentDb;
+	private HashSet<Course> courseDb;
 	
 	public Database() {
-		makeTable();		
+		makeStudentTable();
+		makeCourseTable();
 	}
 	
-	private void makeTable() {
-		this.db = new HashSet<Student>();
+	private void makeStudentTable() {
+		this.studentDb = new HashSet<Student>();
 		try {
 			Scanner fsc = new Scanner(new File("src/logic/resources/firstNames.txt"));
 			Scanner lsc = new Scanner(new File("src/logic/resources/lastNames.txt"));
@@ -28,7 +31,7 @@ public class Database {
 				last = lsc.nextLine();
 
 				Student student = new Student(first, last);
-				db.add(student);
+				studentDb.add(student);
 			}
 
 		//for testing purposes
@@ -45,7 +48,34 @@ public class Database {
 		}
 	}
 	
-	public HashSet<Student> getTable() {
-		return db;
+	private void makeCourseTable(){
+		this.courseDb = new HashSet<Course>();
+		String courseName;
+		int num = 0, section = 2;
+		Random rand = new Random();
+		
+		for (int i = 0; i < NUM_COURSES; i++){
+			if (section == 2) num = rand.nextInt(599);
+			courseName = "CSC " + Integer.toString(num);
+			section = section == 1 ? 2 : 1;
+			Course course = new Course(courseName, section);
+			courseDb.add(course);
+		}
+		
+		/*Iterator<Course> it = courseDb.iterator();
+		while (it.hasNext()){
+			Course course = it.next();
+			System.out.println(course.name + " " + course.section);
+		}*/
+		
+		
+	}
+	
+	public HashSet<Student> getStudentTable() {
+		return studentDb;
+	}
+	
+	public HashSet<Course> getCourseTable() {
+		return courseDb;
 	}
 }

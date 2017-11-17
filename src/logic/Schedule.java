@@ -6,8 +6,8 @@ public class Schedule {
 	
 	
 	ArrayList<Course> courses = new ArrayList<Course>();
-	public void addCourse(String name) {
-		courses.add(new Course(name));
+	public void addCourse(String name, int section) {
+		courses.add(new Course(name, section));
 	}
 	
 	public int getNumCourses() {
