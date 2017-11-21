@@ -1,5 +1,10 @@
 package logic;
 import java.util.*;
+
+import logic.Course;
+import logic.Schedule;
+import logic.Student;
+
 import java.lang.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,17 +13,31 @@ public class Database {
 
 	static int NUM_STUDENTS = 1000;
 	static int NUM_COURSES = 100;
+	static int NUM_COURSES_PER_STUDENT = 4;
 
-	private HashSet<Student> studentDb;
+	private HashMap<String, Student> studentDb;
 	private HashSet<Course> courseDb;
 	
 	public Database() {
-		makeStudentTable();
 		makeCourseTable();
+		makeStudentTable();
+	}
+	
+	public Course[] getScheduleByUsername(String username) {
+		return studentDb.get(username).getCoursesFromSchedule();
+	}
+	
+	public void printScheduleByUsername(String username) {
+		System.out.println(username + ":");
+		Course[] courses = studentDb.get(username).getCoursesFromSchedule();
+		for (int i = 0; i < courses.length; i++) {
+			System.out.println(courses[i].toString());
+		}
+		System.out.println("");
 	}
 	
 	private void makeStudentTable() {
-		this.studentDb = new HashSet<Student>();
+		this.studentDb = new HashMap<String, Student>();
 		try {
 			Scanner fsc = new Scanner(new File("src/logic/resources/firstNames.txt"));
 			Scanner lsc = new Scanner(new File("src/logic/resources/lastNames.txt"));
@@ -31,7 +50,14 @@ public class Database {
 				last = lsc.nextLine();
 
 				Student student = new Student(first, last);
-				studentDb.add(student);
+				addSchedule(student);
+				/*Course courses[] = student.getCoursesFromSchedule();
+				System.out.println(student.username + ":");
+				for (int j = 0; j < courses.length; j++){
+					System.out.print(courses[j] + " ");
+				}
+				System.out.println("");*/
+				studentDb.put(student.username, student);
 			}
 
 		//for testing purposes
@@ -46,6 +72,31 @@ public class Database {
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	private void addSchedule(Student student) {
+		int num = 4;
+		Schedule schedule = new Schedule();
+		for (int i = 0; i < NUM_COURSES_PER_STUDENT; i++) {
+			addRandomCourse(schedule);
+		}
+		student.setSchedule(schedule);
+	}
+	
+	private void addRandomCourse(Schedule schedule) {
+		Random rand = new Random();
+		Course course = new Course(" ", 0);
+		int num = rand.nextInt(NUM_COURSES);
+		int i = 0;
+		Iterator<Course> it = courseDb.iterator();
+		
+		while(i <= num) {
+			i++;
+			course = it.next();
+		}
+		if (schedule.contains(course)) addRandomCourse(schedule);
+		else schedule.addCourse(course);
+
 	}
 	
 	private void makeCourseTable(){
@@ -71,7 +122,7 @@ public class Database {
 		
 	}
 	
-	public HashSet<Student> getStudentTable() {
+	public HashMap<String, Student> getStudentTable() {
 		return studentDb;
 	}
 	

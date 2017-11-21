@@ -29,4 +29,9 @@ public class TestDatabase {
 		Database pc = new Database();
 		assertEquals(pc.getCourseTable().size(), 100);
 	}
+	
+	public void TestSchedules() {
+		Database pc = new Database();
+		
+	}
 }

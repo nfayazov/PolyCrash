@@ -1,17 +1,25 @@
 package logic;
+import logic.Course;
 
 public class Student {
-	String first, last, major, password;
-	int year;
+	public String first, last, major, username;
+	private Schedule schedule;
+	private String password;
+	public int year;
 
 	public Student(String first, String last) {
 		this.first = first;
 		this.last = last;
-		this.password = createPassword(first, last);
-		
+		this.username = createUsername();
+		this.password = createPassword();
 	}
 	
-	public String createPassword(String first, String last) {
+	private String createUsername() {
+		String end = Integer.toString((int)first.charAt(first.length()-1));
+		return (first.charAt(0) + last + end).toLowerCase();
+	}
+	
+	private String createPassword() {
 		String end = Integer.toString((int)last.charAt(last.length()-1));
 		return (first.charAt(0) + last).toLowerCase() + end;
 	}
@@ -24,8 +32,12 @@ public class Student {
 	public String getPassword() {
 		return this.password;
 	}
+	
+	public void setSchedule(Schedule s) {
+		this.schedule = s;
+	}
 
-	public void viewCurrentSchedule() {
-
+	public Course[] getCoursesFromSchedule() {
+		return this.schedule.getCourses();
 	}
 }
