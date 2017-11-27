@@ -125,7 +125,11 @@ public class SchedulePage extends Application implements Page{
 		//initializing the schedule pane's left column with fixed width 150.
 		addLeftColumn(schedule, 100);
 		//Populating the columns corresponding to the five days of the week with fixed width 200.
-		addDayColumn(schedule, 150, 1, s, "M");
+		addDayColumn(schedule, 140, 1, s, "M");
+		addDayColumn(schedule, 140, 2, s, "T");
+		addDayColumn(schedule, 140, 3, s, "W");
+		addDayColumn(schedule, 140, 4, s, "R");
+		addDayColumn(schedule, 140, 5, s, "F");
 		
 		schedule.setStyle("-fx-background-color:#FFF;"
 				+ "-fx-padding:20 0 0 0;");
@@ -137,14 +141,68 @@ public class SchedulePage extends Application implements Page{
 	//Adds all 
 	private void addDayColumn(GridPane schedule, int columnwidth, int columnIndex, Schedule s, String day)
 	{
+		for(int i=1; i < 34; i++)
+		{
+			Pane top = new Pane();
+			top.setStyle("-fx-border-style: hidden solid hidden hidden;"
+				+ "-fx-border-color:"+LIGHT_GREEN+";"
+				+ "-fx-background-color:#FFF;"
+				+ "-fx-background-radius:15 0 0 0;");
+			top.setPrefHeight(50);
+			top.setPrefWidth(columnwidth);
+			schedule.add(top, columnIndex, i);
+		}
+		
+		//Top empty pane
+		Pane top = new Pane();
+		top.setStyle("-fx-border-style: solid solid hidden hidden;"
+			+ "-fx-border-color:"+LIGHT_GREEN+";"
+			+ "-fx-background-color:#FFF;"
+			+ "-fx-padding:10;"
+			+ "-fx-background-radius:15 0 0 0;");
+		top.setPrefHeight(50);
+		top.setPrefWidth(columnwidth);
+		schedule.add(top, columnIndex, 1);
+		
 		//Adds a column for the specified day of the week at the provided column index.
 		for(Course course : s.getCourses())
 		{
 			if(course.onDay(day))
-			{
+			{				
+				Label courseBlock = new Label("Course ("+course.name+") start");
+				courseBlock.setStyle("-fx-border-style:solid;"
+						+ "-fx-border-color: "+DARK_GREEN+";"
+						+ "-fx-text-fill:"+DARK_GREEN+";"
+						+ "-fx-font-size:.9em;"
+						+ "-fx-background-color: "+LIGHT_GREEN+";"
+						+ "-fx-padding:4;");
+				courseBlock.setPrefWidth(columnwidth);
+				courseBlock.setAlignment(Pos.BASELINE_RIGHT);
+				schedule.add(courseBlock, columnIndex, getRowFromTime(course.start));
 				
+				Label courseBlock2 = new Label("Course ("+course.name+") end");
+				courseBlock2.setStyle("-fx-border-style:solid;"
+						+ "-fx-border-color: "+DARK_GREEN+";"
+						+ "-fx-text-fill:"+DARK_GREEN+";"
+						+ "-fx-font-size:.9em;"
+						+ "-fx-background-color: "+LIGHT_GREEN+";"
+						+ "-fx-padding:4;");
+				courseBlock2.setPrefWidth(columnwidth);
+				courseBlock2.setAlignment(Pos.BASELINE_RIGHT);
+				schedule.add(courseBlock2, columnIndex, getRowFromTime(course.end));
 			}
 		}
+		
+		//Bottom empty pane
+				Pane bottom = new Pane();
+				bottom.setStyle("-fx-border-style: hidden solid solid hidden;"
+					+ "-fx-border-color:"+LIGHT_GREEN+";"
+					+ "-fx-background-color:#FFF;"
+					+ "-fx-padding:10;"
+					+ "-fx-background-radius:15 0 0 0;");
+				bottom.setPrefHeight(50);
+				bottom.setPrefWidth(columnwidth);
+				schedule.add(bottom, columnIndex, 34);
 	}
 	
 	//Code to return the bottom pane containing the two buttons.
@@ -234,7 +292,6 @@ public class SchedulePage extends Application implements Page{
 			time.setPrefWidth(columnwidth);
 			time.setAlignment(Pos.BASELINE_RIGHT);
 			schedule.add(time, 0, getRowFromTime(timestamp));
-			System.out.println(getRowFromTime(timestamp));
 			
 			/*Creates an empty cell for use with half hour marks.*/
 			Pane emptyCell = new Pane();
@@ -245,7 +302,6 @@ public class SchedulePage extends Application implements Page{
 					+ "-fx-background-color: "+DARK_GREEN+";"
 					+ "-fx-padding:1;");
 			schedule.add(emptyCell, 0, getRowFromTime(timestamp)+1);
-			System.out.println(getRowFromTime(timestamp)+1);
 			
 			hour++;
 		}
@@ -274,7 +330,7 @@ public class SchedulePage extends Application implements Page{
 				+ "-fx-background-radius:0 0 0 15;");
 		left_bottom.setPrefHeight(50);
 		left_bottom.setPrefWidth(columnwidth);
-		schedule.add(left_bottom, 0, 36);
+		schedule.add(left_bottom, 0, 34);
 	}
 	
 }
