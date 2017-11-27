@@ -98,11 +98,45 @@ public class SchedulePage extends Application implements Page{
 		return content;
 	}
 	
+	private Button getAddClassButton()
+	{
+		Button addClass = new Button();
+		Image addClassImage = new Image(getClass().getResourceAsStream("resources/addIcon_64px.png"), 
+				32, 32, false, false);
+		addClass.setGraphic(new ImageView(addClassImage));
+		addClass.setText("Add New Class");
+		addClass.setPrefWidth(300);
+		addClass.setStyle("-fx-graphic-text-gap: 10; -fx-border:none; -fx-background-color:"+DARK_GREEN+";"
+				+ "-fx-font-size:1.6em; -fx-text-fill:#FFF");
+		
+		return addClass;
+	}
+	
+	private Button getPushButton()
+	{
+		Button pushClass = new Button();
+		Image pushClassImage = new Image(getClass().getResourceAsStream("resources/pushIcon_64px.png"), 
+				32, 32, false, false);
+		pushClass.setGraphic(new ImageView(pushClassImage));
+		pushClass.setText("Push to Student Center");
+		pushClass.setPrefWidth(300);
+		pushClass.setStyle("-fx-graphic-text-gap: 10; -fx-border:none; -fx-background-color:"+DARK_GREEN+";"
+				+ "-fx-font-size:1.6em; -fx-text-fill:#FFF; -fx-content-display:right");
+		
+		return pushClass;
+	}
+	
 	private VBox getBottomPane()
 	{
 		VBox bottom = new VBox();
-		bottom.setStyle("-fx-background-color:#FF0000");
+		bottom.setStyle("-fx-background-color:#FFFFFF");
 		
+		/*Button for adding classes.*/
+		Button addClass = getAddClassButton();
+		Button pushClass = getPushButton();
+		
+		bottom.getChildren().add(addClass);
+		bottom.getChildren().add(pushClass);
 		bottom.setSpacing(10);
 		bottom.setAlignment(Pos.TOP_CENTER);
 		bottom.setPadding(new Insets(20, 0, 0, 0));
