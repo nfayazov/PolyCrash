@@ -86,6 +86,16 @@ public class SchedulePage extends Application implements Page{
 		BorderPane content = new BorderPane();
 		content.setStyle("-fx-background-color: #000");
 		
+		GridPane schedule = getSchedulePane();
+		
+		content.setCenter(schedule);
 		return content;
+	}
+	
+	private GridPane getSchedulePane()
+	{
+		GridPane schedulePane = new GridPane();
+		schedulePane.setStyle("-fx-background-color: #FFF");
+		return schedulePane;
 	}
 }
