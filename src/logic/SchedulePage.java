@@ -168,9 +168,9 @@ public class SchedulePage extends Application implements Page{
 		for(Course course : s.getCourses())
 		{
 			if(course.onDay(day))
-			{				
-				Label courseBlock = new Label("Course ("+course.name+") start");
-				courseBlock.setStyle("-fx-border-style:solid;"
+			{					
+				Label courseBlock = new Label("("+course.name+")");
+				courseBlock.setStyle("-fx-border-style:solid solid hidden solid;"
 						+ "-fx-border-color: "+DARK_GREEN+";"
 						+ "-fx-text-fill:"+DARK_GREEN+";"
 						+ "-fx-font-size:.9em;"
@@ -180,8 +180,8 @@ public class SchedulePage extends Application implements Page{
 				courseBlock.setAlignment(Pos.BASELINE_RIGHT);
 				schedule.add(courseBlock, columnIndex, getRowFromTime(course.start));
 				
-				Label courseBlock2 = new Label("Course ("+course.name+") end");
-				courseBlock2.setStyle("-fx-border-style:solid;"
+				Label courseBlock2 = new Label("");
+				courseBlock2.setStyle("-fx-border-style:hidden solid solid solid;"
 						+ "-fx-border-color: "+DARK_GREEN+";"
 						+ "-fx-text-fill:"+DARK_GREEN+";"
 						+ "-fx-font-size:.9em;"
@@ -190,6 +190,23 @@ public class SchedulePage extends Application implements Page{
 				courseBlock2.setPrefWidth(columnwidth);
 				courseBlock2.setAlignment(Pos.BASELINE_RIGHT);
 				schedule.add(courseBlock2, columnIndex, getRowFromTime(course.end));
+				
+				if((getRowFromTime(course.end)-getRowFromTime(course.start)) > 1)
+				{
+					for(int i=getRowFromTime(course.start)+1; i < getRowFromTime(course.end); i++)
+					{
+						Pane blankpane = new Pane();
+						blankpane.setStyle("-fx-border-style:hidden solid hidden solid;"
+								+ "-fx-border-color: "+DARK_GREEN+";"
+								+ "-fx-text-fill:"+DARK_GREEN+";"
+								+ "-fx-font-size:.9em;"
+								+ "-fx-background-color: "+LIGHT_GREEN+";"
+								+ "-fx-padding:4;");
+						blankpane.setPrefWidth(columnwidth);
+						schedule.add(blankpane, columnIndex, i);
+					}
+				}
+				
 			}
 		}
 		
