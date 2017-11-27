@@ -3,6 +3,7 @@ package logic;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -19,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
@@ -106,8 +108,11 @@ public class SchedulePage extends Application implements Page{
 		addClass.setGraphic(new ImageView(addClassImage));
 		addClass.setText("Add New Class");
 		addClass.setPrefWidth(300);
-		addClass.setStyle("-fx-graphic-text-gap: 10; -fx-border:none; -fx-background-color:"+DARK_GREEN+";"
-				+ "-fx-font-size:1.6em; -fx-text-fill:#FFF");
+		addClass.setStyle("-fx-graphic-text-gap: 10;"
+				+ "-fx-border:none;"
+				+ "-fx-background-color:"+DARK_GREEN+";"
+				+ "-fx-font-size:1.6em;"
+				+ "-fx-text-fill:#FFF");
 		
 		return addClass;
 	}
@@ -120,8 +125,12 @@ public class SchedulePage extends Application implements Page{
 		pushClass.setGraphic(new ImageView(pushClassImage));
 		pushClass.setText("Push to Student Center");
 		pushClass.setPrefWidth(300);
-		pushClass.setStyle("-fx-graphic-text-gap: 10; -fx-border:none; -fx-background-color:"+DARK_GREEN+";"
-				+ "-fx-font-size:1.6em; -fx-text-fill:#FFF; -fx-content-display:right");
+		pushClass.setStyle("-fx-graphic-text-gap: 10;"
+				+ "-fx-border:none;"
+				+ "-fx-background-color:"+DARK_GREEN+";"
+				+ "-fx-font-size:1.6em;"
+				+ "-fx-text-fill:#FFF;"
+				+ "-fx-content-display:right");
 		
 		return pushClass;
 	}
@@ -146,8 +155,33 @@ public class SchedulePage extends Application implements Page{
 	
 	private GridPane getSchedulePane()
 	{
-		GridPane schedulePane = new GridPane();
-		schedulePane.setStyle("-fx-background-color: #FFF");
-		return schedulePane;
+		GridPane schedule = new GridPane();
+		schedule.setPadding(new Insets(50, 0, 50, 0));
+		
+		//Left column
+		Pane left_top = new Pane();
+		left_top.setStyle("fx-border-color:"+LIGHT_GREEN+";"
+				+ "-fx-background-color:"+LIGHT_GREEN+";"
+				+ "-fx-padding:10;"
+				+ "-fx-background-radius:15 0 0 0;");
+		left_top.setPrefHeight(50);
+		
+		Label eightAM = new Label("8 AM");
+		eightAM.setStyle("-fx-border-color: "+LIGHT_GREEN+";"
+				+ "-fx-text-fill:#FFF; "
+				+ "-fx-font-size:1.2em;"
+				+ "-fx-background-color: "+DARK_GREEN+";"
+				+ "-fx-padding:10;");
+		GridPane.setHalignment(eightAM, HPos.RIGHT);
+		
+		//initializing the schedule pane
+		schedule.add(left_top, 0, 1);
+		schedule.add(eightAM,  0,  2);
+		
+		schedule.setStyle("-fx-background-color:#FFF;"
+				+ "-fx-padding:10;");
+		schedule.setAlignment(Pos.TOP_CENTER);
+		
+		return schedule;
 	}
 }
