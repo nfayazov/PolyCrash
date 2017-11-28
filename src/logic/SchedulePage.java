@@ -182,8 +182,8 @@ public class SchedulePage extends Application implements Page{
 			if(course.onDay(day))
 			{					
 				Label courseBlock = new Label("("+course.name+")");
-				courseBlock.setStyle("-fx-border-style:solid solid hidden solid;"
-						+ "-fx-border-color: "+DARK_GREEN+";"
+				courseBlock.setStyle("-fx-border-style:solid;"
+						+ "-fx-border-color: "+DARK_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+";"
 						+ "-fx-text-fill:"+DARK_GREEN+";"
 						+ "-fx-font-size:.9em;"
 						+ "-fx-background-color: "+LIGHT_GREEN+";"
@@ -208,8 +208,8 @@ public class SchedulePage extends Application implements Page{
 					for(int i=getRowFromTime(course.start)+1; i < getRowFromTime(course.end); i++)
 					{
 						Pane blankpane = new Pane();
-						blankpane.setStyle("-fx-border-style:solid;"
-								+ "-fx-border-color: "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+";"
+						blankpane.setStyle("-fx-border-style:hidden solid hidden solid ;"
+								+ "-fx-border-color: "+LIGHT_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+";"
 								+ "-fx-text-fill:"+DARK_GREEN+";"
 								+ "-fx-font-size:.9em;"
 								+ "-fx-background-color: "+LIGHT_GREEN+";"
