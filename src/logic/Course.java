@@ -6,19 +6,16 @@ import logic.Time;
 public class Course {
 	String name;
 	int section;
+	
 	String days;
+	//A string containing a single letter for each day of the week the class lands on.
+	//MON = M, TUES = T, WED = W, THURS = R, FRI = F
 	Time start;
 	Time end;
 	
-	public Course(String name, int section, String daysofweek, Time start, Time end) {
+	public Course(String name, int section) {
 		this.name = name;
-		this.section = section;
-		this.days = daysofweek;
-		//A string containing a single letter for each day of the week the class lands on.
-		//MON = M, TUES = T, WED = W, THURS = R, FRI = F
-		this.start = start;
-		this.end = end;
-		
+		this.section = section;		
 	}
 	public boolean onDay(String day)
 	{
@@ -28,6 +25,6 @@ public class Course {
 	public String toString()
 	{
 		//Implementing a print function for testing
-		return name+"-"+Integer.toString(section)+" ("+days+")";
+		return name+"-"+Integer.toString(section);
 	}
 }

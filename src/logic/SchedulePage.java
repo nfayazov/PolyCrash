@@ -87,9 +87,21 @@ public class SchedulePage extends Application implements Page{
 	private Schedule testSchedule()
 	{
 		Schedule s = new Schedule();
-		Course course1 = new Course("CSC 307", 1, "MWF", new Time(8, 30), new Time(10, 0));
-		Course course2 = new Course("CPE 357", 2, "TR", new Time(19, 0), new Time(20, 0));
-		Course course3 = new Course("CSC 349", 1, "TR", new Time(12, 0), new Time(14, 30));
+		Course course1 = new Course("CSC 307", 1);
+		course1.days = "MWF";
+		course1.start = new Time(8, 30);
+		course1.end = new Time(10, 0);
+
+		Course course2 = new Course("CPE 357", 2);
+		course2.days = "TR";
+		course2.start = new Time(19, 0);
+		course2.end = new Time(20, 0);
+		
+		Course course3 = new Course("CSC 349", 1);
+		course3.days = "TR";
+		course3.start = new Time(12, 0);
+		course3.end = new Time(14, 30);
+
 
 		s.addCourse(course1);
 		s.addCourse(course2);
@@ -196,8 +208,8 @@ public class SchedulePage extends Application implements Page{
 					for(int i=getRowFromTime(course.start)+1; i < getRowFromTime(course.end); i++)
 					{
 						Pane blankpane = new Pane();
-						blankpane.setStyle("-fx-border-style:hidden solid hidden solid;"
-								+ "-fx-border-color: "+DARK_GREEN+";"
+						blankpane.setStyle("-fx-border-style:solid;"
+								+ "-fx-border-color: "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+";"
 								+ "-fx-text-fill:"+DARK_GREEN+";"
 								+ "-fx-font-size:.9em;"
 								+ "-fx-background-color: "+LIGHT_GREEN+";"
