@@ -46,7 +46,6 @@ public class MainPage extends Application implements Page{
 		/* EXAMPLE (delete this) */
 		Database db = new Database();
 		db.printScheduleByUsername("lcowart89");
-		System.out.println(db.getCourseByString("CSC 101"));
 	}
 	
 	

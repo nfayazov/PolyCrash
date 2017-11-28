@@ -136,7 +136,9 @@ public class Database {
 	
 	public Course getCourseByString(String str) {
 		Iterator<Course> it = courseDb.iterator();
-		Course searchedCourse = new Course(str, 1);
+		int section = Integer.parseInt(str.substring(str.length()-1));
+		String name = str.substring(0, str.length()-2);
+		Course searchedCourse = new Course(name, section);
 		while(it.hasNext()) {
 			Course course = it.next();
 			if (course.equals(searchedCourse))

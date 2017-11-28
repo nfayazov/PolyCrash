@@ -2,6 +2,9 @@ package logic;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+
+import java.util.HashMap;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -28,7 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class Login extends Application implements Page{
-
+	
 	Label error1 = new Label("");
 	
 	public Login() {
@@ -36,15 +39,36 @@ public class Login extends Application implements Page{
 	}
 
 	public boolean checkVaild( String username, String pw) {
-		//TO-DO: check database if user and pw matches
-		return true;
+		//TODO: check database if user and pw matches
+		Database db = new Database();
+		HashMap<String, Student> studentList = db.getStudentTable();
+		//string is username, student->pw
+		if(studentList.containsKey(username)) {
+			Student s = studentList.get(username);
+			if (s.getPassword().compareTo(pw) == 0) {
+				return true;
+			}
+			return false;
+		}
+		else {
+			return true;
+		}
+		
 	}
-	
 	
 	@Override
 	  public void start(Stage stage) throws Exception {
-	      BorderPane root = new BorderPane();
-	 
+	      Node root = getNode();
+	      Scene scene = new Scene((Parent) root, 960, 700);
+	      stage.setTitle("Login Page");
+	      stage.setScene(scene);
+	      stage.show();
+	}
+	
+
+	public Node getNode() {
+		  BorderPane root = new BorderPane();
+		 
 	      // TOP ------------------------------------
 	      Label title = new Label("PolyCrash");
 	      title.setFont(new Font("Cambria", 50));
@@ -96,7 +120,7 @@ public class Login extends Application implements Page{
 			        		error1.setText("Invalid username or password");
 			        	else {
 			        		//get student info, go to Main Page
-			        		//TO-DO
+			        		//TODO
 			        	}
 			            
 			        } else {
@@ -107,17 +131,7 @@ public class Login extends Application implements Page{
 		  
 	      root.setTop(top);
 	      root.setBottom(vbox);
-	      
-	      //set scene
-	      Scene scene = new Scene(root, 960, 700);
-	      stage.setTitle("Login Page");
-	      stage.setScene(scene);
-	      stage.show();
-	}
-	
-
-	public Node getNode() {
-		return null;
+		  return root;
 	}
 	
 	public static void main(String[] args) {
