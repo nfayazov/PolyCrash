@@ -43,7 +43,7 @@ import java.util.*;
 import java.util.*;
 
 
-//Use  the function "getSchedulePane(Schedule s)" in order to return a project pane.
+//Use  the function "getSchedulePane(Schedule s)" in order to return a project pane. 
 public class SchedulePage extends Application implements Page{
 	/*This is all copied from the MainPage class, and is just for testing to ensure SchedulePage will
 	 * return correctly when its contents are added to the main page. It can be deleted later.*/
