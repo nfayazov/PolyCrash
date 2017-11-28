@@ -33,11 +33,23 @@ public class Student {
 		return this.password;
 	}
 	
+	public Schedule getSchedule() {
+		return this.schedule;
+	}
+	
 	public void setSchedule(Schedule s) {
 		this.schedule = s;
 	}
 
 	public Course[] getCoursesFromSchedule() {
 		return this.schedule.getCourses();
+	}
+	
+	public boolean addCourse(Course course) {
+		if (schedule.contains(course)) {
+			return false;
+		}
+		schedule.addCourse(course);
+		return true;
 	}
 }
