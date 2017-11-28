@@ -3,8 +3,10 @@
 /bin/
 
 #settings for which jre to use
-.classpath*.class
+*.classpath
+*.class
 
 hs_err_pid8583.log
 
 *.log
+/target/
