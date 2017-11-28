@@ -17,4 +17,9 @@ public class Course {
 		//Implementing a print function for testing
 		return name+"-"+Integer.toString(section);
 	}
+	
+	public boolean equals(Course course){
+		return this.name.equals(course.name) &&
+				this.section == course.section;
+	}
 }
