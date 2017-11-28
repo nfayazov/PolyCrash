@@ -105,6 +105,10 @@ public class Database {
 		int num = 0, section = 2;
 		Random rand = new Random();
 		
+		//add test course
+		Course test = new Course("CSC 101", 1);
+		courseDb.add(test);
+		
 		for (int i = 0; i < NUM_COURSES; i++){
 			if (section == 2) num = rand.nextInt(599);
 			courseName = "CSC " + Integer.toString(num);
@@ -128,5 +132,18 @@ public class Database {
 	
 	public HashSet<Course> getCourseTable() {
 		return courseDb;
+	}
+	
+	public Course getCourseByString(String str) {
+		Iterator<Course> it = courseDb.iterator();
+		int section = Integer.parseInt(str.substring(str.length()-1));
+		String name = str.substring(0, str.length()-2);
+		Course searchedCourse = new Course(name, section);
+		while(it.hasNext()) {
+			Course course = it.next();
+			if (course.equals(searchedCourse))
+				return course;
+		}
+		return null;
 	}
 }
