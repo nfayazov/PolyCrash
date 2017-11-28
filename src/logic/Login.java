@@ -39,8 +39,7 @@ public class Login extends Application implements Page{
 		//constructor
 	}
 
-	public boolean checkVaild( String username, String pw) {
-		//TODO: check database if user and pw matches
+	public boolean checkVaild(String username, String pw) {
 		Database db = new Database();
 		HashMap<String, Student> studentList = db.getStudentTable();
 		//string is username, student->pw
@@ -50,6 +49,14 @@ public class Login extends Application implements Page{
 				return true;
 			}
 			errorLogin.setText("Incorrect password");
+			try        
+			{
+			    Thread.sleep(1000);
+			} 
+			catch(InterruptedException ex) 
+			{
+			    Thread.currentThread().interrupt();
+			}
 			return false;
 		}
 		else {
