@@ -88,19 +88,19 @@ public class SchedulePage extends Application implements Page{
 	{
 		Schedule s = new Schedule();
 		Course course1 = new Course("CSC 307", 1);
-		course1.days = "MWF";
-		course1.start = new Time(8, 30);
-		course1.end = new Time(10, 0);
+		course1.setDays("MWF");
+		course1.setStart(new Time(8, 30));
+		course1.setEnd(new Time(10, 0));
 
 		Course course2 = new Course("CPE 357", 2);
-		course2.days = "TR";
-		course2.start = new Time(19, 0);
-		course2.end = new Time(20, 0);
+		course2.setDays("TR");
+		course2.setStart(new Time(19, 0));
+		course2.setEnd(new Time(20, 0));
 		
 		Course course3 = new Course("CSC 349", 1);
-		course3.days = "TR";
-		course3.start = new Time(12, 0);
-		course3.end = new Time(14, 30);
+		course3.setDays("TR");
+		course3.setStart(new Time(12, 0));
+		course3.setEnd(new Time(14, 30));
 
 
 		s.addCourse(course1);
@@ -190,7 +190,7 @@ public class SchedulePage extends Application implements Page{
 						+ "-fx-padding:4;");
 				courseBlock.setPrefWidth(columnwidth);
 				courseBlock.setAlignment(Pos.BASELINE_RIGHT);
-				schedule.add(courseBlock, columnIndex, getRowFromTime(course.start));
+				schedule.add(courseBlock, columnIndex, getRowFromTime(course.getStart()));
 				
 				Label courseBlock2 = new Label("");
 				courseBlock2.setStyle("-fx-border-style:hidden solid solid solid;"
@@ -201,11 +201,11 @@ public class SchedulePage extends Application implements Page{
 						+ "-fx-padding:4;");
 				courseBlock2.setPrefWidth(columnwidth);
 				courseBlock2.setAlignment(Pos.BASELINE_RIGHT);
-				schedule.add(courseBlock2, columnIndex, getRowFromTime(course.end));
+				schedule.add(courseBlock2, columnIndex, getRowFromTime(course.getEnd()));
 				
-				if((getRowFromTime(course.end)-getRowFromTime(course.start)) > 1)
+				if((getRowFromTime(course.getEnd())-getRowFromTime(course.getStart())) > 1)
 				{
-					for(int i=getRowFromTime(course.start)+1; i < getRowFromTime(course.end); i++)
+					for(int i=getRowFromTime(course.getStart())+1; i < getRowFromTime(course.getEnd()); i++)
 					{
 						Pane blankpane = new Pane();
 						blankpane.setStyle("-fx-border-style:hidden solid hidden solid ;"
