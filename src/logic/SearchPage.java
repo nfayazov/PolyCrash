@@ -1,48 +1,21 @@
 //need to integrate this with MainPage sidebars.
 
-package logic;
 import org.controlsfx.control.textfield.TextFields;
 
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javafx.scene.control.Separator;
-import javafx.geometry.*;
-import javafx.scene.layout.*;
-import javafx.stage.*;
-import javafx.scene.control.*;
-
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-public class SearchPage extends Application implements Page
+public class SearchPage extends Application
 {
 	Label label1;
 	Button button1;
 	int i = 1;
 	public static void main(String[] args)
 	{
-		Database db = new Database();
-		System.out.println(db.getCourseTable());
+		//Database db = new Database();
+		//System.out.println(db.getCourseTable());
 		launch(args);
 	}
 
@@ -65,8 +38,8 @@ public class SearchPage extends Application implements Page
 		TextField searchField = new TextField();
 		List<String> classes = new ArrayList<String>(Arrays.asList("CSC 307", "CSC 225", "CSC 357"));
 		Database db = new Database();
-		//TextFields.bindAutoCompletion(searchField, db.getCourseTable());
-		TextFields.bindAutoCompletion(searchField, classes);
+		TextFields.bindAutoCompletion(searchField, db.getCourseTable());
+		//TextFields.bindAutoCompletion(searchField, classes);
 		grid.add(searchField, 1, 1);
 
 		Button btn = new Button("Search");
@@ -131,8 +104,13 @@ public class SearchPage extends Application implements Page
             		targetClassProfessor.setStyle("-fx-font-color: " + LIGHT_GREEN);
                 
                 String selectedClass = searchField.getText();
+                Course selectedCourse = new Course(selectedClass, 1);
+                Course testCourse = new Course(selectedClass, 1);
+                //db.getCourseTable().get
+                System.out.println(selectedCourse);
+                System.out.println(testCourse);
                 //NOTE: all selected courses are showing up as not being a part of getCourseTable despite showing up as a suggestion.
-                if(/*db.getCourseTable()*/classes.contains(selectedClass) == false)
+                if(db.getCourseTable().contains(selectedCourse) == false)
                 {
                 		System.out.println("selected class = " + selectedClass);
                 		targetClassName.setText("No such class exists.");
@@ -233,9 +211,10 @@ public class SearchPage extends Application implements Page
 		stage.show();
 	}
 
+
 	@Override
-	public Node getNode() {
+	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 }
