@@ -39,7 +39,7 @@ public class Login extends Application implements Page{
 		//constructor
 	}
 
-	public boolean checkVaild(String username, String pw) {
+	public boolean checkValid(String username, String pw) {
 		Database db = new Database();
 		HashMap<String, Student> studentList = db.getStudentTable();
 		//string is username, student->pw
@@ -133,7 +133,7 @@ public class Login extends Application implements Page{
 			    	error1.setText("");
 			        if ((!username.getText().isEmpty() | !pw.getText().isEmpty())) {
 			        	//if not in database/error
-			        	if (checkVaild(username.getText(), pw.getText())) {
+			        	if (checkValid(username.getText(), pw.getText())) {
 			        		//TODO LOGIN -> mainpage
 			        	}
 			            
