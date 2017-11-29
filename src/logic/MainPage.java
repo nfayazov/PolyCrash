@@ -42,6 +42,10 @@ import java.util.*;
 public class MainPage extends Application implements Page{
 	public static void main(String[] args) {
 		launch(MainPage.class, args);
+		
+		/* EXAMPLE (delete this) */
+		Database db = new Database();
+		db.printScheduleByUsername("lcowart89");
 	}
 	
 	

@@ -4,3 +4,7 @@
 
 #settings for which jre to use
 .classpath*.class
+
+hs_err_pid8583.log
+
+*.log
