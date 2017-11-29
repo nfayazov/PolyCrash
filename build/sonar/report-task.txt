@@ -1,0 +1,6 @@
+projectKey=PolyCrash
+serverUrl=http://localhost:9000
+serverVersion=6.7.0.33306
+dashboardUrl=http://localhost:9000/dashboard/index/PolyCrash
+ceTaskId=AWAJuo2aGvqjiAUlQeg2
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWAJuo2aGvqjiAUlQeg2
