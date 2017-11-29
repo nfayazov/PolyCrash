@@ -1,28 +1,44 @@
-//need to integrate this with MainPage sidebars.
+package logic;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.controlsfx.control.textfield.TextFields;
 
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 
-public class SearchPage extends Application
+public class SearchPage extends Application implements Page
 {
 	Label label1;
 	Button button1;
 	int i = 1;
 	public static void main(String[] args)
 	{
-		//Database db = new Database();
-		//System.out.println(db.getCourseTable());
 		launch(args);
 	}
 
 	public void start(Stage stage) throws Exception
 	{
 		stage.setTitle("Search Page");
-		GridPane grid = new GridPane();
+		final GridPane grid = new GridPane();
 		grid.setAlignment(Pos.TOP_LEFT);
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -35,11 +51,11 @@ public class SearchPage extends Application
 		Label valueName1 = new Label("Course Title:");
 		grid.add(valueName1, 0, 1);
 
-		TextField searchField = new TextField();
-		List<String> classes = new ArrayList<String>(Arrays.asList("CSC 307", "CSC 225", "CSC 357"));
-		Database db = new Database();
-		TextFields.bindAutoCompletion(searchField, db.getCourseTable());
-		//TextFields.bindAutoCompletion(searchField, classes);
+		final TextField searchField = new TextField();
+		final List<String> classes = new ArrayList<String>(Arrays.asList("CSC 307", "CSC 225", "CSC 357"));
+		//Database db = new Database();
+		//TextFields.bindAutoCompletion(searchField, db.getCourseTable());
+		TextFields.bindAutoCompletion(searchField, classes);
 		grid.add(searchField, 1, 1);
 
 		Button btn = new Button("Search");
@@ -92,7 +108,6 @@ public class SearchPage extends Application
         
         btn.setOnAction(new EventHandler<ActionEvent>() {
         	 
-            @Override
             public void handle(ActionEvent e) {
                 targetClassName.setFill(Color.DARKGREEN);
             		targetClassName.setStyle("-fx-font-color: " + LIGHT_GREEN);
@@ -103,14 +118,14 @@ public class SearchPage extends Application
             		targetClassProfessor.setFill(Color.DARKGREEN);
             		targetClassProfessor.setStyle("-fx-font-color: " + LIGHT_GREEN);
                 
-                String selectedClass = searchField.getText();
+                final String selectedClass = searchField.getText();
                 Course selectedCourse = new Course(selectedClass, 1);
                 Course testCourse = new Course(selectedClass, 1);
                 //db.getCourseTable().get
                 System.out.println(selectedCourse);
                 System.out.println(testCourse);
                 //NOTE: all selected courses are showing up as not being a part of getCourseTable despite showing up as a suggestion.
-                if(db.getCourseTable().contains(selectedCourse) == false)
+                if(classes.contains(selectedCourse))//db.getCourseTable().contains(selectedCourse) == false)
                 {
                 		System.out.println("selected class = " + selectedClass);
                 		targetClassName.setText("No such class exists.");
@@ -119,12 +134,12 @@ public class SearchPage extends Application
                 }
                 
                 //need to get relevant information about that class to display information about it.
-                String classTimes = "MWF 3:00 - 4:00 PM";
-                String classProfessor = "Falessi";
+                final String classTimes = "MWF 3:00 - 4:00 PM";
+                final String classProfessor = "Falessi";
                 int spotsAvailable = 20;
-                int waitlistLength = 0;
-                String quartersOffered = "F W";
-                int estimatedCrashing = 0;
+                final int waitlistLength = 0;
+                final String quartersOffered = "F W";
+                final int estimatedCrashing = 0;
                 
                 
                 targetClassName.setText(selectedClass);
@@ -143,7 +158,7 @@ public class SearchPage extends Application
                 	{
                 		System.out.println("view detailed class information");
                 		
-                		Stage popupStage =new Stage();
+                		final Stage popupStage =new Stage();
                 	    GridPane popGrid = new GridPane();
                 	    popGrid.setAlignment(Pos.TOP_LEFT);
                 		popGrid.setHgap(5);
@@ -182,7 +197,13 @@ public class SearchPage extends Application
                 		
                 		
                 		Button button1= new Button("Close");
-                		button1.setOnAction(click -> popupStage.close());    
+                		//button1.setOnAction(click -> popupStage.close());  
+                		button1.setOnAction(new EventHandler<ActionEvent>() {
+                			public void handle(ActionEvent e)
+                			{
+                				popupStage.close();
+                			}
+                		});
                 		Scene scene1= new Scene(popGrid, 400, 400);
                 		popupStage.setScene(scene1);
                 		popupStage.showAndWait();
@@ -211,10 +232,10 @@ public class SearchPage extends Application
 		stage.show();
 	}
 
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+	
+	public Node getNode() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
 }
