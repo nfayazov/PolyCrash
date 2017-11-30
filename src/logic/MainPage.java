@@ -17,22 +17,21 @@ import javafx.stage.Stage;
 
 
 public class MainPage extends Application implements Page{
-	public BorderPane border;
-	public Profile profile;
-	public SearchPage searchPage;
-	public SchedulePage schedulePage;
-	public Login login;
-	public static Database db;
+	private BorderPane border;
+	private Profile profile;
+	private SearchPage searchPage;
+	private SchedulePage schedulePage;
+	private Login login;
+	private Database db;
 	
 	public static void main(String[] args) {
-		db = Database.getInstance();
 		launch(MainPage.class, args);
 	}
 	
 	
 	public void start(Stage stage) {
+		db = Database.getInstance();
 		border = new BorderPane();
-		String username = "lcowart89";
 		login = new Login();
 		border.setCenter(login.getNode());
 		
@@ -41,19 +40,12 @@ public class MainPage extends Application implements Page{
 		    	login.loginCheck();
 		    	if(login.loggedInUsername.length() > 0) {
 		    		startMainpage(login.loggedInUsername);
-		    		System.out.print("Starting main page");
+//		    		System.out.print("Starting main page");
 		    	}
 		     }
 		 });
 		
-//		login.enter.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-//		    public void handle(ActionEvent e) {
-//		    	if(login.loggedInUsername.length() > 0) {
-//		    		startMainpage(login.loggedInUsername);
-//		    		System.out.print("Starting main page");
-//		    	}
-//		    }
-//		});
+
 		Scene scene = new Scene(border, 960, 700);
 		stage.setScene(scene);
 		stage.setTitle("Main Page");
@@ -106,7 +98,7 @@ public class MainPage extends Application implements Page{
 		
 		profileButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-				System.out.println("Clicked on profile");
+//				System.out.println("Clicked on profile");
 				border.setCenter(profile.getNode());
 				defaultButtonColors[0] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
@@ -121,7 +113,7 @@ public class MainPage extends Application implements Page{
 		
 		homeButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-				System.out.println("Clicked on home button");;
+//				System.out.println("Clicked on home button");;
 				border.setCenter(schedulePage.getNode());
 				defaultButtonColors[1] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
@@ -136,7 +128,7 @@ public class MainPage extends Application implements Page{
 		
 		browseCoursesButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-				System.out.println("Clicked on browse courses");
+//				System.out.println("Clicked on browse courses");
 				border.setCenter(searchPage.getNode());
 				defaultButtonColors[2] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
@@ -151,7 +143,7 @@ public class MainPage extends Application implements Page{
 		
 		exitButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-				System.out.println("Clicked on exit");
+//				System.out.println("Clicked on exit");
 				System.exit(0);
 			}
 		});
