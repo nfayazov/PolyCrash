@@ -140,10 +140,5 @@ public class Login extends Application implements Page{
             error1.setText("Please fill both fields");
         }
 	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		 launch(args);
-	}
 
 }
