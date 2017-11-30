@@ -7,6 +7,7 @@ import java.util.List;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -38,6 +39,13 @@ public class SearchPage extends Application implements Page
 	public void start(Stage stage) throws Exception
 	{
 		stage.setTitle("Search Page");
+		Scene scene = new Scene((Parent) getNode(), 960, 700);
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	
+	public Node getNode() {
 		final GridPane grid = new GridPane();
 		grid.setAlignment(Pos.TOP_LEFT);
 		grid.setHgap(10);
@@ -53,9 +61,9 @@ public class SearchPage extends Application implements Page
 
 		final TextField searchField = new TextField();
 		final List<String> classes = new ArrayList<String>(Arrays.asList("CSC 307", "CSC 225", "CSC 357"));
-		//Database db = new Database();
-		//TextFields.bindAutoCompletion(searchField, db.getCourseTable());
-		TextFields.bindAutoCompletion(searchField, classes);
+		final Database db = new Database();
+		TextFields.bindAutoCompletion(searchField, db.getCourseTable());
+		//TextFields.bindAutoCompletion(searchField, classes);
 		grid.add(searchField, 1, 1);
 
 		Button btn = new Button("Search");
@@ -119,13 +127,13 @@ public class SearchPage extends Application implements Page
             		targetClassProfessor.setStyle("-fx-font-color: " + LIGHT_GREEN);
                 
                 final String selectedClass = searchField.getText();
-                Course selectedCourse = new Course(selectedClass, 1);
-                Course testCourse = new Course(selectedClass, 1);
+                //Course selectedCourse = new Course(selectedClass, 1);
+                //Course testCourse = new Course(selectedClass, 1);
                 //db.getCourseTable().get
-                System.out.println(selectedCourse);
-                System.out.println(testCourse);
+                //System.out.println(selectedCourse);
+                //System.out.println(testCourse);
                 //NOTE: all selected courses are showing up as not being a part of getCourseTable despite showing up as a suggestion.
-                if(classes.contains(selectedCourse))//db.getCourseTable().contains(selectedCourse) == false)
+                if(db.getCourseByString(selectedClass) == false)
                 {
                 		System.out.println("selected class = " + selectedClass);
                 		targetClassName.setText("No such class exists.");
@@ -226,16 +234,7 @@ public class SearchPage extends Application implements Page
                 });
             }
         });
-
-		Scene scene = new Scene(grid, 960, 700);
-		stage.setScene(scene);
-		stage.show();
-	}
-
-	
-	public Node getNode() {
-		// TODO Auto-generated method stub
-		return null;
+        return grid;
 	}
 
 }

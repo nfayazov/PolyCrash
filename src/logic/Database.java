@@ -102,7 +102,8 @@ public class Database {
 	private void makeCourseTable(){
 		this.courseDb = new HashSet<Course>();
 		String courseName;
-		int num = 0, section = 2;
+		int num = 0;
+		int section = 2;
 		Random rand = new Random();
 		
 		//add test course
@@ -121,8 +122,7 @@ public class Database {
 		while (it.hasNext()){
 			Course course = it.next();
 			System.out.println(course.name + " " + course.section);
-		}*/
-		
+		}*/	
 		
 	}
 	
@@ -134,16 +134,24 @@ public class Database {
 		return courseDb;
 	}
 	
-	public Course getCourseByString(String str) {
+	public boolean getCourseByString(String str) {
 		Iterator<Course> it = courseDb.iterator();
-		int section = Integer.parseInt(str.substring(str.length()-1));
-		String name = str.substring(0, str.length()-2);
-		Course searchedCourse = new Course(name, section);
-		while(it.hasNext()) {
+		int section = Integer.parseInt(str.substring(str.length() - 1));
+		String name = str.substring(0, str.length() - 2);
+		while(it.hasNext())
+		{
 			Course course = it.next();
-			if (course.equals(searchedCourse))
-				return course;
+			int courseSection = course.section;
+			String courseName = course.name;
+			
+			if(courseSection == section)
+			{
+				if(courseName.equals(name))
+				{
+					return true;
+				}
+			}
 		}
-		return null;
+		return false;
 	}
 }
