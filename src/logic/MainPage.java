@@ -85,8 +85,14 @@ public class MainPage extends Application implements Page{
 	
 	public void startMainpage(String username) {
 		profile = new Profile(username);
-		searchPage = new SearchPage();
+		searchPage = new SearchPage(username);
 		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
+		schedulePage.addClass.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	border.setCenter(searchPage.getNode());
+		    	
+		     }
+		 });
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
 		border.setCenter(profile.getNode());

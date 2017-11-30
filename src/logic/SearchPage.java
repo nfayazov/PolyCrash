@@ -31,6 +31,12 @@ public class SearchPage extends Application implements Page
 	Label label1;
 	Button button1;
 	int i = 1;
+	private String username;
+	
+	public SearchPage(String username) {
+		this.username = username;
+	}
+	
 	public static void main(String[] args)
 	{
 		launch(args);

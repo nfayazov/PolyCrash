@@ -48,9 +48,12 @@ public class SchedulePage implements Page{
 	/*This is all copied from the MainPage class, and is just for testing to ensure SchedulePage will
 	 * return correctly when its contents are added to the main page. It can be deleted later.*/
 	Schedule s;
+	public Button addClass;
+	public Button pushClass;
 	public SchedulePage(Schedule s) {
 		this.s = s;
-		//this.s = testSchedule();
+		addClass = getAddClassButton();
+		pushClass = getPushButton();
 	}
 	
 //	public static void main(String[] args) {
@@ -248,8 +251,7 @@ public class SchedulePage implements Page{
 		VBox bottom = new VBox();
 		bottom.setStyle("-fx-background-color:#FFFFFF");
 		
-		Button addClass = getAddClassButton();
-		Button pushClass = getPushButton();
+		
 		
 		bottom.getChildren().add(addClass);
 		bottom.getChildren().add(pushClass);
