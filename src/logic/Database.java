@@ -65,7 +65,10 @@ public class Database {
 				addSchedule(student);
 				
 				studentDb.put(student.username, student);
-			}	
+			}
+			Student student = new Student("a", "a");
+			addSchedule(student);
+			studentDb.put(student.username, student);
 			
 			fsc.close();
 			lsc.close();
