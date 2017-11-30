@@ -68,8 +68,6 @@ public class Database {
 			}
 			Student student = new Student("a", "a");
 			addSchedule(student);
-			System.out.println(student.username);
-			System.out.println(student.getPassword());
 			studentDb.put(student.username, student);
 			
 			fsc.close();
