@@ -44,6 +44,7 @@ public class MainPage extends Application implements Page{
 	public Profile profile;
 	public SearchPage searchPage;
 	public SchedulePage schedulePage;
+	public Login login;
 	public static Database db;
 	
 	public static void main(String[] args) {
@@ -55,15 +56,46 @@ public class MainPage extends Application implements Page{
 	public void start(Stage stage) {
 		border = new BorderPane();
 		String username = "lcowart89";
-		profile = new Profile(username);
-		searchPage = new SearchPage();
-		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
-		VBox navBar = getNavBar();
-		border.setLeft(navBar);
+		login = new Login();
+		border.setCenter(login.getNode());
+		
+		login.enter.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	login.loginCheck();
+		    	if(login.loggedInUsername.length() > 0) {
+		    		startMainpage(login.loggedInUsername);
+		    		System.out.print("Starting main page");
+		    	}
+		     }
+		 });
+		
+//		login.enter.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+//		    public void handle(ActionEvent e) {
+//		    	if(login.loggedInUsername.length() > 0) {
+//		    		startMainpage(login.loggedInUsername);
+//		    		System.out.print("Starting main page");
+//		    	}
+//		    }
+//		});
 		Scene scene = new Scene(border, 960, 700);
 		stage.setScene(scene);
 		stage.setTitle("Main Page");
 		stage.show();
+	}
+	
+	public void startMainpage(String username) {
+		profile = new Profile(username);
+		searchPage = new SearchPage(username);
+		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
+		schedulePage.addClass.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	border.setCenter(searchPage.getNode());
+		    	
+		     }
+		 });
+		VBox navBar = getNavBar();
+		border.setLeft(navBar);
+		border.setCenter(profile.getNode());
 	}
 	
 	public String getDarkGreen() {

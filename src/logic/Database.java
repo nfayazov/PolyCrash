@@ -196,7 +196,7 @@ public class Database {
 		return false;
 	}
 	
-	public Course getCourseFromTable(String str) {
+	public Course findCourse(String str) {
 		Iterator<Course> it = courseDb.iterator();
 		int section = Integer.parseInt(str.substring(str.length() - 1));
 		String name = str.substring(0, str.length() - 2);
