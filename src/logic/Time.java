@@ -40,4 +40,16 @@ public class Time {
 			return this.hour-12;
 		}
 	}
+	
+	public static String toString(Time x)
+	{
+		if(x.minute < 10)
+		{
+			return Integer.toString(x.hour) + ":" + Integer.toString(x.minute) + "0 " + x.period;
+		}
+		else
+		{
+			return Integer.toString(x.hour) + ":" + Integer.toString(x.minute) + x.period;
+		}
+	}
 }
