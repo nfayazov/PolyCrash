@@ -36,6 +36,10 @@ public class Student {
 		return this.password;
 	}
 	
+	public void changePassword(String password) {
+		this.password = password;
+	}
+	
 	public Schedule getSchedule() {
 		return this.schedule;
 	}

@@ -18,6 +18,7 @@ public class Database {
 	private HashMap<String, Student> studentDb;
 	private HashSet<Course> courseDb;
 	public HashMap<Course, ArrayList<Student>> courseLookupDb;
+	public HashMap<Course, ArrayList<Student>> waitlistDb;
 	
 	public Database() {
 		makeCourseTable();
@@ -40,6 +41,8 @@ public class Database {
 	private void makeStudentTable() {
 		this.studentDb = new HashMap<String, Student>();
 		this.courseLookupDb = new HashMap<Course, ArrayList<Student>>();
+		this.waitlistDb = new HashMap<Course, ArrayList<Student>>();
+		
 		try {
 			Scanner fsc = new Scanner(new File("src/logic/resources/firstNames.txt"));
 			Scanner lsc = new Scanner(new File("src/logic/resources/lastNames.txt"));
@@ -97,23 +100,41 @@ public class Database {
 			i++;
 			course = it.next();
 		}
+		
 		if (schedule.contains(course)) addRandomCourse(schedule, student);
 		else {
 			schedule.addCourse(course);
+			addToLookupTable(course, student);
+		}	
+	}
+	
+	private void addToLookupTable(Course course, Student student) {
 			
-			//also add to lookup table
-			ArrayList<Student> students;
-			
-			if (courseLookupDb.containsKey(course)) {
-				 students = courseLookupDb.get(course);
-			}
-			else {
-				students = new ArrayList<Student>();
-			}
+		//also add to lookup table
+		ArrayList<Student> students;
+		
+		if (courseLookupDb.containsKey(course)) {
+			 students = courseLookupDb.get(course);
+		}
+		else {
+			students = new ArrayList<Student>();
+		}
+		
+		if (students.size() < course.getCapacity()){
 			students.add(student);
 			courseLookupDb.put(course, students);
 		}
-
+		else {
+			ArrayList<Student> waitlisted;
+			if (waitlistDb.containsKey(course)) {
+				 waitlisted = waitlistDb.get(course);
+			}
+			else {
+				waitlisted = new ArrayList<Student>();
+			}
+			waitlisted.add(student);
+			waitlistDb.put(course, waitlisted);
+		}
 	}
 	
 	private void makeCourseTable(){

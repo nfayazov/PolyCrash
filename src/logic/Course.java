@@ -4,6 +4,7 @@ import logic.Time;
 //It contains all the new properties added to the class.
 
 public class Course {
+		
 	String name;
 	int section;
 	
@@ -13,9 +14,11 @@ public class Course {
 	private Time start;
 	private Time end;
 	
+	private int capacity = 10;
+	
 	public Course(String name, int section) {
 		this.name = name;
-		this.section = section;		
+		this.section = section;	
 	}
 	
 	public boolean onDay(String day)
@@ -56,5 +59,9 @@ public class Course {
 	
 	public void setEnd(Time end) {
 		this.end = end;
+	}
+	
+	public int getCapacity() {
+		return capacity;
 	}
 }

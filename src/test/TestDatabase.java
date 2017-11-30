@@ -41,7 +41,7 @@ public class TestDatabase {
 		assertEquals(course.toString(), "CSC 101-1");
 	}
 	
-	@Test
+	/*@Test
 	public void TestLookupTable() {
 		Database db = new Database();
 		for (Course course : db.courseLookupDb.keySet()) {
@@ -53,4 +53,17 @@ public class TestDatabase {
 			System.out.println("");
 		}
 	}
+	
+	@Test
+	public void TestWaitlistTable() {
+		Database db = new Database();
+		for (Course course : db.waitlistDb.keySet()) {
+			ArrayList<Student> students = db.waitlistDb.get(course);
+			System.out.print(course.toString() + ": ");
+			for (int i = 0; i < students.size(); i++) {
+				System.out.print(students.get(i).username + ", ");
+			}
+			System.out.println("");
+		}
+	}*/
 }
