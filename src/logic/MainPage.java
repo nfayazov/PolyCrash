@@ -47,8 +47,8 @@ public class MainPage extends Application implements Page{
 	public static Database db;
 	
 	public static void main(String[] args) {
-		launch(MainPage.class, args);
 		db = Database.getInstance();
+		launch(MainPage.class, args);
 	}
 	
 	
@@ -57,7 +57,7 @@ public class MainPage extends Application implements Page{
 		String username = "lcowart89";
 		profile = new Profile(username);
 		searchPage = new SearchPage();
-		//schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
+		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
 		Scene scene = new Scene(border, 960, 700);
@@ -113,6 +113,7 @@ public class MainPage extends Application implements Page{
 		homeButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
 				System.out.println("Clicked on home button");;
+				border.setCenter(schedulePage.getNode());
 				defaultButtonColors[1] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 1) {

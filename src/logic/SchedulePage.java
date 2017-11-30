@@ -50,6 +50,7 @@ public class SchedulePage implements Page{
 	Schedule s;
 	public SchedulePage(Schedule s) {
 		this.s = s;
+		//this.s = testSchedule();
 	}
 	
 //	public static void main(String[] args) {
@@ -183,6 +184,9 @@ public class SchedulePage implements Page{
 		//Adds a column for the specified day of the week at the provided column index.
 		for(Course course : s.getCourses())
 		{
+			System.out.println(course);
+			System.out.println(day);
+			
 			if(course.onDay(day))
 			{					
 				Label courseBlock = new Label("("+course.name+")");
