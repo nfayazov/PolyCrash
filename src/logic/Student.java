@@ -1,5 +1,4 @@
 package logic;
-import logic.Course;
 
 public class Student extends User {
 	public int year;

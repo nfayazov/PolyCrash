@@ -1,9 +1,5 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.scene.Node;
