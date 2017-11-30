@@ -34,9 +34,9 @@ public class Login extends Application implements Page{
 	
 	Label error1 = new Label("");
 	Label errorLogin = new Label("");
-	
+	public Button enter;
 	public Login() {
-		//constructor
+	      enter = new Button("Sign In");
 	}
 
 	public boolean checkValid(String username, String pw) {
@@ -119,7 +119,6 @@ public class Login extends Application implements Page{
 		  pw.setPromptText("Password");
 	      vbox.getChildren().add(pw);
 
-	      Button enter = new Button("Sign In");
 	      root.setCenter(enter);
 	      vbox.getChildren().add(enter);
 

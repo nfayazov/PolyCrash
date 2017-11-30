@@ -44,23 +44,26 @@ public class MainPage extends Application implements Page{
 	public Profile profile;
 	public SearchPage searchPage;
 	public SchedulePage schedulePage;
+	public static Database db;
 	
 	public static void main(String[] args) {
 		launch(MainPage.class, args);
+		db = new Database();
 	}
 	
 	
 	public void start(Stage stage) {
 		border = new BorderPane();
-		profile = new Profile("lcowart89");
+		String username = "lcowart89";
+		profile = new Profile(username);
 		searchPage = new SearchPage();
+		//schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
 		Scene scene = new Scene(border, 960, 700);
 		stage.setScene(scene);
 		stage.setTitle("Main Page");
 		stage.show();
-		
 	}
 	
 	public String getDarkGreen() {
