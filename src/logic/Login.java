@@ -41,7 +41,7 @@ public class Login extends Application implements Page{
 		//string is username, student->pw
 		if(studentList.containsKey(username)) {
 			Student s = studentList.get(username);
-			System.out.println(s.getPassword());
+			
 			if (s.getPassword().compareTo(pw) == 0) {
 				return true;
 			}
@@ -87,13 +87,6 @@ public class Login extends Application implements Page{
 	      top.setPrefHeight(350);
 		  top.setStyle("-fx-background-color: " + DARK_GREEN);
 	 
-	      // BOTTOM ----------------------------
-	      /*GridPane grid = new GridPane();
-			grid.setAlignment(Pos.CENTER);
-			grid.setHgap(10);
-			grid.setVgap(10);
-			grid.setPadding(new Insets(25,25,25,25));
-			*/
 	      Label title1 = new Label("Sign in with your calpoly.edu information");
 	      title1.setFont(new Font("Cambria", 20));
 	      title1.setTextFill(Color.web(DARK_GREEN));
@@ -130,7 +123,7 @@ public class Login extends Application implements Page{
 		//verifying user and pass
     	errorLogin.setText("");
     	error1.setText("");
-        if ((!username.getText().isEmpty() | !pw.getText().isEmpty())) {
+        if ((!username.getText().isEmpty() || !pw.getText().isEmpty())) {
         	//if not in database/error
         	if (checkValid(username.getText(), pw.getText())) {
         		loggedInUsername = username.getText();
