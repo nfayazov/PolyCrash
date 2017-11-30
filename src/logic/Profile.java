@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -136,11 +134,10 @@ public class Profile extends Application implements Page {
         gridPane.add(timepicker, 0, 0);
         vbox.getChildren().add(timepicker);
         
-        //change password hypek
+        //change password hyperlink
         Hyperlink link = new Hyperlink();
         link.setText("Change Password");
-        link.setOnAction((event) -> {
-    		System.out.println("Change Password pressed");
+        link.setOnAction(event -> {
     		final Label errorPW = new Label("");
     		
     		final Stage popupStage =new Stage();
@@ -174,7 +171,7 @@ public class Profile extends Application implements Page {
 		      errorPW.setTextFill(Color.web(DARK_GREEN));
 		      vbox.getChildren().add(errorPW);
 		      
-			  enter.setOnAction((event2) -> {
+			  enter.setOnAction(event2 -> {
 			    	//verifying user and pass
 			    	errorPW.setText("");
 			    	
@@ -202,7 +199,7 @@ public class Profile extends Application implements Page {
 	      	popGrid.getChildren().add(errorPW);
 	      	
     		Button button1= new Button("Close");
-    		button1.setOnAction((event2) ->{
+    		button1.setOnAction(event2 ->{
 				popupStage.close();
     		});
     		Scene scene1= new Scene(popGrid, 400, 400);
