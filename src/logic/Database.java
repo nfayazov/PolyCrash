@@ -5,7 +5,6 @@ import logic.Course;
 import logic.Schedule;
 import logic.Student;
 
-import java.lang.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -77,7 +76,6 @@ public class Database {
 	}
 	
 	private void addSchedule(Student student) {
-		int num = 4;
 		Schedule schedule = new Schedule();
 		for (int i = 0; i < NUMCOURSESPERSTUDENT; i++) {
 			addRandomCourse(schedule, student);
