@@ -37,8 +37,8 @@ public class TestDatabase {
 	@Test
 	public void TestGetClassByName() {
 		Database db = new Database();
-		Course course = db.getCourseByString("CSC 101-1");
-		assertEquals(course.toString(), "CSC 101-1");
+		Boolean exists = db.getCourseByString("CSC 101-1");
+		assertTrue(exists);
 	}
 	
 	/*@Test

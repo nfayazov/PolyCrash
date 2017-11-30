@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Database {
+	
+	private static Database db = null;
 
 	static int NUM_STUDENTS = 1000;
 	static int NUM_COURSES = 100;
@@ -20,9 +22,15 @@ public class Database {
 	public HashMap<Course, ArrayList<Student>> courseLookupDb;
 	public HashMap<Course, ArrayList<Student>> waitlistDb;
 	
-	public Database() {
+	private Database() {
 		makeCourseTable();
 		makeStudentTable();
+	}
+	
+	public static Database getInstance() {
+		if (db == null) 
+			db = new Database();
+		return db;
 	}
 	
 	public Course[] getScheduleByUsername(String username) {

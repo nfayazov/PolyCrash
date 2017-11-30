@@ -44,7 +44,7 @@ public class MainPage extends Application implements Page{
 		launch(MainPage.class, args);
 		
 		/* EXAMPLE (delete this) */
-		Database db = new Database();
+		Database db = Database.getInstance();
 		db.printScheduleByUsername("lcowart89");
 	}
 	
