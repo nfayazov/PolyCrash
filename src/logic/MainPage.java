@@ -40,17 +40,20 @@ import java.util.*;
 
 
 public class MainPage extends Application implements Page{
+	public BorderPane border;
+	public Profile profile;
+	public SearchPage searchPage;
+	public SchedulePage schedulePage;
+	
 	public static void main(String[] args) {
 		launch(MainPage.class, args);
-		
-		/* EXAMPLE (delete this) */
-		Database db = new Database();
-		db.printScheduleByUsername("lcowart89");
 	}
 	
 	
 	public void start(Stage stage) {
-		BorderPane border = new BorderPane();
+		border = new BorderPane();
+		profile = new Profile("lcowart89");
+		searchPage = new SearchPage();
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
 		Scene scene = new Scene(border, 960, 700);
@@ -92,6 +95,7 @@ public class MainPage extends Application implements Page{
 		profileButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
 				System.out.println("Clicked on profile");
+				border.setCenter(profile.getNode());
 				defaultButtonColors[0] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 0) {
@@ -119,7 +123,8 @@ public class MainPage extends Application implements Page{
 		
 		browseCoursesButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-				System.out.println("Clicked on browse courses");;
+				System.out.println("Clicked on browse courses");
+				border.setCenter(searchPage.getNode());
 				defaultButtonColors[2] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 2) {
