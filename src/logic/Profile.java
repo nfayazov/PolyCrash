@@ -35,7 +35,7 @@ public class Profile extends Application implements Page {
 	Student student;
 	
 	public Profile(String username) {
-		Database db = new Database();
+		Database db = Database.getInstance();
 		HashMap<String, Student> studentList = db.getStudentTable();
 		student = studentList.get(username);
 		System.out.println(student);

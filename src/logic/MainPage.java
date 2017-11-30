@@ -48,7 +48,7 @@ public class MainPage extends Application implements Page{
 	
 	public static void main(String[] args) {
 		launch(MainPage.class, args);
-		db = new Database();
+		db = Database.getInstance();
 	}
 	
 	

@@ -62,7 +62,7 @@ public class SearchPage extends Application implements Page
 		grid.add(valueName1, 0, 1);
 
 		final TextField searchField = new TextField();
-		final Database db = new Database();
+		final Database db = Database.getInstance();
 		TextFields.bindAutoCompletion(searchField, db.getCourseTable());
 		searchField.setFont(new Font(fontType, 18));
 		grid.add(searchField, 1, 1);

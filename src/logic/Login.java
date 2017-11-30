@@ -40,7 +40,7 @@ public class Login extends Application implements Page{
 	}
 
 	public boolean checkValid(String username, String pw) {
-		Database db = new Database();
+		Database db = Database.getInstance();
 		HashMap<String, Student> studentList = db.getStudentTable();
 		//string is username, student->pw
 		if(studentList.containsKey(username)) {

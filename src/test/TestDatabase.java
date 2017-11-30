@@ -12,31 +12,31 @@ public class TestDatabase {
 	
 	@Test
 	public void TestDB1() {
-		Database pc = new Database();
-		assertEquals(pc.getStudentTable().isEmpty(), false);
+		Database db = Database.getInstance();
+		assertEquals(db.getStudentTable().isEmpty(), false);
 	}
 	
 	@Test
 	public void TestDB2() {
-		Database pc = new Database();
-		assertEquals(pc.getStudentTable().size(), 1000);
+		Database db = Database.getInstance();
+		assertEquals(db.getStudentTable().size(), 1000);
 	}
 	
 	@Test
 	public void TestDB3() {
-		Database pc = new Database();
-		assertEquals(pc.getCourseTable().isEmpty(), false);
+		Database db = Database.getInstance();
+		assertEquals(db.getCourseTable().isEmpty(), false);
 	}
 	
 	@Test
 	public void TestDB4() {
-		Database pc = new Database();
-		assertEquals(pc.getCourseTable().size(), 100);
+		Database db = Database.getInstance();
+		assertEquals(db.getCourseTable().size(), 100);
 	}
 	
 	@Test
 	public void TestGetClassByName() {
-		Database db = new Database();
+		Database db = Database.getInstance();
 		Boolean exists = db.getCourseByString("CSC 101-1");
 		assertTrue(exists);
 	}
@@ -66,5 +66,4 @@ public class TestDatabase {
 			System.out.println("");
 		}
 	}*/
->>>>>>> 2782ef0e256cd47b526fa5e68696d4501be4b485
 }
