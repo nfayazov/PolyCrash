@@ -37,13 +37,11 @@ public class MainPage extends Application implements Page{
 		login = new Login();
 		border.setCenter(login.getNode());
 		
-		login.enter.setOnAction(new EventHandler<ActionEvent>() {
-		    public void handle(ActionEvent e) {
-		    	login.loginCheck();
-		    	if(login.loggedInUsername.length() > 0) {
-		    		startMainpage(login.loggedInUsername);
-		    	}
-		     }
+		login.enter.setOnAction((event) -> {
+	    	login.loginCheck();
+	    	if(login.loggedInUsername.length() > 0) {
+	    		startMainpage(login.loggedInUsername);
+	    	}
 		 });
 		
 
@@ -57,12 +55,9 @@ public class MainPage extends Application implements Page{
 		profile = new Profile(username);
 		searchPage = new SearchPage(username);
 		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
-		schedulePage.addClass.setOnAction(new EventHandler<ActionEvent>() {
-		    public void handle(ActionEvent e) {
-		    	border.setCenter(searchPage.getNode());
-		    	
-		     }
-		 });
+		schedulePage.addClass.setOnAction((event) -> {
+			    	border.setCenter(searchPage.getNode());
+		});
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
 		border.setCenter(profile.getNode());
@@ -97,52 +92,44 @@ public class MainPage extends Application implements Page{
 			defaultButtonColors[i] = CLEAR;
 		}
 		
-		profileButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e) {
-				border.setCenter(profile.getNode());
-				defaultButtonColors[0] = LIGHT_GREEN;
-				for(int i = 0; i < defaultButtonColors.length; i++) {
-					if(i == 0) {
-						continue;
-					}
-					defaultButtonColors[i] = CLEAR;
-					sideButtons[i].setStyle(SET_BG + CLEAR);
+		profileButton.setOnAction((event) -> {
+			border.setCenter(profile.getNode());
+			defaultButtonColors[0] = LIGHT_GREEN;
+			for(int i = 0; i < defaultButtonColors.length; i++) {
+				if(i == 0) {
+					continue;
 				}
+				defaultButtonColors[i] = CLEAR;
+				sideButtons[i].setStyle(SET_BG + CLEAR);
 			}
 		});
 		
-		homeButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e) {
-				border.setCenter(schedulePage.getNode());
-				defaultButtonColors[1] = LIGHT_GREEN;
-				for(int i = 0; i < defaultButtonColors.length; i++) {
-					if(i == 1) {
-						continue;
-					}
-					defaultButtonColors[i] = CLEAR;
-					sideButtons[i].setStyle(SET_BG + CLEAR);
+		homeButton.setOnAction((event) -> {
+			border.setCenter(schedulePage.getNode());
+			defaultButtonColors[1] = LIGHT_GREEN;
+			for(int i = 0; i < defaultButtonColors.length; i++) {
+				if(i == 1) {
+					continue;
 				}
+				defaultButtonColors[i] = CLEAR;
+				sideButtons[i].setStyle(SET_BG + CLEAR);
 			}
 		});
 		
-		browseCoursesButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e) {
-				border.setCenter(searchPage.getNode());
-				defaultButtonColors[2] = LIGHT_GREEN;
-				for(int i = 0; i < defaultButtonColors.length; i++) {
-					if(i == 2) {
-						continue;
-					}
-					defaultButtonColors[i] = CLEAR;
-					sideButtons[i].setStyle(SET_BG + CLEAR);
+		browseCoursesButton.setOnAction((event) -> {
+			border.setCenter(searchPage.getNode());
+			defaultButtonColors[2] = LIGHT_GREEN;
+			for(int i = 0; i < defaultButtonColors.length; i++) {
+				if(i == 2) {
+					continue;
 				}
+				defaultButtonColors[i] = CLEAR;
+				sideButtons[i].setStyle(SET_BG + CLEAR);
 			}
 		});
 		
-		exitButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e) {
-				System.exit(0);
-			}
+		exitButton.setOnAction((event) -> {
+			System.exit(0);
 		});
 		
 		
