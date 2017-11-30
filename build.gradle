@@ -19,6 +19,8 @@ plugins {
 sonarqube {
     properties {
         property "sonar.sources", "src"
+  		property "sonar.host.url", "http://localhost:9000"
+  		property "sonar.login", "3c033922cde83c9324f1a63937825608f7a99c56"
     //     property "sonar.host.url", "sonarcloud.io"
     //     property "sonar.login", "polycrash"
     //     property "sonar.organization", "polycrash"
