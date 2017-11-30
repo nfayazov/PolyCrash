@@ -7,6 +7,7 @@ import java.util.List;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -38,6 +39,13 @@ public class SearchPage extends Application implements Page
 	public void start(Stage stage) throws Exception
 	{
 		stage.setTitle("Search Page");
+		Scene scene = new Scene((Parent) getNode(), 960, 700);
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	
+	public Node getNode() {
 		final GridPane grid = new GridPane();
 		grid.setAlignment(Pos.TOP_LEFT);
 		grid.setHgap(10);
@@ -226,16 +234,7 @@ public class SearchPage extends Application implements Page
                 });
             }
         });
-
-		Scene scene = new Scene(grid, 960, 700);
-		stage.setScene(scene);
-		stage.show();
-	}
-
-	
-	public Node getNode() {
-		// TODO Auto-generated method stub
-		return null;
+        return grid;
 	}
 
 }
