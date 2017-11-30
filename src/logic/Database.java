@@ -66,7 +66,10 @@ public class Database {
 				addSchedule(student);
 				
 				studentDb.put(student.username, student);
-			}		
+			}	
+			
+			fsc.close();
+			lsc.close();
 		
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -191,5 +194,43 @@ public class Database {
 			}
 		}
 		return false;
+	}
+	
+	public Course getCourseFromTable(String str) {
+		Iterator<Course> it = courseDb.iterator();
+		int section = Integer.parseInt(str.substring(str.length() - 1));
+		String name = str.substring(0, str.length() - 2);
+		while(it.hasNext())
+		{
+			Course course = it.next();
+			int courseSection = course.section;
+			String courseName = course.name;
+			
+			if(courseSection == section && courseName.equals(name))
+			{
+				return course;
+			}
+		}
+		return null;
+	}	
+	
+	public double getProbability(Course course, Student student, Teacher teacher) {
+		double offset;
+		double probability;
+		if (waitlistDb.containsKey(course)){
+			ArrayList<Student> students = waitlistDb.get(course);
+			if (students.indexOf(student) != -1) {
+				offset = teacher.viscocity - students.indexOf(student)+1;				
+				probability = .75 + (1/(teacher.viscocity*5)) * offset;
+				probability = probability > 1 ? 1 : probability;
+				probability = probability < 0 ? 0 : probability;
+				return probability;
+			}
+			else {
+				return 0;
+			}
+		}
+		else
+			return 0;
 	}
 }

@@ -4,6 +4,8 @@ import org.junit.Test;
 import logic.Database;
 import logic.Course;
 import logic.Student;
+import logic.Teacher;
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -33,6 +35,18 @@ public class TestDatabase {
 		Database db = Database.getInstance();
 		Boolean exists = db.getCourseByString("CSC 101-1");
 		assertTrue(exists);
+	}
+	
+	@Test
+	public void TestProbability() {
+		Database db = Database.getInstance();
+		Teacher teacher = new Teacher("Davide","Falessi");
+		Course course = db.getCourseFromTable("CSC 101-1");
+		ArrayList<Student> arr = db.waitlistDb.get(course);
+		Student student = arr.get(12);
+		System.out.println("viscocity" + teacher.viscocity);
+		System.out.println(db.getProbability(course, student, teacher));
+		assertTrue(db.getProbability(course, student, teacher) != 0);
 	}
 	
 	/*@Test
