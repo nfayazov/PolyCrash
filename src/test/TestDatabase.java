@@ -31,10 +31,10 @@ public class TestDatabase {
 		assertEquals(pc.getCourseTable().size(), 100);
 	}
 	
-	@Test
-	public void TestGetClassByName() {
-		Database db = new Database();
-		Course course = db.getCourseByString("CSC 101-1");
-		assertEquals(course.toString(), "CSC 101-1");
-	}
+//	@Test
+//	public void TestGetClassByName() {
+//		Database db = new Database();
+//		Course course = db.getCourseByString("CSC 101-1");
+//		assertEquals(course.toString(), "CSC 101-1");
+//	}
 }
