@@ -17,6 +17,7 @@ public class Database {
 
 	private HashMap<String, Student> studentDb;
 	private HashSet<Course> courseDb;
+	public HashMap<Course, ArrayList<Student>> courseLookupDb;
 	
 	public Database() {
 		makeCourseTable();
@@ -38,6 +39,7 @@ public class Database {
 	
 	private void makeStudentTable() {
 		this.studentDb = new HashMap<String, Student>();
+		this.courseLookupDb = new HashMap<Course, ArrayList<Student>>();
 		try {
 			Scanner fsc = new Scanner(new File("src/logic/resources/firstNames.txt"));
 			Scanner lsc = new Scanner(new File("src/logic/resources/lastNames.txt"));
@@ -51,6 +53,7 @@ public class Database {
 
 				Student student = new Student(first, last);
 				addSchedule(student);
+				
 				/*Course courses[] = student.getCoursesFromSchedule();
 				System.out.println(student.username + ":");
 				for (int j = 0; j < courses.length; j++){
@@ -78,12 +81,12 @@ public class Database {
 		int num = 4;
 		Schedule schedule = new Schedule();
 		for (int i = 0; i < NUM_COURSES_PER_STUDENT; i++) {
-			addRandomCourse(schedule);
+			addRandomCourse(schedule, student);
 		}
 		student.setSchedule(schedule);
 	}
 	
-	private void addRandomCourse(Schedule schedule) {
+	private void addRandomCourse(Schedule schedule, Student student) {
 		Random rand = new Random();
 		Course course = new Course(" ", 0);
 		int num = rand.nextInt(NUM_COURSES);
@@ -94,8 +97,22 @@ public class Database {
 			i++;
 			course = it.next();
 		}
-		if (schedule.contains(course)) addRandomCourse(schedule);
-		else schedule.addCourse(course);
+		if (schedule.contains(course)) addRandomCourse(schedule, student);
+		else {
+			schedule.addCourse(course);
+			
+			//also add to lookup table
+			ArrayList<Student> students;
+			
+			if (courseLookupDb.containsKey(course)) {
+				 students = courseLookupDb.get(course);
+			}
+			else {
+				students = new ArrayList<Student>();
+			}
+			students.add(student);
+			courseLookupDb.put(course, students);
+		}
 
 	}
 	
