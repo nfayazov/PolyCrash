@@ -66,7 +66,10 @@ public class Database {
 				addSchedule(student);
 				
 				studentDb.put(student.username, student);
-			}		
+			}	
+			
+			fsc.close();
+			lsc.close();
 		
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -209,5 +212,25 @@ public class Database {
 			}
 		}
 		return null;
+	}	
+	
+	public double getProbability(Course course, Student student, Teacher teacher) {
+		double offset;
+		double probability;
+		if (waitlistDb.containsKey(course)){
+			ArrayList<Student> students = waitlistDb.get(course);
+			if (students.indexOf(student) != -1) {
+				offset = teacher.viscocity - students.indexOf(student)+1;				
+				probability = .75 + (1/(teacher.viscocity*5)) * offset;
+				probability = probability > 1 ? 1 : probability;
+				probability = probability < 0 ? 0 : probability;
+				return probability;
+			}
+			else {
+				return 0;
+			}
+		}
+		else
+			return 0;
 	}
 }
