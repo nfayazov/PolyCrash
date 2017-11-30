@@ -1,0 +1,11 @@
+plugins {
+    id "org.sonarqube" version "2.6"
+    id "java-gradle-plugin"
+}
+
+sonarqube {
+    properties {
+        property "sonar.sources", "src"
+        property "sonar.java.binaries", "src"
+    }
+}
