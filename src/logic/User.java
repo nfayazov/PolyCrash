@@ -32,7 +32,6 @@ public abstract class User {
 	public String getFirstAndLastName() {
 		return this.first + " " + this.last;
 	}
-	
 	//make this private or protected
 	public String getPassword() {
 		return this.password;
