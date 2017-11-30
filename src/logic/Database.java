@@ -192,4 +192,22 @@ public class Database {
 		}
 		return false;
 	}
+	
+	public Course findCourse(String str) {
+		Iterator<Course> it = courseDb.iterator();
+		int section = Integer.parseInt(str.substring(str.length() - 1));
+		String name = str.substring(0, str.length() - 2);
+		while(it.hasNext())
+		{
+			Course course = it.next();
+			int courseSection = course.section;
+			String courseName = course.name;
+			
+			if(courseSection == section && courseName.equals(name))
+			{
+				return course;
+			}
+		}
+		return null;
+	}
 }
