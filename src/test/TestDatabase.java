@@ -3,7 +3,10 @@ import org.junit.Test;
 
 import logic.Database;
 import logic.Course;
+import logic.Student;
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
 
 public class TestDatabase {
 	
@@ -31,10 +34,37 @@ public class TestDatabase {
 		assertEquals(pc.getCourseTable().size(), 100);
 	}
 	
-//	@Test
-//	public void TestGetClassByName() {
-//		Database db = new Database();
-//		Course course = db.getCourseByString("CSC 101-1");
-//		assertEquals(course.toString(), "CSC 101-1");
-//	}
+	@Test
+	public void TestGetClassByName() {
+		Database db = new Database();
+		Course course = db.getCourseByString("CSC 101-1");
+		assertEquals(course.toString(), "CSC 101-1");
+	}
+	
+	/*@Test
+	public void TestLookupTable() {
+		Database db = new Database();
+		for (Course course : db.courseLookupDb.keySet()) {
+			ArrayList<Student> students = db.courseLookupDb.get(course);
+			System.out.print(course.toString() + ": ");
+			for (int i = 0; i < students.size(); i++) {
+				System.out.print(students.get(i).username + ", ");
+			}
+			System.out.println("");
+		}
+	}
+	
+	@Test
+	public void TestWaitlistTable() {
+		Database db = new Database();
+		for (Course course : db.waitlistDb.keySet()) {
+			ArrayList<Student> students = db.waitlistDb.get(course);
+			System.out.print(course.toString() + ": ");
+			for (int i = 0; i < students.size(); i++) {
+				System.out.print(students.get(i).username + ", ");
+			}
+			System.out.println("");
+		}
+	}*/
+>>>>>>> 2782ef0e256cd47b526fa5e68696d4501be4b485
 }
