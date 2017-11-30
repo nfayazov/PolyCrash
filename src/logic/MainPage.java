@@ -137,16 +137,12 @@ public class MainPage extends Application implements Page{
 			sideButtons[i].setStyle(SET_BG + defaultButtonColors[i]);
 			sideButtons[i].setPrefSize(500, 500);
 			final int tmp = i;
-			sideButtons[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent t) {
-					sideButtons[tmp].setStyle(SET_BG + LIGHT_GREEN);
-				}
-			});
-			sideButtons[i].setOnMouseExited(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent t) {
-					sideButtons[tmp].setStyle(SET_BG + defaultButtonColors[tmp]);
-				}
-			});
+			sideButtons[i].setOnMouseEntered(event -> 
+				sideButtons[tmp].setStyle(SET_BG + LIGHT_GREEN)
+			);
+			sideButtons[i].setOnMouseExited(event ->
+					sideButtons[tmp].setStyle(SET_BG + defaultButtonColors[tmp])
+			);
 			
 		}
 		
@@ -170,7 +166,6 @@ public class MainPage extends Application implements Page{
 
 
 	public Node getNode() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
