@@ -1,7 +1,6 @@
 package logic;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -55,7 +54,7 @@ public class MainPage extends Application implements Page{
 		profile = new Profile(username);
 		searchPage = new SearchPage(username);
 		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
-		schedulePage.addClass.setOnAction((event) -> {
+		schedulePage.addClass.setOnAction(event -> {
 			    	border.setCenter(searchPage.getNode());
 		});
 		VBox navBar = getNavBar();
