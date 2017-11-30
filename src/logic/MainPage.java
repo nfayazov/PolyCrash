@@ -23,6 +23,8 @@ public class MainPage extends Application implements Page{
 	private SchedulePage schedulePage;
 	private Login login;
 	private Database db;
+	private static final String CLEAR = "transparent";
+	private static final String SET_BG = "-fx-background-color: ";
 	
 	public static void main(String[] args) {
 		launch(MainPage.class, args);
@@ -40,7 +42,6 @@ public class MainPage extends Application implements Page{
 		    	login.loginCheck();
 		    	if(login.loggedInUsername.length() > 0) {
 		    		startMainpage(login.loggedInUsername);
-//		    		System.out.print("Starting main page");
 		    	}
 		     }
 		 });
@@ -93,57 +94,53 @@ public class MainPage extends Application implements Page{
 		
 		final String defaultButtonColors[] = new String[sideButtons.length];
 		for(int i = 0; i < defaultButtonColors.length; i++) {
-			defaultButtonColors[i] = "transparent";
+			defaultButtonColors[i] = CLEAR;
 		}
 		
 		profileButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-//				System.out.println("Clicked on profile");
 				border.setCenter(profile.getNode());
 				defaultButtonColors[0] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 0) {
 						continue;
 					}
-					defaultButtonColors[i] = "transparent";
-					sideButtons[i].setStyle("-fx-background-color: transparent");
+					defaultButtonColors[i] = CLEAR;
+					sideButtons[i].setStyle(SET_BG + CLEAR);
 				}
 			}
 		});
 		
 		homeButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-//				System.out.println("Clicked on home button");;
 				border.setCenter(schedulePage.getNode());
 				defaultButtonColors[1] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 1) {
 						continue;
 					}
-					defaultButtonColors[i] = "transparent";
-					sideButtons[i].setStyle("-fx-background-color: transparent");
+					defaultButtonColors[i] = CLEAR;
+					sideButtons[i].setStyle(SET_BG + CLEAR);
 				}
 			}
 		});
 		
 		browseCoursesButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-//				System.out.println("Clicked on browse courses");
 				border.setCenter(searchPage.getNode());
 				defaultButtonColors[2] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 2) {
 						continue;
 					}
-					defaultButtonColors[i] = "transparent";
-					sideButtons[i].setStyle("-fx-background-color: transparent");
+					defaultButtonColors[i] = CLEAR;
+					sideButtons[i].setStyle(SET_BG + CLEAR);
 				}
 			}
 		});
 		
 		exitButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-//				System.out.println("Clicked on exit");
 				System.exit(0);
 			}
 		});
@@ -151,17 +148,17 @@ public class MainPage extends Application implements Page{
 		
 		
 		for(int i = 0; i < sideButtons.length; i++) {
-			sideButtons[i].setStyle("-fx-background-color: " + defaultButtonColors[i]);
+			sideButtons[i].setStyle(SET_BG + defaultButtonColors[i]);
 			sideButtons[i].setPrefSize(500, 500);
 			final int tmp = i;
 			sideButtons[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent t) {
-					sideButtons[tmp].setStyle("-fx-background-color: " + LIGHT_GREEN);
+					sideButtons[tmp].setStyle(SET_BG + LIGHT_GREEN);
 				}
 			});
 			sideButtons[i].setOnMouseExited(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent t) {
-					sideButtons[tmp].setStyle("-fx-background-color: " + defaultButtonColors[tmp]);
+					sideButtons[tmp].setStyle(SET_BG + defaultButtonColors[tmp]);
 				}
 			});
 			
