@@ -29,12 +29,6 @@ public class TestDatabase {
 	}
 	
 	@Test
-	public void TestDB4() {
-		Database db = Database.getInstance();
-		assertEquals(db.getCourseTable().size(), 100);
-	}
-	
-	@Test
 	public void TestGetClassByName() {
 		Database db = Database.getInstance();
 		Boolean exists = db.getCourseByString("CSC 101-1");

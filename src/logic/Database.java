@@ -33,8 +33,8 @@ public class Database {
 		return db;
 	}
 	
-	public Course[] getScheduleByUsername(String username) {
-		return studentDb.get(username).getCoursesFromSchedule();
+	public Schedule getScheduleByUsername(String username) {
+		return studentDb.get(username).getSchedule();
 	}
 	
 	public void printScheduleByUsername(String username) {
