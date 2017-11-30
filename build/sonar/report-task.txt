@@ -1,6 +1,7 @@
+organization=polycrash
 projectKey=PolyCrash
-serverUrl=http://localhost:9000
-serverVersion=6.7.0.33306
-dashboardUrl=http://localhost:9000/dashboard/index/PolyCrash
-ceTaskId=AWAK1kmZN1qCriAYOpsc
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWAK1kmZN1qCriAYOpsc
+serverUrl=https://sonarcloud.io
+serverVersion=6.7.0.33301
+dashboardUrl=https://sonarcloud.io/dashboard/index/PolyCrash
+ceTaskId=AWALFT2E1Q5aQJmOIVGv
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWALFT2E1Q5aQJmOIVGv
