@@ -54,6 +54,8 @@ public abstract class User {
 		return this.schedule.getCourses();
 	}
 	
+
+	
 	public boolean addCourse(Course course) {
 		if (schedule.contains(course)) {
 			return false;

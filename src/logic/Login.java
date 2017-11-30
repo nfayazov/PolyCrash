@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -41,7 +42,7 @@ public class Login extends Application implements Page{
 
 	public boolean checkValid(String username, String pw) {
 		Database db = Database.getInstance();
-		HashMap<String, Student> studentList = db.getStudentTable();
+		Map<String, Student> studentList = db.getStudentTable();
 		//string is username, student->pw
 		if(studentList.containsKey(username)) {
 			Student s = studentList.get(username);

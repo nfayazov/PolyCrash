@@ -13,9 +13,9 @@ public class Database {
 	
 	private static Database db = null;
 
-	static int NUM_STUDENTS = 1000;
-	static int NUM_COURSES = 100;
-	static int NUM_COURSES_PER_STUDENT = 4;
+	static int NUMSTUDENTS = 1000;
+	static int NUMCOURSES = 100;
+	static int NUMCOURSESPERSTUDENT = 4;
 
 	private HashMap<String, Student> studentDb;
 	private HashSet<Course> courseDb;
@@ -58,30 +58,15 @@ public class Database {
 			String first = "";
 			String last = "";
 
-			for (int i = 0; i < NUM_STUDENTS; i++) {
+			for (int i = 0; i < NUMSTUDENTS; i++) {
 				first = fsc.nextLine();
 				last = lsc.nextLine();
 
 				Student student = new Student(first, last);
 				addSchedule(student);
 				
-				/*Course courses[] = student.getCoursesFromSchedule();
-				System.out.println(student.username + ":");
-				for (int j = 0; j < courses.length; j++){
-					System.out.print(courses[j] + " ");
-				}
-				System.out.println("");*/
 				studentDb.put(student.username, student);
-			}
-
-		//for testing purposes
-			
-		/*Iterator<Student> it = db.iterator();
-		while (it.hasNext()){
-			Student st = it.next();
-			System.out.println(st.first + " " + st.last + " " + st.password);
-		}*/
-		
+			}		
 		
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -91,7 +76,7 @@ public class Database {
 	private void addSchedule(Student student) {
 		int num = 4;
 		Schedule schedule = new Schedule();
-		for (int i = 0; i < NUM_COURSES_PER_STUDENT; i++) {
+		for (int i = 0; i < NUMCOURSESPERSTUDENT; i++) {
 			addRandomCourse(schedule, student);
 		}
 		student.setSchedule(schedule);
@@ -100,7 +85,7 @@ public class Database {
 	private void addRandomCourse(Schedule schedule, Student student) {
 		Random rand = new Random();
 		Course course = new Course(" ", 0);
-		int num = rand.nextInt(NUM_COURSES);
+		int num = rand.nextInt(NUMCOURSES);
 		int i = 0;
 		Iterator<Course> it = courseDb.iterator();
 		
@@ -146,37 +131,47 @@ public class Database {
 	}
 	
 	private void makeCourseTable(){
-		this.courseDb = new HashSet<Course>();
+		boolean mwf = true;
 		String courseName;
 		int num = 0;
 		int section = 2;
+		String days;
 		Random rand = new Random();
+		boolean eightHour = true;
+		int startHour;
+		int endHour;
+		int mins = 0;
 		
+		this.courseDb = new HashSet<Course>();
+
 		//add test course
 		Course test = new Course("CSC 101", 1);
 		courseDb.add(test);
 		
-		for (int i = 0; i < NUM_COURSES; i++){
+		for (int i = 0; i < NUMCOURSES; i++){
 			if (section == 2) num = rand.nextInt(599);
 			courseName = "CSC " + Integer.toString(num);
 			section = section == 1 ? 2 : 1;
 			Course course = new Course(courseName, section);
+			
+			days = mwf ? "MWF" : "TR";
+			course.setDays(days);
+			
+			startHour = eightHour ? 8 : 2;
+			endHour = startHour + 3;
+			course.setStart(new Time(startHour, mins));
+			course.setEnd(new Time(endHour, mins));
+			
 			courseDb.add(course);
 		}
 		
-		/*Iterator<Course> it = courseDb.iterator();
-		while (it.hasNext()){
-			Course course = it.next();
-			System.out.println(course.name + " " + course.section);
-		}*/	
-		
 	}
 	
-	public HashMap<String, Student> getStudentTable() {
+	public Map<String, Student> getStudentTable() {
 		return studentDb;
 	}
 	
-	public HashSet<Course> getCourseTable() {
+	public Set<Course> getCourseTable() {
 		return courseDb;
 	}
 	
@@ -190,12 +185,9 @@ public class Database {
 			int courseSection = course.section;
 			String courseName = course.name;
 			
-			if(courseSection == section)
+			if(courseSection == section && courseName.equals(name))
 			{
-				if(courseName.equals(name))
-				{
-					return true;
-				}
+				return true;
 			}
 		}
 		return false;
