@@ -102,7 +102,8 @@ public class Database {
 	private void makeCourseTable(){
 		this.courseDb = new HashSet<Course>();
 		String courseName;
-		int num = 0, section = 2;
+		int num = 0;
+		int section = 2;
 		Random rand = new Random();
 		
 		//add test course
@@ -121,8 +122,7 @@ public class Database {
 		while (it.hasNext()){
 			Course course = it.next();
 			System.out.println(course.name + " " + course.section);
-		}*/
-		
+		}*/	
 		
 	}
 	

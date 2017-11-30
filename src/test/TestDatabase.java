@@ -2,6 +2,7 @@ package test;
 import org.junit.Test;
 
 import logic.Database;
+import logic.Course;
 import static org.junit.Assert.*;
 
 public class TestDatabase {
@@ -30,8 +31,10 @@ public class TestDatabase {
 		assertEquals(pc.getCourseTable().size(), 100);
 	}
 	
-	public void TestSchedules() {
-		Database pc = new Database();
-		
+	@Test
+	public void TestGetClassByName() {
+		Database db = new Database();
+		Course course = db.getCourseByString("CSC 101-1");
+		assertEquals(course.toString(), "CSC 101-1");
 	}
 }

@@ -5,6 +5,12 @@
 #settings for which jre to use
 *.classpath
 *.class
+||||||| merged common ancestors
+.classpath*.class
+=======
+.classpath
+*.class
+>>>>>>> master
 
 hs_err_pid8583.log
 

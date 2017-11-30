@@ -2,7 +2,10 @@ package logic;
 import logic.Course;
 
 public class Student {
-	public String first, last, major, username;
+	public String first;
+	public String last;
+	public String major;
+	public String username;
 	private Schedule schedule;
 	private String password;
 	public int year;
