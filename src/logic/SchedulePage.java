@@ -44,32 +44,38 @@ import java.util.*;
 
 
 //Use  the function "getSchedulePane(Schedule s)" in order to return a project pane.
-public class SchedulePage extends Application implements Page{
+public class SchedulePage implements Page{
 	/*This is all copied from the MainPage class, and is just for testing to ensure SchedulePage will
 	 * return correctly when its contents are added to the main page. It can be deleted later.*/
-	public static void main(String[] args) {
-		launch(SchedulePage.class, args);
-		
-		/* EXAMPLE (delete this) */
-		Database db = new Database();
-		db.printScheduleByUsername("lcowart89");
+	Schedule s;
+	public SchedulePage(Schedule s) {
+		this.s = s;
+		//this.s = testSchedule();
 	}
 	
+//	public static void main(String[] args) {
+//		launch(SchedulePage.class, args);
+//		
+//		/* EXAMPLE (delete this) */
+//		Database db = new Database();
+//		db.printScheduleByUsername("lcowart89");
+//	}
+//	
 	
-	public void start(Stage stage) {
-		BorderPane border = new BorderPane();
-		VBox navBar = getNavBar();
-		
-		Schedule s = testSchedule();
-		BorderPane content = getSchedulePageContent(s);
-		border.setCenter(content);
-		border.setLeft(navBar);
-		Scene scene = new Scene(border, 960, 700);
-		stage.setScene(scene);
-		stage.setTitle("SchedulePageTest");
-		stage.show();
-		
-	}
+//	public void start(Stage stage) {
+//		BorderPane border = new BorderPane();
+//		VBox navBar = getNavBar();
+//		
+//		Schedule s = testSchedule();
+//		BorderPane content = getSchedulePageContent();
+//		border.setCenter(content);
+//		border.setLeft(navBar);
+//		Scene scene = new Scene(border, 960, 700);
+//		stage.setScene(scene);
+//		stage.setTitle("SchedulePageTest");
+//		stage.show();
+//		
+//	}
 	
 	private VBox getNavBar() {
 		VBox navBar = new VBox();
@@ -80,8 +86,7 @@ public class SchedulePage extends Application implements Page{
 
 
 	public Node getNode() {
-		// TODO Auto-generated method stub
-		return null;
+		return getSchedulePageContent();
 	}
 	
 	private Schedule testSchedule()
@@ -114,7 +119,7 @@ public class SchedulePage extends Application implements Page{
 	 * returns an BorderPane object to be used with the BorderPane representing our main page.
 	 * It takes in the value of a user's schedule.*/	
 	
-	private BorderPane getSchedulePageContent(Schedule s)
+	private BorderPane getSchedulePageContent()
 	{
 		BorderPane content = new BorderPane();
 		
@@ -179,6 +184,9 @@ public class SchedulePage extends Application implements Page{
 		//Adds a column for the specified day of the week at the provided column index.
 		for(Course course : s.getCourses())
 		{
+			System.out.println(course);
+			System.out.println(day);
+			
 			if(course.onDay(day))
 			{					
 				Label courseBlock = new Label("("+course.name+")");

@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -35,8 +36,8 @@ public class Profile extends Application implements Page {
 	Student student;
 	
 	public Profile(String username) {
-		Database db = new Database();
-		HashMap<String, Student> studentList = db.getStudentTable();
+		Database db = Database.getInstance();
+		Map<String, Student> studentList = (HashMap<String, Student>) db.getStudentTable();
 		student = studentList.get(username);
 		System.out.println(student);
 	}
@@ -193,7 +194,7 @@ public class Profile extends Application implements Page {
     		    	      	
     		    	      	else {
     		    	      		System.out.print(student.getPassword());
-    		    	      		student.changePassword(newPW.getText());
+    		    	      		//student.changePassword(newPW.getText());
     		    	      		errorPW.setText("Password changed.");
     		    	      	}
     				     }

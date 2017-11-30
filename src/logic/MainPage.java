@@ -40,24 +40,56 @@ import java.util.*;
 
 
 public class MainPage extends Application implements Page{
+	public BorderPane border;
+	public Profile profile;
+	public SearchPage searchPage;
+	public SchedulePage schedulePage;
+	public Login login;
+	public static Database db;
+	
 	public static void main(String[] args) {
+		db = Database.getInstance();
 		launch(MainPage.class, args);
-		
-		/* EXAMPLE (delete this) */
-		Database db = new Database();
-		db.printScheduleByUsername("lcowart89");
 	}
 	
 	
 	public void start(Stage stage) {
-		BorderPane border = new BorderPane();
-		VBox navBar = getNavBar();
-		border.setLeft(navBar);
+		border = new BorderPane();
+		String username = "lcowart89";
+		login = new Login();
+		border.setCenter(login.getNode());
+		
+		login.enter.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	login.loginCheck();
+		    	if(login.loggedInUsername.length() > 0) {
+		    		startMainpage(login.loggedInUsername);
+		    		System.out.print("Starting main page");
+		    	}
+		     }
+		 });
+		
+//		login.enter.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+//		    public void handle(ActionEvent e) {
+//		    	if(login.loggedInUsername.length() > 0) {
+//		    		startMainpage(login.loggedInUsername);
+//		    		System.out.print("Starting main page");
+//		    	}
+//		    }
+//		});
 		Scene scene = new Scene(border, 960, 700);
 		stage.setScene(scene);
 		stage.setTitle("Main Page");
 		stage.show();
-		
+	}
+	
+	public void startMainpage(String username) {
+		profile = new Profile(username);
+		searchPage = new SearchPage();
+		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
+		VBox navBar = getNavBar();
+		border.setLeft(navBar);
+		border.setCenter(profile.getNode());
 	}
 	
 	public String getDarkGreen() {
@@ -92,6 +124,7 @@ public class MainPage extends Application implements Page{
 		profileButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
 				System.out.println("Clicked on profile");
+				border.setCenter(profile.getNode());
 				defaultButtonColors[0] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 0) {
@@ -106,6 +139,7 @@ public class MainPage extends Application implements Page{
 		homeButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
 				System.out.println("Clicked on home button");;
+				border.setCenter(schedulePage.getNode());
 				defaultButtonColors[1] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 1) {
@@ -119,7 +153,8 @@ public class MainPage extends Application implements Page{
 		
 		browseCoursesButton.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-				System.out.println("Clicked on browse courses");;
+				System.out.println("Clicked on browse courses");
+				border.setCenter(searchPage.getNode());
 				defaultButtonColors[2] = LIGHT_GREEN;
 				for(int i = 0; i < defaultButtonColors.length; i++) {
 					if(i == 2) {

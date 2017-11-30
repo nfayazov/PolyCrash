@@ -53,34 +53,36 @@ public class SearchPage extends Application implements Page
 		grid.setPadding(new Insets(25, 25, 25, 25));
 		
 		Text scenetitle = new Text("Search Classes");
-		scenetitle.setFont(Font.font("Cambria", FontWeight.NORMAL, 30));
+		final String fontType = "Cambria";
+		scenetitle.setFont(Font.font(fontType, FontWeight.NORMAL, 30));
 		grid.add(scenetitle, 0, 0, 2, 1);
 
 		Label valueName1 = new Label("Course Title:");
-		valueName1.setFont(new Font("Cambria", 20));
+		valueName1.setFont(new Font(fontType, 20));
 		grid.add(valueName1, 0, 1);
 
 		final TextField searchField = new TextField();
-		//final List<String> classes = new ArrayList<String>(Arrays.asList("CSC 307", "CSC 225", "CSC 357"));
-		final Database db = new Database();
+		final Database db = Database.getInstance();
 		TextFields.bindAutoCompletion(searchField, db.getCourseTable());
-		searchField.setFont(new Font("Cambria", 18));
-		//TextFields.bindAutoCompletion(searchField, classes);
+		searchField.setFont(new Font(fontType, 18));
 		grid.add(searchField, 1, 1);
 
+		final String fxBorder = "-fx-border:none;";
+		final String fxBackground = "-fx-background-color:"+DARK_GREEN+";";
+		final String fxTextFill = "-fx-text-fill:#FFF";
 		Button btn = new Button("Search");
 		btn.setStyle("-fx-graphic-text-gap: 5;"
-				+ "-fx-border:none;"
-				+ "-fx-background-color:"+DARK_GREEN+";"
+				+ fxBorder
+				+ fxBackground
 				+ "-fx-font-size:1.4em;"
-				+ "-fx-text-fill:#FFF");
+				+ fxTextFill);
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 2, 1);
         
         Text courseTitles = new Text("Course");
-        Font titles = new Font("Cambria", 20);
+        Font titles = new Font(fontType, 20);
         courseTitles.setFont(titles);
 	    grid.add(courseTitles, 1, 4); 
 	    
@@ -136,41 +138,38 @@ public class SearchPage extends Application implements Page
             		targetClassProfessor.setStyle(style);
                 
                 final String selectedClass = searchField.getText();
-                if(db.getCourseByString(selectedClass) == false)
+                if(!db.getCourseByString(selectedClass))
                 {
-                		//System.out.println("selected class = " + selectedClass);
                 		targetClassName.setText("No such class exists.");
-                		targetClassName.setFont(new Font("Cambria", 17));
+                		targetClassName.setFont(new Font(fontType, 17));
                 		targetClassTimings.setText("Please try again.");
-                		targetClassTimings.setFont(new Font("Cambria", 17));
+                		targetClassTimings.setFont(new Font(fontType, 17));
                 		return;
                 }
                 
                 //need to get relevant information about that class to display information about it.
                 final String classTimes = "MWF 3:00 - 4:00 PM";
                 final String classProfessor = "Falessi";
-                //int spotsAvailable = 20;
                 final int waitlistLength = 0;
                 final String quartersOffered = "F W";
                 final int estimatedCrashing = 0;
                 
                 
                 targetClassName.setText(selectedClass);
-                targetClassName.setFont(new Font("Cambria", 17));
+                targetClassName.setFont(new Font(fontType, 17));
                 targetClassTimings.setText(classTimes);
-                targetClassTimings.setFont((new Font("Cambria", 17)));
+                targetClassTimings.setFont((new Font(fontType, 17)));
                 targetClassProfessor.setText(classProfessor);
-                targetClassProfessor.setFont(new Font("Cambria", 17));
+                targetClassProfessor.setFont(new Font(fontType, 17));
                 
-                
-                //grid.add(vertSep, 2, 6);
-                
+                final String fxTestGap = "-fx-graphic-text-gap: 2;";
+                final String fxFontSize = "-fx-font-size:1em;";
                 Button viewClass = new Button("View");
-                viewClass.setStyle("-fx-graphic-text-gap: 2;"
-        				+ "-fx-border:none;"
-        				+ "-fx-background-color:"+DARK_GREEN+";"
-        				+ "-fx-font-size:1em;"
-        				+ "-fx-text-fill:#FFF");
+                viewClass.setStyle(fxTestGap
+        				+ fxBorder
+        				+ fxBackground
+        				+ fxFontSize
+        				+ fxTextFill);
                 HBox viewBtn = new HBox(2);
                 viewBtn.setAlignment(Pos.CENTER);
                 viewBtn.getChildren().add(viewClass);
@@ -179,7 +178,6 @@ public class SearchPage extends Application implements Page
                 viewClass.setOnAction(new EventHandler<ActionEvent>() {
                 	public void handle(ActionEvent e)
                 	{
-                		//System.out.println("view detailed class information");
                 		
                 		final Stage popupStage =new Stage();
                 	    GridPane popGrid = new GridPane();
@@ -190,50 +188,50 @@ public class SearchPage extends Application implements Page
                 		popupStage.initModality(Modality.APPLICATION_MODAL);
                 		popupStage.setTitle("Detailed Course Information");
                 		
-                		Label label1= new Label("Course Details");
-                		label1.setFont(Font.font("Cambria",20));
-                		popGrid.add(label1, 0, 0);
+                		Label popLabel= new Label("Course Details");
+                		popLabel.setFont(Font.font(fontType,20));
+                		popGrid.add(popLabel, 0, 0);
                 		
                 		Text courseTitle = new Text(selectedClass);
-                		courseTitle.setFont(new Font("Cambria", 15));
+                		courseTitle.setFont(new Font(fontType, 15));
                 		popGrid.add(courseTitle, 0, 2);
                 		
                 		Text courseTimings = new Text(classTimes);
-                		courseTimings.setFont(new Font("Cambria", 15));
+                		courseTimings.setFont(new Font(fontType, 15));
                 		popGrid.add(courseTimings, 0, 3);
                 		
                 		Text courseProfessor = new Text(classProfessor);
-                		courseProfessor.setFont(new Font("Cambria", 15));
+                		courseProfessor.setFont(new Font(fontType, 15));
                 		popGrid.add(courseProfessor, 1, 2);
                 		
                 		Text professorRatings = new Text("Professor Rating: 5 stars");
-                		professorRatings.setFont(new Font("Cambria", 15));
+                		professorRatings.setFont(new Font(fontType, 15));
                 		popGrid.add(professorRatings, 1, 3);
                 		
                 		Text spotsAvailable = new Text("Spots Available: "+ Integer.toString(20));
-                		spotsAvailable.setFont(new Font("Cambria", 15));
+                		spotsAvailable.setFont(new Font(fontType, 15));
                 		popGrid.add(spotsAvailable, 0, 4);
                 		
                 		Text waitlistLengthText = new Text("Waitlist Length: "+Integer.toString(waitlistLength));
-                		waitlistLengthText.setFont(new Font("Cambria", 15));
+                		waitlistLengthText.setFont(new Font(fontType, 15));
                 		popGrid.add(waitlistLengthText, 1, 4);
                 		
                 		Text quartersOfferedText = new Text("Quarters Offered: "+quartersOffered);
-                		quartersOfferedText.setFont(new Font("Cambria", 15));
+                		quartersOfferedText.setFont(new Font(fontType, 15));
                 		popGrid.add(quartersOfferedText, 0, 5);
                 		
                 		Text estCrashing = new Text("Estimated Students Crashing: " + Integer.toString(estimatedCrashing));
-                		estCrashing.setFont(new Font("Cambria", 15));
+                		estCrashing.setFont(new Font(fontType, 15));
                 		popGrid.add(estCrashing, 0, 6);
                 		
                 		
                 		
                 		Button button1= new Button("Close");
-                		button1.setStyle("-fx-graphic-text-gap: 2;"
-                				+ "-fx-border:none;"
-                				+ "-fx-background-color:"+DARK_GREEN+";"
-                				+ "-fx-font-size:1em;"
-                				+ "-fx-text-fill:#FFF");
+                		button1.setStyle(fxTestGap
+                				+ fxBorder
+                				+ fxBackground
+                				+ fxFontSize
+                				+ fxTextFill);
                 		button1.setOnAction(new EventHandler<ActionEvent>() {
                 			public void handle(ActionEvent e)
                 			{
@@ -248,11 +246,11 @@ public class SearchPage extends Application implements Page
                 });
                 
                 final Button addToSchedule = new Button("Add to Schedule");
-                addToSchedule.setStyle("-fx-graphic-text-gap: 2;"
-        				+ "-fx-border:none;"
-        				+ "-fx-background-color:"+DARK_GREEN+";"
-        				+ "-fx-font-size:1em;"
-        				+ "-fx-text-fill:#FFF");
+                addToSchedule.setStyle(fxTestGap
+        				+ fxBorder
+        				+ fxBackground
+        				+ fxFontSize
+        				+ fxTextFill);
                 HBox addBtn = new HBox(5);
                 addBtn.setAlignment(Pos.CENTER);
                 addBtn.getChildren().add(addToSchedule);

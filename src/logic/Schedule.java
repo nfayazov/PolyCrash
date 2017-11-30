@@ -22,6 +22,10 @@ public class Schedule {
 		return courses.contains(c);
 	}
 	
+	public void setSchedule() {
+		this.courses = courses;
+	}
+	
 	public Course[] getCourses() {
 		Course[] result = new Course[courses.size()];
 		for (int i = 0; i < courses.size(); i++) {
@@ -30,4 +34,5 @@ public class Schedule {
 				
 		return result;
 	}
+	
 }

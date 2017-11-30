@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -34,17 +35,25 @@ public class Login extends Application implements Page{
 	
 	Label error1 = new Label("");
 	Label errorLogin = new Label("");
-	
+	public Button enter;
+	public String loggedInUsername;
+    final TextField username;
+    final PasswordField pw;
+
 	public Login() {
-		//constructor
+		enter = new Button("Sign In");
+		loggedInUsername = "";
+		username = new TextField();
+		pw = new PasswordField();
 	}
 
 	public boolean checkValid(String username, String pw) {
-		Database db = new Database();
-		HashMap<String, Student> studentList = db.getStudentTable();
+		Database db = Database.getInstance();
+		Map<String, Student> studentList = db.getStudentTable();
 		//string is username, student->pw
 		if(studentList.containsKey(username)) {
 			Student s = studentList.get(username);
+			System.out.println(s.getPassword());
 			if (s.getPassword().compareTo(pw) == 0) {
 				return true;
 			}
@@ -111,41 +120,37 @@ public class Login extends Application implements Page{
 	      error1.setTextFill(Color.web(DARK_GREEN));
 	      vbox.getChildren().add(error1);
 
-	      final TextField username = new TextField();
 		  username.setPromptText("Username");
 	      vbox.getChildren().add(username);
 	      
-	      final PasswordField pw = new PasswordField();
 		  pw.setPromptText("Password");
 	      vbox.getChildren().add(pw);
 
-	      Button enter = new Button("Sign In");
 	      root.setCenter(enter);
 	      vbox.getChildren().add(enter);
 
 	      errorLogin.setTextFill(Color.web(DARK_GREEN));
 	      vbox.getChildren().add(errorLogin);
 	      
-		  enter.setOnAction(new EventHandler<ActionEvent>() {
-			    public void handle(ActionEvent e) {
-			    	//verifying user and pass
-			    	errorLogin.setText("");
-			    	error1.setText("");
-			        if ((!username.getText().isEmpty() | !pw.getText().isEmpty())) {
-			        	//if not in database/error
-			        	if (checkValid(username.getText(), pw.getText())) {
-			        		//TODO LOGIN -> mainpage
-			        	}
-			            
-			        } else {
-			            error1.setText("Please fill both fields");
-			        }
-			     }
-			 });
 		  
 	      root.setTop(top);
 	      root.setBottom(vbox);
 		  return root;
+	}
+	
+	public void loginCheck() {
+		//verifying user and pass
+    	errorLogin.setText("");
+    	error1.setText("");
+        if ((!username.getText().isEmpty() | !pw.getText().isEmpty())) {
+        	//if not in database/error
+        	if (checkValid(username.getText(), pw.getText())) {
+        		loggedInUsername = username.getText();
+        	}
+            
+        } else {
+            error1.setText("Please fill both fields");
+        }
 	}
 	
 	public static void main(String[] args) {
