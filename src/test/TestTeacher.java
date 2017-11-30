@@ -8,13 +8,13 @@ import logic.Teacher;
 public class TestTeacher {
 	
 	@Test
-	public void TestTeacher1() {
+	public void testTeacher1() {
 		Teacher teacher = new Teacher("Davide", "Falessi");
 		assertEquals("Davide Falessi", teacher.getFirstAndLastName());
 	}
 	
 	@Test
-	public void TestTeacher2() {
+	public void testTeacher2() {
 		Teacher teacher = new Teacher("Davide", "Falessi");
 		assertTrue(teacher.viscocity < 10.0);
 	}

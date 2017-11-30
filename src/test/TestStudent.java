@@ -10,20 +10,20 @@ import static org.junit.Assert.*;
 public class TestStudent {
 	
 	@Test
-	public void TestStudent1() {
+	public void testStudent1() {
 		Student st = new Student("Nadir", "Fayazov");
 		assertEquals("Nadir Fayazov", st.getFirstAndLastName());
 	}
 	
 	@Test
-	public void TestStudent2(){
+	public void testStudent2(){
 		Student st = new Student("Davide", "Falessi");
 		String password = st.getPassword();
 		assertEquals("dfalessi105", password);
 	}
 	
 	@Test
-	public void TestStudentAddClass() {
+	public void testStudentAddClass() {
 		Student student = new Student("Nadir", "Fayazov");
 		Course course1 = new Course("CSC 307", 1);
 		Schedule schedule = new Schedule();
