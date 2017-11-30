@@ -79,16 +79,17 @@ public class SearchPage extends Application implements Page
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 2, 1);
         
-        Text CourseTitles = new Text("Course");
-        CourseTitles.setFont(Font.font("Cambria",20));
-	    grid.add(CourseTitles, 1, 4); 
+        Text courseTitles = new Text("Course");
+        Font titles = new Font("Cambria", 20);
+        courseTitles.setFont(titles);
+	    grid.add(courseTitles, 1, 4); 
 	    
 	    Text courseProfessors = new Text("Professor");
-	    courseProfessors.setFont(Font.font("Cambria", 20));
+	    courseProfessors.setFont(titles);
 	    grid.add(courseProfessors, 2, 4);
 	    
 	    Text courseTimings = new Text(" Timing");
-	    courseTimings.setFont(Font.font("Cambria", 20));
+	    courseTimings.setFont(titles);
 	    grid.add(courseTimings, 3, 4);
         
 	    //add line separators
@@ -125,18 +126,19 @@ public class SearchPage extends Application implements Page
         	 
             public void handle(ActionEvent e) {
                 targetClassName.setFill(Color.DARKGREEN);
-            		targetClassName.setStyle("-fx-font-color: " + LIGHT_GREEN);
+                String style = "-fx-font-color: " + LIGHT_GREEN;
+            		targetClassName.setStyle(style);
             		
             		targetClassTimings.setFill(Color.DARKGREEN);
-            		targetClassTimings.setStyle("-fx-font-color: " + LIGHT_GREEN);
+            		targetClassTimings.setStyle(style);
             		
             		targetClassProfessor.setFill(Color.DARKGREEN);
-            		targetClassProfessor.setStyle("-fx-font-color: " + LIGHT_GREEN);
+            		targetClassProfessor.setStyle(style);
                 
                 final String selectedClass = searchField.getText();
                 if(db.getCourseByString(selectedClass) == false)
                 {
-                		System.out.println("selected class = " + selectedClass);
+                		//System.out.println("selected class = " + selectedClass);
                 		targetClassName.setText("No such class exists.");
                 		targetClassName.setFont(new Font("Cambria", 17));
                 		targetClassTimings.setText("Please try again.");
@@ -177,7 +179,7 @@ public class SearchPage extends Application implements Page
                 viewClass.setOnAction(new EventHandler<ActionEvent>() {
                 	public void handle(ActionEvent e)
                 	{
-                		System.out.println("view detailed class information");
+                		//System.out.println("view detailed class information");
                 		
                 		final Stage popupStage =new Stage();
                 	    GridPane popGrid = new GridPane();
