@@ -30,14 +30,17 @@ import javafx.stage.Stage;
 public class Profile extends Application implements Page {
 
 	DatePicker timepicker;
-	
+
+
+	final static String font = "Cambria";
+	final static String changePWText = "Change Password";
 	Student student;
 	
 	public Profile(String username) {
 		Database db = Database.getInstance();
 		Map<String, Student> studentList = (HashMap<String, Student>) db.getStudentTable();
 		student = studentList.get(username);
-		System.out.println(student);
+		
 	}
 
 	
@@ -78,18 +81,18 @@ public class Profile extends Application implements Page {
         vbox.getChildren().addAll(pic);
         
         Label username = new Label(student.username);
-        username.setFont(new Font("Cambria", 20));
+        username.setFont(new Font(font, 20));
         username.setTextFill(Color.web(DARK_GREEN));
         vbox.getChildren().addAll(username);
         
         Label name = new Label(student.first + " " + student.last);
-        name.setFont(new Font("Cambria", 20));
+        name.setFont(new Font(font, 20));
         name.setStyle("-fx-font-weight: bold");
         name.setTextFill(Color.web(DARK_GREEN));
 	    vbox.getChildren().add(name);
 	    
 	    Label email = new Label(student.username + "@calpoly.edu");
-	    email.setFont(new Font("Cambria", 15));
+	    email.setFont(new Font(font, 15));
 	    email.setTextFill(Color.web(DARK_GREEN));
 	    vbox.getChildren().add(email);
         
@@ -149,9 +152,9 @@ public class Profile extends Application implements Page {
         	
         		popGrid.setPadding(new Insets(5, 5, 5, 5));
         		popupStage.initModality(Modality.APPLICATION_MODAL);
-        		popupStage.setTitle("Change Password");
+        		popupStage.setTitle(changePWText);
         		
-        		Label label1= new Label("Change Password");
+        		Label label1= new Label(changePWText);
         		popGrid.getChildren().add(label1);
         		
         		final PasswordField verifyOldPW = new PasswordField();
@@ -177,7 +180,6 @@ public class Profile extends Application implements Page {
     				    	//verifying user and pass
     				    	errorPW.setText("");
     				    	
-    				    	System.out.print(student.getPassword());
     		    	      	if (verifyOldPW.getText().isEmpty() || newPW.getText().isEmpty() 
     		    	      			|| verifynewPW.getText().isEmpty()) {
     		    	      		errorPW.setText("Please fill all fields");
@@ -191,8 +193,8 @@ public class Profile extends Application implements Page {
     		      	      	}
     		    	      	
     		    	      	else {
-    		    	      		System.out.print(student.getPassword());
-    		    	      		//student.changePassword(newPW.getText());
+    		    	      		
+    		    	      		student.changePassword(newPW.getText());
     		    	      		errorPW.setText("Password changed.");
     		    	      	}
     				     }
@@ -224,9 +226,5 @@ public class Profile extends Application implements Page {
 	}
 	
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		launch(args);
-	}
 
 }
