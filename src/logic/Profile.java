@@ -193,7 +193,7 @@ public class Profile extends Application implements Page {
     		    	      	
     		    	      	else {
     		    	      		System.out.print(student.getPassword());
-    		    	      		student.changePassword(newPW.getText());
+    		    	      		//student.changePassword(newPW.getText());
     		    	      		errorPW.setText("Password changed.");
     		    	      	}
     				     }
