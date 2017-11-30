@@ -33,13 +33,13 @@ import javafx.event.EventHandler;
 public class Login extends Application implements Page{
 	
 	Label error1 = new Label("");
+	Label errorLogin = new Label("");
 	
 	public Login() {
 		//constructor
 	}
 
-	public boolean checkVaild( String username, String pw) {
-		//TODO: check database if user and pw matches
+	public boolean checkVaild(String username, String pw) {
 		Database db = new Database();
 		HashMap<String, Student> studentList = db.getStudentTable();
 		//string is username, student->pw
@@ -48,10 +48,20 @@ public class Login extends Application implements Page{
 			if (s.getPassword().compareTo(pw) == 0) {
 				return true;
 			}
+			errorLogin.setText("Incorrect password");
+			try        
+			{
+			    Thread.sleep(1000);
+			} 
+			catch(InterruptedException ex) 
+			{
+			    Thread.currentThread().interrupt();
+			}
 			return false;
 		}
 		else {
-			return true;
+			errorLogin.setText("Username does not exist");
+			return false;
 		}
 		
 	}
@@ -96,9 +106,11 @@ public class Login extends Application implements Page{
 	      vbox.setPadding(new Insets(10));
 	      vbox.setSpacing(8);
 	      vbox.setAlignment(Pos.BOTTOM_CENTER);
-	      vbox.getChildren().addAll(title1);
-	      vbox.getChildren().addAll(error1);
+	      vbox.getChildren().add(title1);
 	      
+	      error1.setTextFill(Color.web(DARK_GREEN));
+	      vbox.getChildren().add(error1);
+
 	      final TextField username = new TextField();
 		  username.setPromptText("Username");
 	      vbox.getChildren().add(username);
@@ -111,16 +123,18 @@ public class Login extends Application implements Page{
 	      root.setCenter(enter);
 	      vbox.getChildren().add(enter);
 
+	      errorLogin.setTextFill(Color.web(DARK_GREEN));
+	      vbox.getChildren().add(errorLogin);
+	      
 		  enter.setOnAction(new EventHandler<ActionEvent>() {
 			    public void handle(ActionEvent e) {
 			    	//verifying user and pass
+			    	errorLogin.setText("");
+			    	error1.setText("");
 			        if ((!username.getText().isEmpty() | !pw.getText().isEmpty())) {
 			        	//if not in database/error
-			        	if (checkVaild(username.getText(), pw.getText()) == false) 
-			        		error1.setText("Invalid username or password");
-			        	else {
-			        		//get student info, go to Main Page
-			        		//TODO
+			        	if (checkVaild(username.getText(), pw.getText())) {
+			        		//TODO LOGIN -> mainpage
 			        	}
 			            
 			        } else {
