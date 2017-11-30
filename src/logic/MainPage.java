@@ -177,7 +177,7 @@ public class MainPage extends Application implements Page{
 		for(int i = 0; i < sideButtons.length; i++) {
 			navBar.getChildren().add(sideButtons[i]);
 		}
-		navBar.setStyle("-fx-background-color: " + DARK_GREEN);
+		navBar.setStyle(SET_BG + DARK_GREEN);
 		navBar.setPrefWidth(200);
 		return navBar;
 	}
