@@ -87,9 +87,10 @@ public class Database {
 		} catch (FileNotFoundException e) {
 			
 			System.err.println(e.getMessage());
+			
 		} finally {
-			fsc.close();
-			lsc.close();
+			if (fsc != null) fsc.close();
+			if (lsc != null) lsc.close();
 		}
 		
 	}
