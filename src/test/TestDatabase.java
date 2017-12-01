@@ -43,7 +43,7 @@ public class TestDatabase {
 		Teacher teacher = new Teacher("Davide","Falessi");
 		Course course = db.findCourse("CSC 101-1");
 		ArrayList<Student> arr = db.waitlistDb.get(course);
-		Student student = arr.get(12);
+		Student student = arr.get(2);
 		System.out.println("viscocity" + teacher.viscocity);
 		System.out.println(db.getProbability(course, student, teacher));
 		assertTrue(db.getProbability(course, student, teacher) != 0);
