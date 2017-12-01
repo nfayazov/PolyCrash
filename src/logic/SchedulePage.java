@@ -12,16 +12,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import static org.junit.Assert.assertEquals;
-
 
 //Use  the function "getSchedulePane(Schedule s)" in order to return a project pane.
 public class SchedulePage implements Page{
 	/*This is all copied from the MainPage class, and is just for testing to ensure SchedulePage will
 	 * return correctly when its contents are added to the main page. It can be deleted later.*/
 	Schedule s;
-	public Button addClass;
-	public Button pushClass;
+	private Button addClass;
+	private Button pushClass;
 	
 	
 	static final String BSTYLE = "-fx-border-style: ";
@@ -41,6 +39,9 @@ public class SchedulePage implements Page{
 		pushClass = getPushButton();
 	}
 	
+	public Button getAddClass() {
+		return addClass;
+	}
 	
 	public Node getNode() {
 		return getSchedulePageContent();
