@@ -22,7 +22,7 @@ public class Schedule {
 		return courses.contains(c);
 	}
 	
-	public void setSchedule(ArrayList<Course> courses) {
+	public void setSchedule(List<Course> courses) {
 		this.courses = courses;
 	}
 	
