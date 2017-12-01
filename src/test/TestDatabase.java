@@ -8,8 +8,8 @@ import logic.Teacher;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-//Nadir
+import java.util.*;
+
 public class TestDatabase {
 	
 	@Test
@@ -37,15 +37,31 @@ public class TestDatabase {
 		assertTrue(exists);
 	}
 	
+	public void testTeacherDb() {
+		Database db = Database.getInstance();
+		assertEquals(db.teacherDb.get("dfalessi").getFirstAndLastName(), "Davide Falessi");
+	}
+	
 	@Test
 	public void testProbability() {
 		Database db = Database.getInstance();
 		Teacher teacher = new Teacher("Davide","Falessi");
 		Course course = db.findCourse("CSC 101-1");
 		ArrayList<Student> arr = db.waitlistDb.get(course);
-		Student student = arr.get(10);
+		Student student = arr.get(3);
 		System.out.println(db.getProbability(course, student, teacher));
 		assertTrue(db.getProbability(course, student, teacher) != 0);
+	}
+	
+	@Test
+	public void testStudentWaitlist() {
+		Database db = Database.getInstance();
+		Student student = db.getStudentTable().get("aa");
+		Iterator<Course> it = student.waitlist.keySet().iterator();
+		while (it.hasNext()){
+			Course course = it.next();
+			//System.out.println("course: " + course.toString() + ", position: "+student.waitlist.get(course));
+		}
 	}
 	
 	/*@Test
