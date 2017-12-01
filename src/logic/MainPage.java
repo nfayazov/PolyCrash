@@ -77,14 +77,14 @@ public class MainPage extends Application implements Page{
 		Button exitButton = new Button();
 		exitButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/exitIcon_64px.png"))));
 
-		final Button sideButtons[] = {
+		final Button [] sideButtons = {
 				profileButton,
 				homeButton,
 				browseCoursesButton,
 				exitButton
 			};
 		
-		final String defaultButtonColors[] = new String[sideButtons.length];
+		final String [] defaultButtonColors = new String[sideButtons.length];
 		for(int i = 0; i < defaultButtonColors.length; i++) {
 			defaultButtonColors[i] = CLEAR;
 		}
