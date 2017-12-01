@@ -157,8 +157,8 @@ public class SearchPage extends Application implements Page
                 final String classDays = selected.getDays();
                 final Time classStart = selected.getStart();
                 final Time classEnd = selected.getEnd();
-                final String start = Time.toString(classEnd);
-                final String end = Time.toString(classStart);
+                final String start = Time.toString(classStart);
+                final String end = Time.toString(classEnd);
                 final String times = classDays + " " + start + " - " + end;
                 final Teacher professor = selected.getInstructor();
                 final String classProfessor = professor.first + " " + professor.last;
