@@ -6,8 +6,8 @@ import logic.MainPage;
 public class TestMainPage {	
 	@Test
 	public void myTestGreenColor() {
-		MainPage TestGreenColor = new MainPage();
-		String color = TestGreenColor.getDarkGreen();
+		MainPage testgreencolor = new MainPage();
+		String color = testgreencolor.getDarkGreen();
 		boolean colorEquals = color.equals("#004d00");
 		assertEquals(colorEquals, true);	
 	}
