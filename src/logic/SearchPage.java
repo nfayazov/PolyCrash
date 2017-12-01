@@ -70,7 +70,7 @@ public class SearchPage extends Application implements Page
 		grid.add(searchField, 1, 1);
 
 		final String fxBorder = "-fx-border:none;";
-		final String fxBackground = "-fx-background-color:"+DARK_GREEN+";";
+		final String fxBackground = "-fx-background-color:"+ Colors.DARK_GREEN+";";
 		final String fxTextFill = "-fx-text-fill:#FFF";
 		Button btn = new Button("Search");
 		btn.setStyle("-fx-graphic-text-gap: 5;"
@@ -128,7 +128,7 @@ public class SearchPage extends Application implements Page
         
         btn.setOnAction(click -> {
                 targetClassName.setFill(Color.DARKGREEN);
-                String style = "-fx-font-color: " + LIGHT_GREEN;
+                String style = "-fx-font-color: " + Colors.LIGHT_GREEN;
             		targetClassName.setStyle(style);
             		
             		targetClassTimings.setFill(Color.DARKGREEN);
