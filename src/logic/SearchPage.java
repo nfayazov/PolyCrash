@@ -1,176 +1,269 @@
 package logic;
 
-import javafx.application.Application;
+import java.util.Map;
+
+import org.controlsfx.control.textfield.TextFields;
+
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 
-
-
-
-public class MainPage extends Application implements Page{
-	private BorderPane border;
-	private Profile profile;
-	private SearchPage searchPage;
-	private SchedulePage schedulePage;
-	private Database db;
-	private static final String CLEAR = "transparent";
-	private static final String SET_BG = "-fx-background-color: ";
+public class SearchPage extends Application implements Page
+{
+	Label label1;
+	Button button1;
+	int i = 1;
+	private String username;
 	
-	public static void main(String[] args) {
-		launch(MainPage.class, args);
+	public SearchPage(String username) {
+		this.username = username;
 	}
 	
-	
-	public void start(Stage stage) {
-		db = Database.getInstance();
-		border = new BorderPane();
-		Login login = new Login();
-		border.setCenter(login.getNode());
-		
-		login.enter.setOnAction(event -> {
-	    	login.loginCheck();
-	    	if(login.loggedInUsername.length() > 0) {
-	    		startMainpage(login.loggedInUsername);
-	    	}
-		 });
-		
+	public static void main(String[] args)
+	{
+		launch(args);
+	}
 
-		Scene scene = new Scene(border, 960, 700);
+	public void start(Stage stage) throws Exception
+	{
+		stage.setTitle("Search Page");
+		Scene scene = new Scene((Parent) getNode(), 960, 700);
 		stage.setScene(scene);
-		stage.setTitle("Main Page");
 		stage.show();
 	}
-	
-	public void startMainpage(String username) {
-		profile = new Profile(username);
-		searchPage = new SearchPage(username);
-		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
-		schedulePage.addClass.setOnAction(event -> 
-			    	border.setCenter(searchPage.getNode())
-		);
-		VBox navBar = getNavBar();
-		border.setLeft(navBar);
-		border.setCenter(profile.getNode());
-	}
-	
-	public String getDarkGreen() {
-		return "#004d00";
-	}
-	
-	private void setDefaultButtonColorsToClear(String [] defaultButtonColors) {
-		for(int i = 0; i < defaultButtonColors.length; i++) {
-			defaultButtonColors[i] = CLEAR;
-		}
-	}
-	
-	private Button[] getSideButtons() {
-		final Button profileButton = new Button();
-		profileButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/profileIcon_64px.png"))));
-		
-		Button homeButton = new Button();
-		homeButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/calendarIcon_64px.png"))));
 
-		Button browseCoursesButton = new Button();
-		browseCoursesButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/searchIcon_64px.png"))));
-
-		Button exitButton = new Button();
-		exitButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/exitIcon_64px.png"))));
-
-		final Button [] sideButtons = {
-				profileButton,
-				homeButton,
-				browseCoursesButton,
-				exitButton
-			};
-		
-		final String [] defaultButtonColors = new String[sideButtons.length];
-		setDefaultButtonColorsToClear(defaultButtonColors);
-		
-		
-		profileButton.setOnAction(event -> {
-			border.setCenter(profile.getNode());
-			defaultButtonColors[0] = LIGHT_GREEN;
-			for(int i = 0; i < defaultButtonColors.length; i++) {
-				if(i == 0) {
-					continue;
-				}
-				defaultButtonColors[i] = CLEAR;
-				sideButtons[i].setStyle(SET_BG + CLEAR);
-			}
-		});
-		
-		homeButton.setOnAction(event -> {
-			border.setCenter(schedulePage.getNode());
-			defaultButtonColors[1] = LIGHT_GREEN;
-			for(int i = 0; i < defaultButtonColors.length; i++) {
-				if(i == 1) {
-					continue;
-				}
-				defaultButtonColors[i] = CLEAR;
-				sideButtons[i].setStyle(SET_BG + CLEAR);
-			}
-		});
-		
-		browseCoursesButton.setOnAction(event -> {
-			border.setCenter(searchPage.getNode());
-			defaultButtonColors[2] = LIGHT_GREEN;
-			for(int i = 0; i < defaultButtonColors.length; i++) {
-				if(i == 2) {
-					continue;
-				}
-				defaultButtonColors[i] = CLEAR;
-				sideButtons[i].setStyle(SET_BG + CLEAR);
-			}
-		});
-		
-		exitButton.setOnAction(event -> 
-			System.exit(0)
-		);
-		
-		setupHighlighting(sideButtons, defaultButtonColors);
-		
-		
-		return sideButtons;
-		
-	}
 	
-	private void setupHighlighting(Button [] sideButtons, String[] defaultButtonColors) {
-		for(int i = 0; i < sideButtons.length; i++) {
-			sideButtons[i].setStyle(SET_BG + defaultButtonColors[i]);
-			sideButtons[i].setPrefSize(500, 500);
-			final int tmp = i;
-			sideButtons[i].setOnMouseEntered(event -> 
-				sideButtons[tmp].setStyle(SET_BG + LIGHT_GREEN)
-			);
-			sideButtons[i].setOnMouseExited(event ->
-					sideButtons[tmp].setStyle(SET_BG + defaultButtonColors[tmp])
-			);
-			
-		}
-		
-	}
-	
-	
-	
-	private VBox getNavBar() {
-		VBox navBar = new VBox();
-		Button [] sideButtons = getSideButtons();
-		for(int i = 0; i < sideButtons.length; i++) {
-			navBar.getChildren().add(sideButtons[i]);
-		}
-		navBar.setStyle(SET_BG + DARK_GREEN);
-		navBar.setPrefWidth(200);
-		return navBar;
-	}
-
-
 	public Node getNode() {
-		return null;
+		final GridPane grid = new GridPane();
+		grid.setAlignment(Pos.TOP_LEFT);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
+		
+		Text scenetitle = new Text("Search Classes");
+		final String fontType = "Cambria";
+		scenetitle.setFont(Font.font(fontType, FontWeight.NORMAL, 30));
+		grid.add(scenetitle, 0, 0, 2, 1);
+
+		Label valueName1 = new Label("Course Title:");
+		valueName1.setFont(new Font(fontType, 20));
+		grid.add(valueName1, 0, 1);
+
+		final TextField searchField = new TextField();
+		final Database db = Database.getInstance();
+		TextFields.bindAutoCompletion(searchField, db.getCourseTable());
+		searchField.setFont(new Font(fontType, 18));
+		grid.add(searchField, 1, 1);
+
+		final String fxBorder = "-fx-border:none;";
+		final String fxBackground = "-fx-background-color:"+DARK_GREEN+";";
+		final String fxTextFill = "-fx-text-fill:#FFF";
+		Button btn = new Button("Search");
+		btn.setStyle("-fx-graphic-text-gap: 5;"
+				+ fxBorder
+				+ fxBackground
+				+ "-fx-font-size:1.4em;"
+				+ fxTextFill);
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.getChildren().add(btn);
+        grid.add(hbBtn, 2, 1);
+        
+        Text courseTitles = new Text("Course");
+        Font titles = new Font(fontType, 20);
+        courseTitles.setFont(titles);
+	    grid.add(courseTitles, 1, 4); 
+	    
+	    Text courseProfessors = new Text("Professor");
+	    courseProfessors.setFont(titles);
+	    grid.add(courseProfessors, 2, 4);
+	    
+	    Text courseTimings = new Text(" Timing");
+	    courseTimings.setFont(titles);
+	    grid.add(courseTimings, 3, 4);
+        
+	    //add line separators
+	    Separator horizontalSep = new Separator();
+	    horizontalSep.setMaxWidth(1000);
+	    horizontalSep.setValignment(VPos.BASELINE);
+	    grid.add(horizontalSep, 1, 5);
+	    
+	    
+	    Separator horiSep2 = new Separator();
+	    horiSep2.setMaxWidth(400);
+	    horiSep2.setValignment(VPos.BASELINE);
+	    grid.add(horiSep2, 2, 5);
+	    
+	    Separator horiSep3 = new Separator();
+	    horiSep3.setMaxWidth(1000);
+	    horiSep3.setValignment(VPos.BASELINE);
+	    grid.add(horiSep3, 3, 5);
+	    
+	    Separator vertSep = new Separator();
+	    vertSep.setValignment(VPos.BOTTOM);
+	    vertSep.setOrientation(Orientation.VERTICAL);
+	    
+        final Text targetClassName = new Text();
+        grid.add(targetClassName, 1, 6);
+        
+        final Text targetClassProfessor = new Text();
+        grid.add(targetClassProfessor, 2, 6);
+        
+        final Text targetClassTimings = new Text();
+        grid.add(targetClassTimings, 3, 6);
+        
+        btn.setOnAction(click -> {
+                targetClassName.setFill(Color.DARKGREEN);
+                String style = "-fx-font-color: " + LIGHT_GREEN;
+            		targetClassName.setStyle(style);
+            		
+            		targetClassTimings.setFill(Color.DARKGREEN);
+            		targetClassTimings.setStyle(style);
+            		
+            		targetClassProfessor.setFill(Color.DARKGREEN);
+            		targetClassProfessor.setStyle(style);
+                
+                final String selectedClass = searchField.getText();
+                if(!db.getCourseByString(selectedClass))
+                {
+                		targetClassName.setText("No such class exists.");
+                		targetClassName.setFont(new Font(fontType, 17));
+                		targetClassTimings.setText("Please try again.");
+                		targetClassTimings.setFont(new Font(fontType, 17));
+                		return;
+                }
+                
+                //need to get relevant information about that class to display information about it.
+                Course selected = db.findCourse(selectedClass);
+                final String classDays = selected.getDays();
+                final Time classStart = selected.getStart();
+                final Time classEnd = selected.getEnd();
+                final String start = Time.toString(classEnd);
+                final String end = Time.toString(classStart);
+                final String times = classDays + " " + start + " - " + end;
+                final String classProfessor = "Falessi";
+                final int waitlistLength = db.waitlistDb.get(selected).size();
+                final String quartersOffered = "F W";
+                final int estimatedCrashing = 0;
+                
+                
+                targetClassName.setText(selectedClass);
+                targetClassName.setFont(new Font(fontType, 17));
+                targetClassTimings.setText(times);
+                targetClassTimings.setFont((new Font(fontType, 17)));
+                targetClassProfessor.setText(classProfessor);
+                targetClassProfessor.setFont(new Font(fontType, 17));
+                
+                final String fxTestGap = "-fx-graphic-text-gap: 2;";
+                final String fxFontSize = "-fx-font-size:1em;";
+                Button viewClass = new Button("View");
+                viewClass.setStyle(fxTestGap
+        				+ fxBorder
+        				+ fxBackground
+        				+ fxFontSize
+        				+ fxTextFill);
+                HBox viewBtn = new HBox(2);
+                viewBtn.setAlignment(Pos.CENTER);
+                viewBtn.getChildren().add(viewClass);
+                grid.add(viewBtn, 0, 6);
+                
+                viewClass.setOnAction(event ->
+                	{
+                		
+                		final Stage popupStage =new Stage();
+                	    GridPane popGrid = new GridPane();
+                	    popGrid.setAlignment(Pos.TOP_LEFT);
+                		popGrid.setHgap(5);
+                		popGrid.setVgap(5);
+                		popGrid.setPadding(new Insets(5, 5, 5, 5));
+                		popupStage.initModality(Modality.APPLICATION_MODAL);
+                		popupStage.setTitle("Detailed Course Information");
+                		
+                		Label popLabel= new Label("Course Details");
+                		popLabel.setFont(Font.font(fontType,20));
+                		popGrid.add(popLabel, 0, 0);
+                		
+                		Text courseTitle = new Text(selectedClass);
+                		courseTitle.setFont(new Font(fontType, 15));
+                		popGrid.add(courseTitle, 0, 2);
+                		
+                		Text courseTimings1 = new Text(times);
+                		courseTimings1.setFont(new Font(fontType, 15));
+                		popGrid.add(courseTimings1, 0, 3);
+                		
+                		Text courseProfessor = new Text(classProfessor);
+                		courseProfessor.setFont(new Font(fontType, 15));
+                		popGrid.add(courseProfessor, 1, 2);
+                		
+                		Text professorRatings = new Text("Professor Rating: 5 stars");
+                		professorRatings.setFont(new Font(fontType, 15));
+                		popGrid.add(professorRatings, 1, 3);
+                		
+                		Text spotsAvailable = new Text("Spots Available: "+ Integer.toString(20));
+                		spotsAvailable.setFont(new Font(fontType, 15));
+                		popGrid.add(spotsAvailable, 0, 4);
+                		
+                		Text waitlistLengthText = new Text("Waitlist Length: "+Integer.toString(waitlistLength));
+                		waitlistLengthText.setFont(new Font(fontType, 15));
+                		popGrid.add(waitlistLengthText, 1, 4);
+                		
+                		Text quartersOfferedText = new Text("Quarters Offered: "+quartersOffered);
+                		quartersOfferedText.setFont(new Font(fontType, 15));
+                		popGrid.add(quartersOfferedText, 0, 5);
+                		
+                		Text estCrashing = new Text("Estimated Students Crashing: " + Integer.toString(estimatedCrashing));
+                		estCrashing.setFont(new Font(fontType, 15));
+                		popGrid.add(estCrashing, 0, 6);
+                		
+                		
+                		
+                		Button close= new Button("Close");
+                		close.setStyle(fxTestGap
+                				+ fxBorder
+                				+ fxBackground
+                				+ fxFontSize
+                				+ fxTextFill);
+                		close.setOnAction(event2 ->
+                				popupStage.close()
+                		);
+                		Scene scene1= new Scene(popGrid, 500, 200);
+                		popupStage.setScene(scene1);
+                		popupStage.showAndWait();
+                });
+                
+                final Button addToSchedule = new Button("Add to Schedule");
+                addToSchedule.setStyle(fxTestGap
+        				+ fxBorder
+        				+ fxBackground
+        				+ fxFontSize
+        				+ fxTextFill);
+                HBox addBtn = new HBox(5);
+                addBtn.setAlignment(Pos.CENTER);
+                addBtn.getChildren().add(addToSchedule);
+                grid.add(addBtn, 4, 6);
+                
+                addToSchedule.setOnAction(event -> {
+                		Map<String, Student> studentList = db.getStudentTable();
+                		Student student = studentList.get(username);
+                		student.addCourse(selected);
+                });
+            }
+        );
+        return grid;
 	}
+
 }
