@@ -60,7 +60,7 @@ public class TestDatabase {
 		Iterator<Course> it = student.waitlist.keySet().iterator();
 		while (it.hasNext()){
 			Course course = it.next();
-			//System.out.println("course: " + course.toString() + ", position: "+student.waitlist.get(course));
+			System.out.println("course: " + course.toString() + ", position: "+student.waitlist.get(course));
 		}
 	}
 	

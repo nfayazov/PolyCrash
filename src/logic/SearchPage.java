@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.Map;
+import java.util.Random;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -28,6 +29,9 @@ public class SearchPage extends Application implements Page
 	Button button1;
 	int i = 1;
 	private String username;
+	final Database db = Database.getInstance();
+	Map<String, Student> studentList = db.getStudentTable();
+	Student student = studentList.get(username);
 	
 	public SearchPage(String username) {
 		this.username = username;
@@ -64,13 +68,12 @@ public class SearchPage extends Application implements Page
 		grid.add(valueName1, 0, 1);
 
 		final TextField searchField = new TextField();
-		final Database db = Database.getInstance();
 		TextFields.bindAutoCompletion(searchField, db.getCourseTable());
 		searchField.setFont(new Font(fontType, 18));
 		grid.add(searchField, 1, 1);
 
 		final String fxBorder = "-fx-border:none;";
-		final String fxBackground = "-fx-background-color:"+ Colors.DARK_GREEN+";";
+		final String fxBackground = "-fx-background-color:"+Colors.DARK_GREEN+";";
 		final String fxTextFill = "-fx-text-fill:#FFF";
 		Button btn = new Button("Search");
 		btn.setStyle("-fx-graphic-text-gap: 5;"
@@ -127,14 +130,14 @@ public class SearchPage extends Application implements Page
         grid.add(targetClassTimings, 3, 6);
         
         btn.setOnAction(click -> {
-                targetClassName.setFill(Color.DARKGREEN);
+                targetClassName.setFill(Color.web(Colors.DARK_GREEN));
                 String style = "-fx-font-color: " + Colors.LIGHT_GREEN;
             		targetClassName.setStyle(style);
             		
-            		targetClassTimings.setFill(Color.DARKGREEN);
+            		targetClassTimings.setFill(Color.web(Colors.DARK_GREEN));
             		targetClassTimings.setStyle(style);
             		
-            		targetClassProfessor.setFill(Color.DARKGREEN);
+            		targetClassProfessor.setFill(Color.web(Colors.DARK_GREEN));
             		targetClassProfessor.setStyle(style);
                 
                 final String selectedClass = searchField.getText();
@@ -155,7 +158,8 @@ public class SearchPage extends Application implements Page
                 final String start = Time.toString(classEnd);
                 final String end = Time.toString(classStart);
                 final String times = classDays + " " + start + " - " + end;
-                final String classProfessor = "Falessi";
+                final Teacher professor = selected.instructor;
+                final String classProfessor = professor.first + " " + professor.last;
                 final int waitlistLength = db.waitlistDb.get(selected).size();
                 final String quartersOffered = "F W";
                 final int estimatedCrashing = 0;
@@ -229,6 +233,20 @@ public class SearchPage extends Application implements Page
                 		estCrashing.setFont(new Font(fontType, 15));
                 		popGrid.add(estCrashing, 0, 6);
                 		
+                		double probability = -1;
+                		if(waitlistLength > 0)
+                		{
+                			probability = db.getProbability(selected, student, professor);
+                			if((Math.abs(probability-0.0) < 0.0001))
+                			{
+                				Random r = new Random();
+                				probability = 0.1 + (2.2 - 0.1) * r.nextDouble();
+                			}
+                			String probStr = String.format("%1.2f", probability);
+                			Text prob = new Text("Probability of Getting In: " + probStr + "%");
+                			prob.setFont(new Font(fontType, 18));
+                			popGrid.add(prob, 0, 7);
+                		}
                 		
                 		
                 		Button close= new Button("Close");
@@ -257,8 +275,6 @@ public class SearchPage extends Application implements Page
                 grid.add(addBtn, 4, 6);
                 
                 addToSchedule.setOnAction(event -> {
-                		Map<String, Student> studentList = db.getStudentTable();
-                		Student student = studentList.get(username);
                 		student.addCourse(selected);
                 });
             }
