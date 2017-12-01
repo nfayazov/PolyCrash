@@ -130,14 +130,14 @@ public class SearchPage extends Application implements Page
         grid.add(targetClassTimings, 3, 6);
         
         btn.setOnAction(click -> {
-                targetClassName.setFill(Colors.DARK_GREEN);
+                targetClassName.setFill(Color.web(Colors.DARK_GREEN));
                 String style = "-fx-font-color: " + Colors.LIGHT_GREEN;
             		targetClassName.setStyle(style);
             		
-            		targetClassTimings.setFill(Colors.DARK_GREEN);
+            		targetClassTimings.setFill(Color.web(Colors.DARK_GREEN));
             		targetClassTimings.setStyle(style);
             		
-            		targetClassProfessor.setFill(Colors.DARK_GREEN);
+            		targetClassProfessor.setFill(Color.web(Colors.DARK_GREEN));
             		targetClassProfessor.setStyle(style);
                 
                 final String selectedClass = searchField.getText();
