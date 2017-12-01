@@ -23,8 +23,8 @@ public class Login extends Application implements Page{
 	
 	Label error1 = new Label("");
 	Label errorLogin = new Label("");
-	public Button enter;
-	public String loggedInUsername;
+	private Button enter;
+	private String loggedInUsername;
     final TextField username;
     final PasswordField pw;
 
@@ -33,6 +33,14 @@ public class Login extends Application implements Page{
 		loggedInUsername = "";
 		username = new TextField();
 		pw = new PasswordField();
+	}
+	
+	public Button getEnter() {
+		return this.enter;
+	}
+	
+	public String getLoggedInUsername() {
+		return this.loggedInUsername;
 	}
 
 	public boolean checkValid(String username, String pw) {
