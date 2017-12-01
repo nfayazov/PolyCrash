@@ -158,7 +158,7 @@ public class Database {
 			mwf = !mwf;
 			course.setDays(days);
 			
-			startHour = eightHour ? 8 : 2;
+			startHour = eightHour ? 8 : 14;
 			eightHour = !eightHour;
 			endHour = startHour + 3;
 			course.setStart(new Time(startHour, mins));

@@ -7,7 +7,7 @@ public class Schedule {
 	private ArrayList<Course> courses;
 	
 	public Schedule(){
-		courses = new ArrayList<Course>();
+		courses = new ArrayList<>();
 	}
 	
 	public void addCourse(Course course) {
