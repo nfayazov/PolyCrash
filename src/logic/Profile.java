@@ -30,8 +30,8 @@ public class Profile extends Application implements Page {
 	DatePicker timepicker;
 
 
-	final static String font = "Cambria";
-	final static String changePWText = "Change Password";
+	final static String FONT = "Cambria";
+	final static String PWTEXT = "Change Password";
 	Student student;
 	
 	public Profile(String username) {
@@ -79,23 +79,23 @@ public class Profile extends Application implements Page {
         vbox.getChildren().addAll(pic);
         
         Label username = new Label(student.username);
-        username.setFont(new Font(font, 20));
+        username.setFont(new Font(FONT, 20));
         username.setTextFill(Color.web(DARK_GREEN));
         vbox.getChildren().addAll(username);
         
         Label name = new Label(student.first + " " + student.last);
-        name.setFont(new Font(font, 20));
+        name.setFont(new Font(FONT, 20));
         name.setStyle("-fx-font-weight: bold");
         name.setTextFill(Color.web(DARK_GREEN));
 	    vbox.getChildren().add(name);
 	    
 	    Label email = new Label(student.username + "@calpoly.edu");
-	    email.setFont(new Font(font, 15));
+	    email.setFont(new Font(FONT, 15));
 	    email.setTextFill(Color.web(DARK_GREEN));
 	    vbox.getChildren().add(email);
         
 	    
-	    final ComboBox<String> major = new ComboBox<String>();
+	    final ComboBox<String> major = new ComboBox<>();
 	    
         major.getItems().addAll(
         	"Choose your major",
@@ -109,7 +109,7 @@ public class Profile extends Application implements Page {
 
         vbox.getChildren().add(major);
         
-	    final ComboBox<String> year = new ComboBox<String>();
+	    final ComboBox<String> year = new ComboBox<>();
         year.getItems().addAll(
         	"Choose your year",
             "Freshman",
@@ -136,7 +136,7 @@ public class Profile extends Application implements Page {
         
         //change password hyperlink
         Hyperlink link = new Hyperlink();
-        link.setText("Change Password");
+        link.setText(PWTEXT);
         link.setOnAction(event -> {
     		final Label errorPW = new Label("");
     		
@@ -148,9 +148,9 @@ public class Profile extends Application implements Page {
     	
     		popGrid.setPadding(new Insets(5, 5, 5, 5));
     		popupStage.initModality(Modality.APPLICATION_MODAL);
-    		popupStage.setTitle(changePWText);
+    		popupStage.setTitle(PWTEXT);
     		
-    		Label label1= new Label(changePWText);
+    		Label label1= new Label(PWTEXT);
     		popGrid.getChildren().add(label1);
     		
     		final PasswordField verifyOldPW = new PasswordField();
@@ -199,9 +199,9 @@ public class Profile extends Application implements Page {
 	      	popGrid.getChildren().add(errorPW);
 	      	
     		Button button1= new Button("Close");
-    		button1.setOnAction(event2 ->{
-				popupStage.close();
-    		});
+    		button1.setOnAction(event2 ->
+				popupStage.close()
+    		);
     		Scene scene1= new Scene(popGrid, 400, 400);
     		popupStage.setScene(scene1);
     		popupStage.showAndWait();
