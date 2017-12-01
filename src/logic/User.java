@@ -20,8 +20,7 @@ public abstract class User {
 	}
 	
 	private String createUsername() {
-		String end = Integer.toString((int)first.charAt(first.length()-1));
-		return (first.charAt(0) + last + end).toLowerCase();
+		return (first.charAt(0) + last).toLowerCase();
 	}
 	
 	private String createPassword() {
