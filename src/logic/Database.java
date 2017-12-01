@@ -12,14 +12,14 @@ public class Database {
 	
 	private static Database db = null;
 
-	static int NUMSTUDENTS = 1000;
-	static int NUMCOURSES = 100;
-	static int NUMCOURSESPERSTUDENT = 4;
+	static int numStudents = 1000;
+	static int numCourses = 100;
+	static int numCoursesPerStudent = 4;
 
-	private HashMap<String, Student> studentDb;
-	private HashSet<Course> courseDb;
-	public HashMap<Course, ArrayList<Student>> courseLookupDb;
-	public HashMap<Course, ArrayList<Student>> waitlistDb;
+	private Map<String, Student> studentDb;
+	private Set<Course> courseDb;
+	public Map<Course, ArrayList<Student>> courseLookupDb;
+	public Map<Course, ArrayList<Student>> waitlistDb;
 	
 	private Database() {
 		makeCourseTable();
@@ -36,28 +36,22 @@ public class Database {
 		return studentDb.get(username).getSchedule();
 	}
 	
-	public void printScheduleByUsername(String username) {
-		System.out.println(username + ":");
-		Course[] courses = studentDb.get(username).getCoursesFromSchedule();
-		for (int i = 0; i < courses.length; i++) {
-			System.out.println(courses[i].toString());
-		}
-		System.out.println("");
-	}
-	
 	private void makeStudentTable() {
-		this.studentDb = new HashMap<String, Student>();
-		this.courseLookupDb = new HashMap<Course, ArrayList<Student>>();
-		this.waitlistDb = new HashMap<Course, ArrayList<Student>>();
+		Scanner fsc;
+		Scanner lsc;
+		
+		this.studentDb = new HashMap<>();
+		this.courseLookupDb = new HashMap<>();
+		this.waitlistDb = new HashMap<>();
 		
 		try {
-			Scanner fsc = new Scanner(new File("src/logic/resources/firstNames.txt"));
-			Scanner lsc = new Scanner(new File("src/logic/resources/lastNames.txt"));
+			fsc = new Scanner(new File("src/logic/resources/firstNames.txt"));
+			lsc = new Scanner(new File("src/logic/resources/lastNames.txt"));
 
 			String first = "";
 			String last = "";
 
-			for (int i = 0; i < NUMSTUDENTS; i++) {
+			for (int i = 0; i < numStudents; i++) {
 				first = fsc.nextLine();
 				last = lsc.nextLine();
 
@@ -74,13 +68,14 @@ public class Database {
 			lsc.close();
 		
 		} catch (FileNotFoundException e) {
+			
 			System.out.println(e.getMessage());
 		}
 	}
 	
 	private void addSchedule(Student student) {
 		Schedule schedule = new Schedule();
-		for (int i = 0; i < NUMCOURSESPERSTUDENT; i++) {
+		for (int i = 0; i < numCoursesPerStudent; i++) {
 			addRandomCourse(schedule, student);
 		}
 		student.setSchedule(schedule);
@@ -89,13 +84,14 @@ public class Database {
 	private void addRandomCourse(Schedule schedule, Student student) {
 		Random rand = new Random();
 		Course course = new Course(" ", 0);
-		int num = rand.nextInt(NUMCOURSES);
+		int num = rand.nextInt(numCourses);
 		int i = 0;
 		Iterator<Course> it = courseDb.iterator();
 		
 		while(i <= num) {
 			i++;
-			course = it.next();
+			if (it.hasNext()) course = it.next();
+
 		}
 		
 		if (schedule.contains(course)) addRandomCourse(schedule, student);
@@ -127,7 +123,7 @@ public class Database {
 				 waitlisted = waitlistDb.get(course);
 			}
 			else {
-				waitlisted = new ArrayList<Student>();
+				waitlisted = new ArrayList<>();
 			}
 			waitlisted.add(student);
 			waitlistDb.put(course, waitlisted);
@@ -146,22 +142,24 @@ public class Database {
 		int endHour;
 		int mins = 0;
 		
-		this.courseDb = new HashSet<Course>();
+		this.courseDb = new HashSet<>();
 
 		//add test course
 		Course test = new Course("CSC 101", 1);
 		courseDb.add(test);
 		
-		for (int i = 0; i < NUMCOURSES; i++){
-			if (section == 2) num = rand.nextInt(599);
+		for (int i = 0; i < numCourses; i++){
+			if (section == 2) num = rand.nextInt(499)+100;
 			courseName = "CSC " + Integer.toString(num);
 			section = section == 1 ? 2 : 1;
 			Course course = new Course(courseName, section);
 			
 			days = mwf ? "MWF" : "TR";
+			mwf = !mwf;
 			course.setDays(days);
 			
 			startHour = eightHour ? 8 : 2;
+			eightHour = !eightHour;
 			endHour = startHour + 3;
 			course.setStart(new Time(startHour, mins));
 			course.setEnd(new Time(endHour, mins));
