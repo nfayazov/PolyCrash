@@ -64,17 +64,14 @@ public class Database {
 	}
 	
 	private void makeStudentTable() {
-		Scanner fsc = null;
-		Scanner lsc = null;
 		
 		this.studentDb = new HashMap<>();
 		this.courseLookupDb = new HashMap<>();
 		this.waitlistDb = new HashMap<>();
 		
-		try {
-			fsc = new Scanner(new File("src/logic/resources/firstNames.txt"));
-			lsc = new Scanner(new File("src/logic/resources/lastNames.txt"));
-
+		try (Scanner fsc = new Scanner(new File("src/logic/resources/firstNames.txt"));
+			Scanner lsc = new Scanner(new File("src/logic/resources/lastNames.txt"))
+				){
 			String first = "";
 			String last = "";
 
@@ -94,9 +91,6 @@ public class Database {
 		
 		} catch (FileNotFoundException e) {
 			System.exit(0);
-		} finally {
-			if (fsc != null) fsc.close();
-			if (lsc != null) lsc.close();
 		}
 		
 	}
