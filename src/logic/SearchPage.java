@@ -17,8 +17,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -128,9 +126,7 @@ public class SearchPage extends Application implements Page
         final Text targetClassTimings = new Text();
         grid.add(targetClassTimings, 3, 6);
         
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-        	 
-            public void handle(ActionEvent e) {
+        btn.setOnAction(click -> {
                 targetClassName.setFill(Color.DARKGREEN);
                 String style = "-fx-font-color: " + LIGHT_GREEN;
             		targetClassName.setStyle(style);
@@ -152,8 +148,6 @@ public class SearchPage extends Application implements Page
                 }
                 
                 //need to get relevant information about that class to display information about it.
-                final Database db;
-                db = Database.getInstance();
                 Course selected = db.findCourse(selectedClass);
                 final String classDays = selected.getDays();
                 final Time classStart = selected.getStart();
@@ -207,9 +201,9 @@ public class SearchPage extends Application implements Page
                 		courseTitle.setFont(new Font(fontType, 15));
                 		popGrid.add(courseTitle, 0, 2);
                 		
-                		Text courseTimings = new Text(times);
-                		courseTimings.setFont(new Font(fontType, 15));
-                		popGrid.add(courseTimings, 0, 3);
+                		Text courseTimings1 = new Text(times);
+                		courseTimings1.setFont(new Font(fontType, 15));
+                		popGrid.add(courseTimings1, 0, 3);
                 		
                 		Text courseProfessor = new Text(classProfessor);
                 		courseProfessor.setFont(new Font(fontType, 15));
@@ -268,7 +262,7 @@ public class SearchPage extends Application implements Page
                 		student.addCourse(selected);
                 });
             }
-        });
+        );
         return grid;
 	}
 
