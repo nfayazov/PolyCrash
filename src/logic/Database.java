@@ -174,9 +174,7 @@ public class Database {
 		courseDb.add(test);
 		
 		for (int i = 0; i < numCourses; i++){
-			if (section == 2) {
-				num = rand.nextInt(499)+100;
-			}
+			num = rand.nextInt(499) + 100;
 			courseName = "CSC " + Integer.toString(num);
 			section = section == 1 ? 2 : 1;
 			Course course = new Course(courseName, section);
