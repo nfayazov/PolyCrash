@@ -49,44 +49,6 @@ public class TestDatabase {
 		Course course = db.findCourse("CSC 101-1");
 		ArrayList<Student> arr = db.getWaitlistDb().get(course);
 		Student student = arr.get(3);
-		System.out.println(db.getProbability(course, student, teacher));
 		assertTrue(db.getProbability(course, student, teacher) != 0);
-	}
-	
-	@Test
-	public void testStudentWaitlist() {
-		Database db = Database.getInstance();
-		Student student = db.getStudentTable().get("aa");
-		Iterator<Course> it = student.getWaitlist().keySet().iterator();
-		while (it.hasNext()){
-			Course course = it.next();
-			//System.out.println("course: " + course.toString() + ", position: "+student.waitlist.get(course));
-		}
-	}
-	
-	/*@Test
-	public void TestLookupTable() {
-		Database db = new Database();
-		for (Course course : db.courseLookupDb.keySet()) {
-			ArrayList<Student> students = db.courseLookupDb.get(course);
-			System.out.print(course.toString() + ": ");
-			for (int i = 0; i < students.size(); i++) {
-				System.out.print(students.get(i).username + ", ");
-			}
-			System.out.println("");
-		}
-	}
-	
-	@Test
-	public void TestWaitlistTable() {
-		Database db = new Database();
-		for (Course course : db.waitlistDb.keySet()) {
-			ArrayList<Student> students = db.waitlistDb.get(course);
-			System.out.print(course.toString() + ": ");
-			for (int i = 0; i < students.size(); i++) {
-				System.out.print(students.get(i).username + ", ");
-			}
-			System.out.println("");
-		}
-	}*/
+	}	
 }
