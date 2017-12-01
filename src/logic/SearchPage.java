@@ -31,10 +31,11 @@ public class SearchPage extends Application implements Page
 	private String username;
 	final Database db = Database.getInstance();
 	Map<String, Student> studentList = db.getStudentTable();
-	Student student = studentList.get(username);
+	Student student;
 	
 	public SearchPage(String username) {
 		this.username = username;
+		student = studentList.get(username);
 	}
 	
 	public static void main(String[] args)
@@ -152,6 +153,7 @@ public class SearchPage extends Application implements Page
                 
                 //need to get relevant information about that class to display information about it.
                 Course selected = db.findCourse(selectedClass);
+                System.out.println("found course = " + selected.name);
                 final String classDays = selected.getDays();
                 final Time classStart = selected.getStart();
                 final Time classEnd = selected.getEnd();
@@ -276,7 +278,7 @@ public class SearchPage extends Application implements Page
                 
                 addToSchedule.setOnAction(event -> {
                 		System.out.println("add course ");
-                		
+                		System.out.println("course = " + selected.name);
                 		boolean ret = student.addCourse(selected);
                 		System.out.println("addCourse ret = " + ret  + " ");
                 });
