@@ -30,8 +30,8 @@ public class Profile extends Application implements Page {
 	DatePicker timepicker;
 
 
-	final static String FONT = "Cambria";
-	final static String PWTEXT = "Change Password";
+	static final String FONT = "Cambria";
+	static final String PWTEXT = "Change Password";
 	Student student;
 	
 	public Profile(String username) {
