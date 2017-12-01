@@ -39,7 +39,7 @@ public class TestDatabase {
 	
 	public void testTeacherDb() {
 		Database db = Database.getInstance();
-		assertEquals(db.teacherDb.get("dfalessi").getFirstAndLastName(), "Davide Falessi");
+		assertEquals(db.getTeacherDb().get("dfalessi").getFirstAndLastName(), "Davide Falessi");
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ public class TestDatabase {
 		Database db = Database.getInstance();
 		Teacher teacher = new Teacher("Davide","Falessi");
 		Course course = db.findCourse("CSC 101-1");
-		ArrayList<Student> arr = db.waitlistDb.get(course);
+		ArrayList<Student> arr = db.getWaitlistDb().get(course);
 		Student student = arr.get(3);
 		System.out.println(db.getProbability(course, student, teacher));
 		assertTrue(db.getProbability(course, student, teacher) != 0);
@@ -57,7 +57,7 @@ public class TestDatabase {
 	public void testStudentWaitlist() {
 		Database db = Database.getInstance();
 		Student student = db.getStudentTable().get("aa");
-		Iterator<Course> it = student.waitlist.keySet().iterator();
+		Iterator<Course> it = student.getWaitlist().keySet().iterator();
 		while (it.hasNext()){
 			Course course = it.next();
 			//System.out.println("course: " + course.toString() + ", position: "+student.waitlist.get(course));

@@ -15,11 +15,19 @@ public class Course {
 	private Time end;
 	
 	private int capacity = 10;
-	public Teacher instructor;
+	private Teacher instructor;
 	
 	public Course(String name, int section) {
 		this.name = name;
 		this.section = section;	
+	}
+	
+	public Teacher getInstructor() {
+		return instructor;
+	}
+	
+	public void setInstructor(Teacher instructor) {
+		this.instructor = instructor;
 	}
 	
 	public boolean onDay(String day)
