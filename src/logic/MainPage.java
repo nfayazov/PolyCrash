@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.Colors;
 
 
 
@@ -95,7 +96,7 @@ public class MainPage extends Application implements Page{
 		
 		profileButton.setOnAction(event -> {
 			border.setCenter(profile.getNode());
-			defaultButtonColors[0] = LIGHT_GREEN;
+			defaultButtonColors[0] = Colors.LIGHT_GREEN;
 			for(int i = 0; i < defaultButtonColors.length; i++) {
 				if(i == 0) {
 					continue;
@@ -107,7 +108,7 @@ public class MainPage extends Application implements Page{
 		
 		homeButton.setOnAction(event -> {
 			border.setCenter(schedulePage.getNode());
-			defaultButtonColors[1] = LIGHT_GREEN;
+			defaultButtonColors[1] = Colors.LIGHT_GREEN;
 			for(int i = 0; i < defaultButtonColors.length; i++) {
 				if(i == 1) {
 					continue;
@@ -119,7 +120,7 @@ public class MainPage extends Application implements Page{
 		
 		browseCoursesButton.setOnAction(event -> {
 			border.setCenter(searchPage.getNode());
-			defaultButtonColors[2] = LIGHT_GREEN;
+			defaultButtonColors[2] = Colors.LIGHT_GREEN;
 			for(int i = 0; i < defaultButtonColors.length; i++) {
 				if(i == 2) {
 					continue;
@@ -146,7 +147,7 @@ public class MainPage extends Application implements Page{
 			sideButtons[i].setPrefSize(500, 500);
 			final int tmp = i;
 			sideButtons[i].setOnMouseEntered(event -> 
-				sideButtons[tmp].setStyle(SET_BG + LIGHT_GREEN)
+				sideButtons[tmp].setStyle(SET_BG + Colors.LIGHT_GREEN)
 			);
 			sideButtons[i].setOnMouseExited(event ->
 					sideButtons[tmp].setStyle(SET_BG + defaultButtonColors[tmp])
@@ -164,7 +165,7 @@ public class MainPage extends Application implements Page{
 		for(int i = 0; i < sideButtons.length; i++) {
 			navBar.getChildren().add(sideButtons[i]);
 		}
-		navBar.setStyle(SET_BG + DARK_GREEN);
+		navBar.setStyle(SET_BG + Colors.DARK_GREEN);
 		navBar.setPrefWidth(200);
 		return navBar;
 	}

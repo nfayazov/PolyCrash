@@ -80,18 +80,18 @@ public class Profile extends Application implements Page {
         
         Label username = new Label(student.username);
         username.setFont(new Font(FONT, 20));
-        username.setTextFill(Color.web(DARK_GREEN));
+        username.setTextFill(Color.web(Colors.DARK_GREEN));
         vbox.getChildren().addAll(username);
         
         Label name = new Label(student.first + " " + student.last);
         name.setFont(new Font(FONT, 20));
         name.setStyle("-fx-font-weight: bold");
-        name.setTextFill(Color.web(DARK_GREEN));
+        name.setTextFill(Color.web(Colors.DARK_GREEN));
 	    vbox.getChildren().add(name);
 	    
 	    Label email = new Label(student.username + "@calpoly.edu");
 	    email.setFont(new Font(FONT, 15));
-	    email.setTextFill(Color.web(DARK_GREEN));
+	    email.setTextFill(Color.web(Colors.DARK_GREEN));
 	    vbox.getChildren().add(email);
         
 	    
@@ -168,7 +168,7 @@ public class Profile extends Application implements Page {
 	      	Button enter = new Button("Enter");
 		   
 		      popGrid.getChildren().add(enter);
-		      errorPW.setTextFill(Color.web(DARK_GREEN));
+		      errorPW.setTextFill(Color.web(Colors.DARK_GREEN));
 		      vbox.getChildren().add(errorPW);
 		      
 			  enter.setOnAction(event2 -> {
