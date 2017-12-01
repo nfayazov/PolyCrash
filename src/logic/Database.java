@@ -56,8 +56,8 @@ public class Database {
 	}
 	
 	private void makeStudentTable() {
-		Scanner fsc;
-		Scanner lsc;
+		Scanner fsc = null;
+		Scanner lsc = null;
 		
 		this.studentDb = new HashMap<>();
 		this.courseLookupDb = new HashMap<>();
@@ -83,14 +83,15 @@ public class Database {
 			addSchedule(student);
 			
 			studentDb.put(student.username, student);
-			
-			fsc.close();
-			lsc.close();
 		
 		} catch (FileNotFoundException e) {
 			
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
+		} finally {
+			fsc.close();
+			lsc.close();
 		}
+		
 	}
 	
 	private void addSchedule(Student student) {
@@ -130,7 +131,7 @@ public class Database {
 			 students = courseLookupDb.get(course);
 		}
 		else {
-			students = new ArrayList<Student>();
+			students = new ArrayList<>();
 		}
 		
 		if (students.size() < course.getCapacity()){
@@ -147,7 +148,6 @@ public class Database {
 			}
 			waitlisted.add(student);
 			student.waitlist.put(course, waitlisted.size()+1);
-			//System.out.println("Student: " + student.getFirstAndLastName() + ", course: " + course.toString() + ", position: " + student.waitlist.get(course));
 			waitlistDb.put(course, waitlisted);
 		}
 	}
@@ -179,7 +179,6 @@ public class Database {
 			courseName = "CSC " + Integer.toString(num);
 			section = section == 1 ? 2 : 1;
 			Course course = new Course(courseName, section);
-			//System.out.println("courseTest: " + course.toString());
 
 			days = mwf ? "MWF" : "TR";
 			mwf = !mwf;
@@ -191,7 +190,6 @@ public class Database {
 			course.setStart(new Time(startHour, mins));
 			course.setEnd(new Time(endHour, mins));
 			
-			//assign random teacher to course;
 			num = rand.nextInt(12);
 			Iterator<String> it = teacherDb.keySet().iterator();
 			while (j < num){

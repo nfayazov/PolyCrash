@@ -15,7 +15,7 @@ public class Course {
 	private Time end;
 	
 	private int capacity = 10;
-	Teacher instructor;
+	public Teacher instructor;
 	
 	public Course(String name, int section) {
 		this.name = name;
