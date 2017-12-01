@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Map;
+
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.scene.Node;
@@ -150,16 +152,24 @@ public class SearchPage extends Application implements Page
                 }
                 
                 //need to get relevant information about that class to display information about it.
-                final String classTimes = "MWF 3:00 - 4:00 PM";
+                final Database db;
+                db = Database.getInstance();
+                Course selected = db.findCourse(selectedClass);
+                final String classDays = selected.getDays();
+                final Time classStart = selected.getStart();
+                final Time classEnd = selected.getEnd();
+                final String start = Time.toString(classEnd);
+                final String end = Time.toString(classStart);
+                final String times = classDays + " " + start + " - " + end;
                 final String classProfessor = "Falessi";
-                final int waitlistLength = 0;
+                final int waitlistLength = db.waitlistDb.get(selected).size();
                 final String quartersOffered = "F W";
                 final int estimatedCrashing = 0;
                 
                 
                 targetClassName.setText(selectedClass);
                 targetClassName.setFont(new Font(fontType, 17));
-                targetClassTimings.setText(classTimes);
+                targetClassTimings.setText(times);
                 targetClassTimings.setFont((new Font(fontType, 17)));
                 targetClassProfessor.setText(classProfessor);
                 targetClassProfessor.setFont(new Font(fontType, 17));
@@ -198,7 +208,7 @@ public class SearchPage extends Application implements Page
                 		courseTitle.setFont(new Font(fontType, 15));
                 		popGrid.add(courseTitle, 0, 2);
                 		
-                		Text courseTimings = new Text(classTimes);
+                		Text courseTimings = new Text(times);
                 		courseTimings.setFont(new Font(fontType, 15));
                 		popGrid.add(courseTimings, 0, 3);
                 		
@@ -262,6 +272,9 @@ public class SearchPage extends Application implements Page
                 	public void handle(ActionEvent e)
                 	{
                 		System.out.println("Send this information to Schedule");
+                		Map<String, Student> studentList = db.getStudentTable();
+                		Student student = studentList.get(username);
+                		student.addCourse(selected);
                 	}
                 });
             }
