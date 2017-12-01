@@ -12,7 +12,7 @@ public class Database {
 	
 	private static Database db = null;
 
-	static int numStudents = 1000;
+	static int numStudents = 100;
 	static int numCourses = 100;
 	static int numCoursesPerStudent = 4;
 
@@ -127,6 +127,7 @@ public class Database {
 			
 		//also add to lookup table
 		ArrayList<Student> students;
+		Random rand = new Random();
 		
 		if (courseLookupDb.containsKey(course)) {
 			 students = courseLookupDb.get(course);
@@ -148,7 +149,7 @@ public class Database {
 				waitlisted = new ArrayList<>();
 			}
 			waitlisted.add(student);
-			student.waitlist.put(course, waitlisted.size()+1);
+			student.waitlist.put(course, rand.nextInt(12)+1);
 			waitlistDb.put(course, waitlisted);
 		}
 	}
