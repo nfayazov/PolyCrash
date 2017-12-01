@@ -26,12 +26,11 @@ public class Schedule {
 		this.courses = courses;
 	}
 	
-	public Course[] getCourses() {
-		Course[] result = new Course[courses.size()];
+	public ArrayList<Course> getCourses() {
+		ArrayList<Course> result = new ArrayList<Course>();
 		for (int i = 0; i < courses.size(); i++) {
-			result[i] = courses.get(i);
-		}
-				
+			result.add(i, courses.get(i));
+		}	
 		return result;
 	}
 	
