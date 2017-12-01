@@ -9,7 +9,7 @@ public abstract class User {
  	String first;
  	String last;
  	
-	public Schedule schedule;
+	private Schedule schedule;
 
 	
 	public User(String first, String last) {
