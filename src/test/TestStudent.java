@@ -33,4 +33,5 @@ public class TestStudent {
 		student.addCourse(course2);
 		assertEquals(student.getSchedule().contains(course2), true);
 	}
+	
 }

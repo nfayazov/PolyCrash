@@ -16,12 +16,14 @@ public class Database {
 	static int numCourses = 100;
 	static int numCoursesPerStudent = 4;
 
-	private Map<String, Student> studentDb;
+	public Map<String, Student> studentDb;
+	public Map<String, Teacher> teacherDb;
 	private Set<Course> courseDb;
 	public Map<Course, ArrayList<Student>> courseLookupDb;
 	public Map<Course, ArrayList<Student>> waitlistDb;
 	
 	private Database() {
+		makeTeacherTable();
 		makeCourseTable();
 		makeStudentTable();
 	}
@@ -34,6 +36,23 @@ public class Database {
 	
 	public Schedule getScheduleByUsername(String username) {
 		return studentDb.get(username).getSchedule();
+	}
+	
+	private void makeTeacherTable() {
+		this.teacherDb = new HashMap<>();
+		teacherDb.put("dfalessi", new Teacher("Davide", "Falessi"));
+		teacherDb.put("zpjn", new Teacher("Zachary", "Peterson"));
+		teacherDb.put("bdebruhl", new Teacher("Bruce", "DeBruhl"));
+		teacherDb.put("kmammen", new Teacher("Kurt", "Mammen"));
+		teacherDb.put("adekhtyar", new Teacher("Alexander", "Dekhtyar"));
+		teacherDb.put("dretz", new Teacher("David", "Retz"));
+		teacherDb.put("lstanchev", new Teacher("Lubomir", "Stanchev"));
+		teacherDb.put("tmigler", new Teacher("Teresa", "Migler"));
+		teacherDb.put("cbuckalew", new Teacher("Christopher", "Buckalew"));
+		teacherDb.put("bhollister", new Teacher("Brad", "Hollister"));
+		teacherDb.put("akeen", new Teacher("Aaron", "Keen"));
+		teacherDb.put("hsmith", new Teacher("Hugh", "Smith"));
+		
 	}
 	
 	private void makeStudentTable() {
@@ -62,6 +81,7 @@ public class Database {
 			}
 			Student student = new Student("a", "a");
 			addSchedule(student);
+			
 			studentDb.put(student.username, student);
 			
 			fsc.close();
@@ -126,6 +146,8 @@ public class Database {
 				waitlisted = new ArrayList<>();
 			}
 			waitlisted.add(student);
+			student.waitlist.put(course, waitlisted.size()+1);
+			//System.out.println("Student: " + student.getFirstAndLastName() + ", course: " + course.toString() + ", position: " + student.waitlist.get(course));
 			waitlistDb.put(course, waitlisted);
 		}
 	}
@@ -141,6 +163,8 @@ public class Database {
 		int startHour;
 		int endHour;
 		int mins = 0;
+		int j = 0;
+		Teacher teacher = null;
 		
 		this.courseDb = new HashSet<>();
 
@@ -149,11 +173,14 @@ public class Database {
 		courseDb.add(test);
 		
 		for (int i = 0; i < numCourses; i++){
-			if (section == 2) num = rand.nextInt(499)+100;
+			if (section == 2) {
+				num = rand.nextInt(499)+100;
+			}
 			courseName = "CSC " + Integer.toString(num);
 			section = section == 1 ? 2 : 1;
 			Course course = new Course(courseName, section);
-			
+			//System.out.println("courseTest: " + course.toString());
+
 			days = mwf ? "MWF" : "TR";
 			mwf = !mwf;
 			course.setDays(days);
@@ -164,6 +191,18 @@ public class Database {
 			course.setStart(new Time(startHour, mins));
 			course.setEnd(new Time(endHour, mins));
 			
+			//assign random teacher to course;
+			num = rand.nextInt(12);
+			Iterator<String> it = teacherDb.keySet().iterator();
+			while (j < num){
+				if (it.hasNext()) {
+					teacher = teacherDb.get(it.next());	 
+				}
+				j++;
+			}
+			
+			j=0;
+			course.instructor = teacher;
 			courseDb.add(course);
 		}
 		
