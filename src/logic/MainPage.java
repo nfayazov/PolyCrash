@@ -18,7 +18,6 @@ public class MainPage extends Application implements Page{
 	private Profile profile;
 	private SearchPage searchPage;
 	private SchedulePage schedulePage;
-	private Login login;
 	private Database db;
 	private static final String CLEAR = "transparent";
 	private static final String SET_BG = "-fx-background-color: ";
@@ -31,10 +30,10 @@ public class MainPage extends Application implements Page{
 	public void start(Stage stage) {
 		db = Database.getInstance();
 		border = new BorderPane();
-		login = new Login();
+		Login login = new Login();
 		border.setCenter(login.getNode());
 		
-		login.enter.setOnAction((event) -> {
+		login.enter.setOnAction(event -> {
 	    	login.loginCheck();
 	    	if(login.loggedInUsername.length() > 0) {
 	    		startMainpage(login.loggedInUsername);
@@ -52,9 +51,9 @@ public class MainPage extends Application implements Page{
 		profile = new Profile(username);
 		searchPage = new SearchPage(username);
 		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
-		schedulePage.addClass.setOnAction(event -> {
-			    	border.setCenter(searchPage.getNode());
-		});
+		schedulePage.addClass.setOnAction(event -> 
+			    	border.setCenter(searchPage.getNode())
+		);
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
 		border.setCenter(profile.getNode());
@@ -153,7 +152,7 @@ public class MainPage extends Application implements Page{
 	
 	private VBox getNavBar() {
 		VBox navBar = new VBox();
-		Button sideButtons[] = getSideButtons();
+		Button [] sideButtons = getSideButtons();
 		for(int i = 0; i < sideButtons.length; i++) {
 			navBar.getChildren().add(sideButtons[i]);
 		}
