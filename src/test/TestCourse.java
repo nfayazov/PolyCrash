@@ -24,7 +24,5 @@ public class TestCourse {
 		c.setEnd(new Time(10, 0));
 		
 		assertTrue(c.onDay("R"));
-	}
-	
-	
+	}	
 }
