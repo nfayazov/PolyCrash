@@ -20,7 +20,7 @@ public class TestMainPage {
 	
 	
 	@Test
-	public void MyTestGreenColor() {
+	public void myTestGreenColor() {
 		MainPage TestGreenColor = new MainPage();
 		String color = TestGreenColor.getDarkGreen();
 		boolean colorEquals = color.equals("#004d00");

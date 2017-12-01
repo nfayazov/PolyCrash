@@ -1,14 +1,11 @@
 package logic;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -17,43 +14,33 @@ import javafx.stage.Stage;
 
 
 public class MainPage extends Application implements Page{
-	public BorderPane border;
-	public Profile profile;
-	public SearchPage searchPage;
-	public SchedulePage schedulePage;
-	public Login login;
-	public static Database db;
+	private BorderPane border;
+	private Profile profile;
+	private SearchPage searchPage;
+	private SchedulePage schedulePage;
+	private Database db;
+	private static final String CLEAR = "transparent";
+	private static final String SET_BG = "-fx-background-color: ";
 	
 	public static void main(String[] args) {
-		db = Database.getInstance();
 		launch(MainPage.class, args);
 	}
 	
 	
 	public void start(Stage stage) {
+		db = Database.getInstance();
 		border = new BorderPane();
-		String username = "lcowart89";
-		login = new Login();
+		Login login = new Login();
 		border.setCenter(login.getNode());
 		
-		login.enter.setOnAction(new EventHandler<ActionEvent>() {
-		    public void handle(ActionEvent e) {
-		    	login.loginCheck();
-		    	if(login.loggedInUsername.length() > 0) {
-		    		startMainpage(login.loggedInUsername);
-		    		System.out.print("Starting main page");
-		    	}
-		     }
+		login.enter.setOnAction(event -> {
+	    	login.loginCheck();
+	    	if(login.loggedInUsername.length() > 0) {
+	    		startMainpage(login.loggedInUsername);
+	    	}
 		 });
 		
-//		login.enter.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-//		    public void handle(ActionEvent e) {
-//		    	if(login.loggedInUsername.length() > 0) {
-//		    		startMainpage(login.loggedInUsername);
-//		    		System.out.print("Starting main page");
-//		    	}
-//		    }
-//		});
+
 		Scene scene = new Scene(border, 960, 700);
 		stage.setScene(scene);
 		stage.setTitle("Main Page");
@@ -64,12 +51,9 @@ public class MainPage extends Application implements Page{
 		profile = new Profile(username);
 		searchPage = new SearchPage(username);
 		schedulePage = new SchedulePage( db.getScheduleByUsername(username) );
-		schedulePage.addClass.setOnAction(new EventHandler<ActionEvent>() {
-		    public void handle(ActionEvent e) {
-		    	border.setCenter(searchPage.getNode());
-		    	
-		     }
-		 });
+		schedulePage.addClass.setOnAction(event -> 
+			    	border.setCenter(searchPage.getNode())
+		);
 		VBox navBar = getNavBar();
 		border.setLeft(navBar);
 		border.setCenter(profile.getNode());
@@ -77,6 +61,12 @@ public class MainPage extends Application implements Page{
 	
 	public String getDarkGreen() {
 		return "#004d00";
+	}
+	
+	private void setDefaultButtonColorsToClear(String [] defaultButtonColors) {
+		for(int i = 0; i < defaultButtonColors.length; i++) {
+			defaultButtonColors[i] = CLEAR;
+		}
 	}
 	
 	private Button[] getSideButtons() {
@@ -92,110 +82,95 @@ public class MainPage extends Application implements Page{
 		Button exitButton = new Button();
 		exitButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/exitIcon_64px.png"))));
 
-		final Button sideButtons[] = {
+		final Button [] sideButtons = {
 				profileButton,
 				homeButton,
 				browseCoursesButton,
 				exitButton
 			};
 		
-		final String defaultButtonColors[] = new String[sideButtons.length];
-		for(int i = 0; i < defaultButtonColors.length; i++) {
-			defaultButtonColors[i] = "transparent";
-		}
+		final String [] defaultButtonColors = new String[sideButtons.length];
+		setDefaultButtonColorsToClear(defaultButtonColors);
 		
-		profileButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e) {
-				System.out.println("Clicked on profile");
-				border.setCenter(profile.getNode());
-				defaultButtonColors[0] = LIGHT_GREEN;
-				for(int i = 0; i < defaultButtonColors.length; i++) {
-					if(i == 0) {
-						continue;
-					}
-					defaultButtonColors[i] = "transparent";
-					sideButtons[i].setStyle("-fx-background-color: transparent");
+		
+		profileButton.setOnAction(event -> {
+			border.setCenter(profile.getNode());
+			defaultButtonColors[0] = LIGHT_GREEN;
+			for(int i = 0; i < defaultButtonColors.length; i++) {
+				if(i == 0) {
+					continue;
 				}
+				defaultButtonColors[i] = CLEAR;
+				sideButtons[i].setStyle(SET_BG + CLEAR);
 			}
 		});
 		
-		homeButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e) {
-				System.out.println("Clicked on home button");;
-				border.setCenter(schedulePage.getNode());
-				defaultButtonColors[1] = LIGHT_GREEN;
-				for(int i = 0; i < defaultButtonColors.length; i++) {
-					if(i == 1) {
-						continue;
-					}
-					defaultButtonColors[i] = "transparent";
-					sideButtons[i].setStyle("-fx-background-color: transparent");
+		homeButton.setOnAction(event -> {
+			border.setCenter(schedulePage.getNode());
+			defaultButtonColors[1] = LIGHT_GREEN;
+			for(int i = 0; i < defaultButtonColors.length; i++) {
+				if(i == 1) {
+					continue;
 				}
+				defaultButtonColors[i] = CLEAR;
+				sideButtons[i].setStyle(SET_BG + CLEAR);
 			}
 		});
 		
-		browseCoursesButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e) {
-				System.out.println("Clicked on browse courses");
-				border.setCenter(searchPage.getNode());
-				defaultButtonColors[2] = LIGHT_GREEN;
-				for(int i = 0; i < defaultButtonColors.length; i++) {
-					if(i == 2) {
-						continue;
-					}
-					defaultButtonColors[i] = "transparent";
-					sideButtons[i].setStyle("-fx-background-color: transparent");
+		browseCoursesButton.setOnAction(event -> {
+			border.setCenter(searchPage.getNode());
+			defaultButtonColors[2] = LIGHT_GREEN;
+			for(int i = 0; i < defaultButtonColors.length; i++) {
+				if(i == 2) {
+					continue;
 				}
+				defaultButtonColors[i] = CLEAR;
+				sideButtons[i].setStyle(SET_BG + CLEAR);
 			}
 		});
 		
-		exitButton.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e) {
-				System.out.println("Clicked on exit");
-				System.exit(0);
-			}
-		});
+		exitButton.setOnAction(event -> 
+			System.exit(0)
+		);
 		
+		setupHighlighting(sideButtons, defaultButtonColors);
 		
-		
-		for(int i = 0; i < sideButtons.length; i++) {
-			sideButtons[i].setStyle("-fx-background-color: " + defaultButtonColors[i]);
-			sideButtons[i].setPrefSize(500, 500);
-			final int tmp = i;
-			sideButtons[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent t) {
-					sideButtons[tmp].setStyle("-fx-background-color: " + LIGHT_GREEN);
-				}
-			});
-			sideButtons[i].setOnMouseExited(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent t) {
-					sideButtons[tmp].setStyle("-fx-background-color: " + defaultButtonColors[tmp]);
-				}
-			});
-			
-		}
 		
 		return sideButtons;
 		
 	}
 	
+	private void setupHighlighting(Button [] sideButtons, String[] defaultButtonColors) {
+		for(int i = 0; i < sideButtons.length; i++) {
+			sideButtons[i].setStyle(SET_BG + defaultButtonColors[i]);
+			sideButtons[i].setPrefSize(500, 500);
+			final int tmp = i;
+			sideButtons[i].setOnMouseEntered(event -> 
+				sideButtons[tmp].setStyle(SET_BG + LIGHT_GREEN)
+			);
+			sideButtons[i].setOnMouseExited(event ->
+					sideButtons[tmp].setStyle(SET_BG + defaultButtonColors[tmp])
+			);
+			
+		}
+		
+	}
 	
 	
 	
 	private VBox getNavBar() {
 		VBox navBar = new VBox();
-		Button sideButtons[] = getSideButtons();
+		Button [] sideButtons = getSideButtons();
 		for(int i = 0; i < sideButtons.length; i++) {
 			navBar.getChildren().add(sideButtons[i]);
 		}
-		navBar.setStyle("-fx-background-color: " + DARK_GREEN);
+		navBar.setStyle(SET_BG + DARK_GREEN);
 		navBar.setPrefWidth(200);
 		return navBar;
 	}
 
 
 	public Node getNode() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

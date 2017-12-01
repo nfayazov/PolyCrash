@@ -1,35 +1,23 @@
 package logic;
 
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 public class Login extends Application implements Page{
 	
@@ -53,7 +41,7 @@ public class Login extends Application implements Page{
 		//string is username, student->pw
 		if(studentList.containsKey(username)) {
 			Student s = studentList.get(username);
-			System.out.println(s.getPassword());
+			
 			if (s.getPassword().compareTo(pw) == 0) {
 				return true;
 			}
@@ -99,13 +87,6 @@ public class Login extends Application implements Page{
 	      top.setPrefHeight(350);
 		  top.setStyle("-fx-background-color: " + DARK_GREEN);
 	 
-	      // BOTTOM ----------------------------
-	      /*GridPane grid = new GridPane();
-			grid.setAlignment(Pos.CENTER);
-			grid.setHgap(10);
-			grid.setVgap(10);
-			grid.setPadding(new Insets(25,25,25,25));
-			*/
 	      Label title1 = new Label("Sign in with your calpoly.edu information");
 	      title1.setFont(new Font("Cambria", 20));
 	      title1.setTextFill(Color.web(DARK_GREEN));
@@ -142,7 +123,7 @@ public class Login extends Application implements Page{
 		//verifying user and pass
     	errorLogin.setText("");
     	error1.setText("");
-        if ((!username.getText().isEmpty() | !pw.getText().isEmpty())) {
+        if ((!username.getText().isEmpty() || !pw.getText().isEmpty())) {
         	//if not in database/error
         	if (checkValid(username.getText(), pw.getText())) {
         		loggedInUsername = username.getText();
@@ -151,11 +132,6 @@ public class Login extends Application implements Page{
         } else {
             error1.setText("Please fill both fields");
         }
-	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		 launch(args);
 	}
 
 }

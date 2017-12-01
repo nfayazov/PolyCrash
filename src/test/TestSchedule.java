@@ -8,7 +8,7 @@ import logic.Time;
 public class TestSchedule {
 	
 	@Test
-	public void MyTestNumCourses() {
+	public void myTestNumCourses() {
 		Schedule s = new Schedule();
 		Course course1 = new Course("CSC 307", 1);
 		course1.setDays("MWF");

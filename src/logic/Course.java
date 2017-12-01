@@ -27,15 +27,30 @@ public class Course {
 		return getDays().contains(day);
 	}
 	
+	@Override
 	public String toString() {
 		//Implementing a print function for testing
 		return name+"-"+Integer.toString(section);
 	}
 	
-	public boolean equals(Course course) {
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+		return false;
+		
+		if (this.getClass() != obj.getClass())
+		return false;
+			
+		Course course = (Course)obj;
 		return this.name.equals(course.name) &&
 				this.section == course.section;
 	}
+	
+	//is this bs? I feel it is
+	@Override
+	  public int hashCode() {
+	    return 1;
+	  }
 
 	public Time getStart() {
 		return start;

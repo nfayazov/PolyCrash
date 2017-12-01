@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -30,14 +28,17 @@ import javafx.stage.Stage;
 public class Profile extends Application implements Page {
 
 	DatePicker timepicker;
-	
+
+
+	static final String FONT = "Cambria";
+	static final String PWTEXT = "Change Password";
 	Student student;
 	
 	public Profile(String username) {
 		Database db = Database.getInstance();
 		Map<String, Student> studentList = (HashMap<String, Student>) db.getStudentTable();
 		student = studentList.get(username);
-		System.out.println(student);
+		
 	}
 
 	
@@ -78,23 +79,23 @@ public class Profile extends Application implements Page {
         vbox.getChildren().addAll(pic);
         
         Label username = new Label(student.username);
-        username.setFont(new Font("Cambria", 20));
+        username.setFont(new Font(FONT, 20));
         username.setTextFill(Color.web(DARK_GREEN));
         vbox.getChildren().addAll(username);
         
         Label name = new Label(student.first + " " + student.last);
-        name.setFont(new Font("Cambria", 20));
+        name.setFont(new Font(FONT, 20));
         name.setStyle("-fx-font-weight: bold");
         name.setTextFill(Color.web(DARK_GREEN));
 	    vbox.getChildren().add(name);
 	    
 	    Label email = new Label(student.username + "@calpoly.edu");
-	    email.setFont(new Font("Cambria", 15));
+	    email.setFont(new Font(FONT, 15));
 	    email.setTextFill(Color.web(DARK_GREEN));
 	    vbox.getChildren().add(email);
         
 	    
-	    final ComboBox<String> major = new ComboBox<String>();
+	    final ComboBox<String> major = new ComboBox<>();
 	    
         major.getItems().addAll(
         	"Choose your major",
@@ -108,7 +109,7 @@ public class Profile extends Application implements Page {
 
         vbox.getChildren().add(major);
         
-	    final ComboBox<String> year = new ComboBox<String>();
+	    final ComboBox<String> year = new ComboBox<>();
         year.getItems().addAll(
         	"Choose your year",
             "Freshman",
@@ -133,89 +134,77 @@ public class Profile extends Application implements Page {
         gridPane.add(timepicker, 0, 0);
         vbox.getChildren().add(timepicker);
         
-        //change password hypek
+        //change password hyperlink
         Hyperlink link = new Hyperlink();
-        link.setText("Change Password");
-        link.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-        		System.out.println("Change Password pressed");
-        		final Label errorPW = new Label("");
-        		
-        		final Stage popupStage =new Stage();
-        	    VBox popGrid = new VBox();
-        	    popGrid.setPadding(new Insets(10));
-      	      	popGrid.setSpacing(8);
-        	    popGrid.setAlignment(Pos.CENTER);
-        	
-        		popGrid.setPadding(new Insets(5, 5, 5, 5));
-        		popupStage.initModality(Modality.APPLICATION_MODAL);
-        		popupStage.setTitle("Change Password");
-        		
-        		Label label1= new Label("Change Password");
-        		popGrid.getChildren().add(label1);
-        		
-        		final PasswordField verifyOldPW = new PasswordField();
-        		verifyOldPW.setPromptText("Current Password");
-      	      	popGrid.getChildren().add(verifyOldPW);
-      	      	
-      	      	final PasswordField  newPW = new PasswordField();
-        		newPW.setPromptText("New Password");
-      	      	popGrid.getChildren().add(newPW);
-      	      	
-      	      	final PasswordField  verifynewPW = new PasswordField();
-      	      	verifynewPW.setPromptText("Retype Password");
-    	      	popGrid.getChildren().add(verifynewPW);
-      	      
-    	      	Button enter = new Button("Enter");
-    		   
-    		      popGrid.getChildren().add(enter);
-    		      errorPW.setTextFill(Color.web(DARK_GREEN));
-    		      vbox.getChildren().add(errorPW);
-    		      
-    			  enter.setOnAction(new EventHandler<ActionEvent>() {
-    				    public void handle(ActionEvent e) {
-    				    	//verifying user and pass
-    				    	errorPW.setText("");
-    				    	
-    				    	System.out.print(student.getPassword());
-    		    	      	if (verifyOldPW.getText().isEmpty() || newPW.getText().isEmpty() 
-    		    	      			|| verifynewPW.getText().isEmpty()) {
-    		    	      		errorPW.setText("Please fill all fields");
-    		    	      	}
-    		    	      	else if (verifyOldPW.getText().compareTo(student.getPassword()) != 0) {
-    		    	      		errorPW.setText("Incorrect old password");
-    		      	      	}
-    		      	      	
-    		    	      	else if (newPW.getText().compareTo(verifynewPW.getText()) != 0) {
-    		    	      		errorPW.setText("New passwords do not match");
-    		      	      	}
-    		    	      	
-    		    	      	else {
-    		    	      		System.out.print(student.getPassword());
-    		    	      		//student.changePassword(newPW.getText());
-    		    	      		errorPW.setText("Password changed.");
-    		    	      	}
-    				     }
-    				 });
-    			  
-        
-        		
-    	      	popGrid.getChildren().add(errorPW);
-    	      	
-        		Button button1= new Button("Close");
-        		//button1.setOnAction(click -> popupStage.close());  
-        		button1.setOnAction(new EventHandler<ActionEvent>() {
-        			public void handle(ActionEvent e)
-        			{
-        				popupStage.close();
-        			}
-        		});
-        		Scene scene1= new Scene(popGrid, 400, 400);
-        		popupStage.setScene(scene1);
-        		popupStage.showAndWait();
-        		
-                
-            }
+        link.setText(PWTEXT);
+        link.setOnAction(event -> {
+    		final Label errorPW = new Label("");
+    		
+    		final Stage popupStage =new Stage();
+    	    VBox popGrid = new VBox();
+    	    popGrid.setPadding(new Insets(10));
+  	      	popGrid.setSpacing(8);
+    	    popGrid.setAlignment(Pos.CENTER);
+    	
+    		popGrid.setPadding(new Insets(5, 5, 5, 5));
+    		popupStage.initModality(Modality.APPLICATION_MODAL);
+    		popupStage.setTitle(PWTEXT);
+    		
+    		Label label1= new Label(PWTEXT);
+    		popGrid.getChildren().add(label1);
+    		
+    		final PasswordField verifyOldPW = new PasswordField();
+    		verifyOldPW.setPromptText("Current Password");
+  	      	popGrid.getChildren().add(verifyOldPW);
+  	      	
+  	      	final PasswordField  newPW = new PasswordField();
+    		newPW.setPromptText("New Password");
+  	      	popGrid.getChildren().add(newPW);
+  	      	
+  	      	final PasswordField  verifynewPW = new PasswordField();
+  	      	verifynewPW.setPromptText("Retype Password");
+	      	popGrid.getChildren().add(verifynewPW);
+  	      
+	      	Button enter = new Button("Enter");
+		   
+		      popGrid.getChildren().add(enter);
+		      errorPW.setTextFill(Color.web(DARK_GREEN));
+		      vbox.getChildren().add(errorPW);
+		      
+			  enter.setOnAction(event2 -> {
+			    	//verifying user and pass
+			    	errorPW.setText("");
+			    	
+	    	      	if (verifyOldPW.getText().isEmpty() || newPW.getText().isEmpty() 
+	    	      			|| verifynewPW.getText().isEmpty()) {
+	    	      		errorPW.setText("Please fill all fields");
+	    	      	}
+	    	      	else if (verifyOldPW.getText().compareTo(student.getPassword()) != 0) {
+	    	      		errorPW.setText("Incorrect old password");
+	      	      	}
+	      	      	
+	    	      	else if (newPW.getText().compareTo(verifynewPW.getText()) != 0) {
+	    	      		errorPW.setText("New passwords do not match");
+	      	      	}
+	    	      	
+	    	      	else {
+	    	      		
+	    	      		student.changePassword(newPW.getText());
+	    	      		errorPW.setText("Password changed.");
+	    	      	}
+				 });
+			  
+    
+    		
+	      	popGrid.getChildren().add(errorPW);
+	      	
+    		Button button1= new Button("Close");
+    		button1.setOnAction(event2 ->
+				popupStage.close()
+    		);
+    		Scene scene1= new Scene(popGrid, 400, 400);
+    		popupStage.setScene(scene1);
+    		popupStage.showAndWait();
         });
         
         vbox.getChildren().add(link);
@@ -224,9 +213,5 @@ public class Profile extends Application implements Page {
 	}
 	
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		launch(args);
-	}
 
 }

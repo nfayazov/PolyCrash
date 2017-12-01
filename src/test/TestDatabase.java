@@ -13,32 +13,32 @@ import java.util.ArrayList;
 public class TestDatabase {
 	
 	@Test
-	public void TestDB1() {
+	public void testDB1() {
 		Database db = Database.getInstance();
 		assertEquals(db.getStudentTable().isEmpty(), false);
 	}
 	
 	@Test
-	public void TestDB2() {
+	public void testDB2() {
 		Database db = Database.getInstance();
 		assertEquals(db.getStudentTable().size(), 1000);
 	}
 	
 	@Test
-	public void TestDB3() {
+	public void testDB3() {
 		Database db = Database.getInstance();
 		assertEquals(db.getCourseTable().isEmpty(), false);
 	}
 	
 	@Test
-	public void TestGetClassByName() {
+	public void testGetClassByName() {
 		Database db = Database.getInstance();
 		Boolean exists = db.getCourseByString("CSC 101-1");
 		assertTrue(exists);
 	}
 	
 	@Test
-	public void TestProbability() {
+	public void testProbability() {
 		Database db = Database.getInstance();
 		Teacher teacher = new Teacher("Davide","Falessi");
 		Course course = db.findCourse("CSC 101-1");
