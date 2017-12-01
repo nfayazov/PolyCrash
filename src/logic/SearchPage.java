@@ -153,7 +153,6 @@ public class SearchPage extends Application implements Page
                 
                 //need to get relevant information about that class to display information about it.
                 Course selected = db.findCourse(selectedClass);
-                System.out.println("found course = " + selected.name);
                 final String classDays = selected.getDays();
                 final Time classStart = selected.getStart();
                 final Time classEnd = selected.getEnd();
@@ -276,12 +275,9 @@ public class SearchPage extends Application implements Page
                 addBtn.getChildren().add(addToSchedule);
                 grid.add(addBtn, 4, 6);
                 
-                addToSchedule.setOnAction(event -> {
-                		System.out.println("add course ");
-                		System.out.println("course = " + selected.name);
-                		boolean ret = student.addCourse(selected);
-                		System.out.println("addCourse ret = " + ret  + " ");
-                });
+                addToSchedule.setOnAction(event ->
+                		student.addCourse(selected)
+                );
             }
         );
         return grid;
