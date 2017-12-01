@@ -63,6 +63,12 @@ public class MainPage extends Application implements Page{
 		return "#004d00";
 	}
 	
+	private void setDefaultButtonColorsToClear(String [] defaultButtonColors) {
+		for(int i = 0; i < defaultButtonColors.length; i++) {
+			defaultButtonColors[i] = CLEAR;
+		}
+	}
+	
 	private Button[] getSideButtons() {
 		final Button profileButton = new Button();
 		profileButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("resources/profileIcon_64px.png"))));
@@ -84,9 +90,8 @@ public class MainPage extends Application implements Page{
 			};
 		
 		final String [] defaultButtonColors = new String[sideButtons.length];
-		for(int i = 0; i < defaultButtonColors.length; i++) {
-			defaultButtonColors[i] = CLEAR;
-		}
+		setDefaultButtonColorsToClear(defaultButtonColors);
+		
 		
 		profileButton.setOnAction(event -> {
 			border.setCenter(profile.getNode());
@@ -128,8 +133,14 @@ public class MainPage extends Application implements Page{
 			System.exit(0)
 		);
 		
+		setupHighlighting(sideButtons, defaultButtonColors);
 		
 		
+		return sideButtons;
+		
+	}
+	
+	private void setupHighlighting(Button [] sideButtons, String[] defaultButtonColors) {
 		for(int i = 0; i < sideButtons.length; i++) {
 			sideButtons[i].setStyle(SET_BG + defaultButtonColors[i]);
 			sideButtons[i].setPrefSize(500, 500);
@@ -143,10 +154,7 @@ public class MainPage extends Application implements Page{
 			
 		}
 		
-		return sideButtons;
-		
 	}
-	
 	
 	
 	
