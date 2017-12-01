@@ -6,7 +6,7 @@ import logic.Course;
 import logic.Schedule;
 
 import static org.junit.Assert.*;
-
+//Sebastian
 public class TestStudent {
 	
 	@Test
