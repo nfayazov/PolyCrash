@@ -1,13 +1,11 @@
 package logic;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -91,7 +89,7 @@ public class MainPage extends Application implements Page{
 			defaultButtonColors[i] = CLEAR;
 		}
 		
-		profileButton.setOnAction((event) -> {
+		profileButton.setOnAction(event -> {
 			border.setCenter(profile.getNode());
 			defaultButtonColors[0] = LIGHT_GREEN;
 			for(int i = 0; i < defaultButtonColors.length; i++) {
@@ -103,7 +101,7 @@ public class MainPage extends Application implements Page{
 			}
 		});
 		
-		homeButton.setOnAction((event) -> {
+		homeButton.setOnAction(event -> {
 			border.setCenter(schedulePage.getNode());
 			defaultButtonColors[1] = LIGHT_GREEN;
 			for(int i = 0; i < defaultButtonColors.length; i++) {
@@ -115,7 +113,7 @@ public class MainPage extends Application implements Page{
 			}
 		});
 		
-		browseCoursesButton.setOnAction((event) -> {
+		browseCoursesButton.setOnAction(event -> {
 			border.setCenter(searchPage.getNode());
 			defaultButtonColors[2] = LIGHT_GREEN;
 			for(int i = 0; i < defaultButtonColors.length; i++) {
@@ -127,9 +125,9 @@ public class MainPage extends Application implements Page{
 			}
 		});
 		
-		exitButton.setOnAction((event) -> {
-			System.exit(0);
-		});
+		exitButton.setOnAction(event -> 
+			System.exit(0)
+		);
 		
 		
 		
