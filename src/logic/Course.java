@@ -27,12 +27,15 @@ public class Course {
 		return getDays().contains(day);
 	}
 	
+	@Override
 	public String toString() {
 		//Implementing a print function for testing
 		return name+"-"+Integer.toString(section);
 	}
 	
-	public boolean equals(Course course) {
+	@Override
+	public boolean equals(Object obj) {
+		Course course = (Course)obj;
 		return this.name.equals(course.name) &&
 				this.section == course.section;
 	}
