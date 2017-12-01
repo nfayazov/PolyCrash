@@ -29,7 +29,6 @@ public class SchedulePage implements Page{
 	static final String BGCOLOR = "-fx-background-color: ";
 	static final String WHITE = "#FFF;";
 	static final String PAD = "-fx-padding: ";
-	static final String BGRADIUS = "-fx-background-radius: ";
 	static final String FSIZE = "-fx-font-size: ";
 
 	static final String BRADNUM =  "15 0 0 0;";
@@ -97,7 +96,7 @@ public class SchedulePage implements Page{
 			top.setStyle("-fx-border-style: hidden solid hidden hidden;"
 				+ BORCOLOR+Colors.LIGHT_GREEN+";"
 				+ BGCOLOR + WHITE
-				+ BGRADIUS + BRADNUM);
+				+ BRADNUM);
 			top.setPrefHeight(25);
 			top.setPrefWidth(columnwidth);
 			schedule.add(top, columnIndex, i);
@@ -109,7 +108,7 @@ public class SchedulePage implements Page{
 			+ BORCOLOR+Colors.LIGHT_GREEN+";"
 			+ BGCOLOR+ WHITE
 			+ PAD + "10;"
-			+ BGRADIUS + BRADNUM);
+			+ BRADNUM);
 		top.setPrefHeight(50);
 		top.setPrefWidth(columnwidth);
 		schedule.add(top, columnIndex, 1);
@@ -174,7 +173,7 @@ public class SchedulePage implements Page{
 					+ BORCOLOR+Colors.LIGHT_GREEN+";"
 					+  BGCOLOR +  WHITE
 					+ PAD + "10;"
-					+ BGRADIUS+ BRADNUM);
+					+ BRADNUM);
 				bottom.setPrefHeight(50);
 				bottom.setPrefWidth(columnwidth);
 				schedule.add(bottom, columnIndex, 34);
@@ -290,7 +289,7 @@ public class SchedulePage implements Page{
 		lefttop.setStyle(BORCOLOR+Colors.LIGHT_GREEN+";"
 				+ BGCOLOR+Colors.LIGHT_GREEN+";"
 				+ PAD + "10;"
-				+ BGRADIUS + BRADNUM);
+				+ BRADNUM);
 		lefttop.setPrefHeight(25);
 		lefttop.setPrefWidth(columnwidth);
 		schedule.add(lefttop, 0, 1);
@@ -303,7 +302,7 @@ public class SchedulePage implements Page{
 		leftbottom.setStyle(BORCOLOR+Colors.LIGHT_GREEN+";"
 				+ BGCOLOR+Colors.LIGHT_GREEN+";"
 				+ PAD + "10;"
-				+ BGRADIUS +BRADNUM);
+				+BRADNUM);
 		leftbottom.setPrefHeight(25);
 		leftbottom.setPrefWidth(columnwidth);
 		schedule.add(leftbottom, 0, 34);
