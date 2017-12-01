@@ -69,13 +69,13 @@ public class SchedulePage implements Page{
 		GridPane schedule = new GridPane();
 		
 		//initializing the schedule pane's left column with fixed width 150.
-		addLeftColumn(schedule, 100);
+		addLeftColumn(schedule, 80);
 		//Populating the columns corresponding to the five days of the week with fixed width 200.
-		addDayColumn(schedule, 140, 1, s, "M");
-		addDayColumn(schedule, 140, 2, s, "T");
-		addDayColumn(schedule, 140, 3, s, "W");
-		addDayColumn(schedule, 140, 4, s, "R");
-		addDayColumn(schedule, 140, 5, s, "F");
+		addDayColumn(schedule, 100, 1, s, "M");
+		addDayColumn(schedule, 100, 2, s, "T");
+		addDayColumn(schedule, 100, 3, s, "W");
+		addDayColumn(schedule, 100, 4, s, "R");
+		addDayColumn(schedule, 100, 5, s, "F");
 		
 		schedule.setStyle(BGCOLOR+WHITE
 				+ PAD + "20 0 0 0;");
@@ -94,7 +94,7 @@ public class SchedulePage implements Page{
 				+ BORCOLOR+LIGHT_GREEN+";"
 				+ BGCOLOR + WHITE
 				+ "-fx-background-radius:15 0 0 0;");
-			top.setPrefHeight(50);
+			top.setPrefHeight(25);
 			top.setPrefWidth(columnwidth);
 			schedule.add(top, columnIndex, i);
 		}
@@ -122,8 +122,10 @@ public class SchedulePage implements Page{
 						+ BORCOLOR+DARK_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+";"
 						+ TFILL+DARK_GREEN+";"
 						+ "-fx-font-size:.9em;"
+
 						+ BGCOLOR+LIGHT_GREEN+";"
-						+ PAD + "4;");
+						+ PAD + "1;");
+
 				courseBlock.setPrefWidth(columnwidth);
 				courseBlock.setAlignment(Pos.BASELINE_RIGHT);
 				schedule.add(courseBlock, columnIndex, getRowFromTime(course.getStart()));
@@ -133,8 +135,10 @@ public class SchedulePage implements Page{
 						+ BORCOLOR+DARK_GREEN+";"
 						+ TFILL+DARK_GREEN+";"
 						+ "-fx-font-size:.9em;"
+
 						+ BGCOLOR+LIGHT_GREEN+";"
-						+ PAD + "4;");
+						+ PAD + "1;");
+
 				courseBlock2.setPrefWidth(columnwidth);
 				courseBlock2.setAlignment(Pos.BASELINE_RIGHT);
 				schedule.add(courseBlock2, columnIndex, getRowFromTime(course.getEnd()));
@@ -148,8 +152,10 @@ public class SchedulePage implements Page{
 								+ BORCOLOR+LIGHT_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+";"
 								+ TFILL+DARK_GREEN+";"
 								+ "-fx-font-size:.9em;"
+
 								+ BGCOLOR+LIGHT_GREEN+";"
-								+ PAD + "4;");
+								+ PAD + "1;");
+
 						blankpane.setPrefWidth(columnwidth);
 						schedule.add(blankpane, columnIndex, i);
 					}
@@ -251,8 +257,10 @@ public class SchedulePage implements Page{
 					+ BORCOLOR+LIGHT_GREEN+";"
 					+ TFILL + "#FFF; "
 					+ "-fx-font-size:1.1em;"
+
 					+ BGCOLOR+DARK_GREEN+";"
-					+ PAD + "4;");
+					+ PAD + "1;");
+
 			time.setPrefWidth(columnwidth);
 			time.setAlignment(Pos.BASELINE_RIGHT);
 			schedule.add(time, 0, getRowFromTime(timestamp));
@@ -279,7 +287,7 @@ public class SchedulePage implements Page{
 				+ BGCOLOR+LIGHT_GREEN+";"
 				+ PAD + "10;"
 				+ "-fx-background-radius:15 0 0 0;");
-		lefttop.setPrefHeight(50);
+		lefttop.setPrefHeight(25);
 		lefttop.setPrefWidth(columnwidth);
 		schedule.add(lefttop, 0, 1);
 				
@@ -292,7 +300,7 @@ public class SchedulePage implements Page{
 				+ BGCOLOR+LIGHT_GREEN+";"
 				+ PAD + "10;"
 				+ "-fx-background-radius:0 0 0 15;");
-		leftbottom.setPrefHeight(50);
+		leftbottom.setPrefHeight(25);
 		leftbottom.setPrefWidth(columnwidth);
 		schedule.add(leftbottom, 0, 34);
 	}
