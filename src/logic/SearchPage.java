@@ -130,14 +130,14 @@ public class SearchPage extends Application implements Page
         grid.add(targetClassTimings, 3, 6);
         
         btn.setOnAction(click -> {
-                targetClassName.setFill(Color.DARKGREEN);
+                targetClassName.setFill(Color.web(Colors.DARK_GREEN));
                 String style = "-fx-font-color: " + LIGHT_GREEN;
             		targetClassName.setStyle(style);
             		
-            		targetClassTimings.setFill(Color.DARKGREEN);
+            		targetClassTimings.setFill(Color.web(Colors.DARK_GREEN));//setFill(Color.DARKGREEN);
             		targetClassTimings.setStyle(style);
             		
-            		targetClassProfessor.setFill(Color.DARKGREEN);
+            		targetClassProfessor.setFill(Color.web(Colors.DARK_GREEN));//setFill(Color.DARKGREEN);
             		targetClassProfessor.setStyle(style);
                 
                 final String selectedClass = searchField.getText();
@@ -275,7 +275,10 @@ public class SearchPage extends Application implements Page
                 grid.add(addBtn, 4, 6);
                 
                 addToSchedule.setOnAction(event -> {
-                		student.addCourse(selected);
+                		System.out.println("add course ");
+                		
+                		boolean ret = student.addCourse(selected);
+                		System.out.println("addCourse ret = " + ret  + " ");
                 });
             }
         );
