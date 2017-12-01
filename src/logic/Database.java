@@ -55,7 +55,7 @@ public class Database {
 		teacherDb.put("adekhtyar", new Teacher("Alexander", "Dekhtyar"));
 		teacherDb.put("dretz", new Teacher("David", "Retz"));
 		teacherDb.put("lstanchev", new Teacher("Lubomir", "Stanchev"));
-		teacherDb.put("tmigler", new Teacher("Teresa", "Migler"));
+		teacherDb.put("tmigler", new Teacher("Theresa", "Migler"));
 		teacherDb.put("cbuckalew", new Teacher("Christopher", "Buckalew"));
 		teacherDb.put("bhollister", new Teacher("Brad", "Hollister"));
 		teacherDb.put("akeen", new Teacher("Aaron", "Keen"));

@@ -31,10 +31,11 @@ public class SearchPage extends Application implements Page
 	private String username;
 	final Database db = Database.getInstance();
 	Map<String, Student> studentList = db.getStudentTable();
-	Student student = studentList.get(username);
+	Student student;
 	
 	public SearchPage(String username) {
 		this.username = username;
+		student = studentList.get(username);
 	}
 	
 	public static void main(String[] args)
@@ -73,7 +74,7 @@ public class SearchPage extends Application implements Page
 		grid.add(searchField, 1, 1);
 
 		final String fxBorder = "-fx-border:none;";
-		final String fxBackground = "-fx-background-color:"+DARK_GREEN+";";
+		final String fxBackground = "-fx-background-color:"+Colors.DARK_GREEN+";";
 		final String fxTextFill = "-fx-text-fill:#FFF";
 		Button btn = new Button("Search");
 		btn.setStyle("-fx-graphic-text-gap: 5;"
@@ -130,14 +131,14 @@ public class SearchPage extends Application implements Page
         grid.add(targetClassTimings, 3, 6);
         
         btn.setOnAction(click -> {
-                targetClassName.setFill(Color.DARKGREEN);
-                String style = "-fx-font-color: " + LIGHT_GREEN;
+                targetClassName.setFill(Color.web(Colors.DARK_GREEN));
+                String style = "-fx-font-color: " + Colors.LIGHT_GREEN;
             		targetClassName.setStyle(style);
             		
-            		targetClassTimings.setFill(Color.DARKGREEN);
+            		targetClassTimings.setFill(Color.web(Colors.DARK_GREEN));//setFill(Color.DARKGREEN);
             		targetClassTimings.setStyle(style);
             		
-            		targetClassProfessor.setFill(Color.DARKGREEN);
+            		targetClassProfessor.setFill(Color.web(Colors.DARK_GREEN));//setFill(Color.DARKGREEN);
             		targetClassProfessor.setStyle(style);
                 
                 final String selectedClass = searchField.getText();
@@ -152,11 +153,12 @@ public class SearchPage extends Application implements Page
                 
                 //need to get relevant information about that class to display information about it.
                 Course selected = db.findCourse(selectedClass);
+                System.out.println("found course = " + selected.name);
                 final String classDays = selected.getDays();
                 final Time classStart = selected.getStart();
                 final Time classEnd = selected.getEnd();
-                final String start = Time.toString(classEnd);
-                final String end = Time.toString(classStart);
+                final String start = Time.toString(classStart);
+                final String end = Time.toString(classEnd);
                 final String times = classDays + " " + start + " - " + end;
                 final Teacher professor = selected.getInstructor();
                 final String classProfessor = professor.first + " " + professor.last;
@@ -275,7 +277,10 @@ public class SearchPage extends Application implements Page
                 grid.add(addBtn, 4, 6);
                 
                 addToSchedule.setOnAction(event -> {
-                		student.addCourse(selected);
+                		System.out.println("add course ");
+                		System.out.println("course = " + selected.name);
+                		boolean ret = student.addCourse(selected);
+                		System.out.println("addCourse ret = " + ret  + " ");
                 });
             }
         );
