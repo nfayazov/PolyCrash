@@ -85,9 +85,7 @@ public class Database {
 			studentDb.put(student.username, student);
 		
 		} catch (FileNotFoundException e) {
-			
-			System.err.println(e.getMessage());
-			
+			System.exit(0);
 		} finally {
 			if (fsc != null) fsc.close();
 			if (lsc != null) lsc.close();
