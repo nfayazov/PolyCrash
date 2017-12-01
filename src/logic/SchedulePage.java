@@ -22,35 +22,25 @@ public class SchedulePage implements Page{
 	Schedule s;
 	public Button addClass;
 	public Button pushClass;
+	
+	
+	static final String BSTYLE = "-fx-border-style: ";
+	static final String BORCOLOR = "-fx-border-color: ";
+	static final String TFILL = "-fx-text-fill: ";
+
+	static final String BGCOLOR = "-fx-background-color: ";
+	static final String WHITE = "#FFF;";
+	static final String PAD = "-fx-padding: ";
+	static final String BGRADIUS = "-fx-background-radius: ";
+	static final String FSIZE = "-fx-font-size: ";
+
+	static final String BRADNUM =  "15 0 0 0;";
 	public SchedulePage(Schedule s) {
 		this.s = s;
 		addClass = getAddClassButton();
 		pushClass = getPushButton();
 	}
 	
-//	public static void main(String[] args) {
-//		launch(SchedulePage.class, args);
-//		
-//		/* EXAMPLE (delete this) */
-//		Database db = new Database();
-//		db.printScheduleByUsername("lcowart89");
-//	}
-//	
-	
-//	public void start(Stage stage) {
-//		BorderPane border = new BorderPane();
-//		VBox navBar = getNavBar();
-//		
-//		Schedule s = testSchedule();
-//		BorderPane content = getSchedulePageContent();
-//		border.setCenter(content);
-//		border.setLeft(navBar);
-//		Scene scene = new Scene(border, 960, 700);
-//		stage.setScene(scene);
-//		stage.setTitle("SchedulePageTest");
-//		stage.show();
-//		
-//	}
 	
 	public Node getNode() {
 		return getSchedulePageContent();
@@ -82,16 +72,16 @@ public class SchedulePage implements Page{
 		GridPane schedule = new GridPane();
 		
 		//initializing the schedule pane's left column with fixed width 150.
-		addLeftColumn(schedule, 100);
+		addLeftColumn(schedule, 80);
 		//Populating the columns corresponding to the five days of the week with fixed width 200.
-		addDayColumn(schedule, 140, 1, s, "M");
-		addDayColumn(schedule, 140, 2, s, "T");
-		addDayColumn(schedule, 140, 3, s, "W");
-		addDayColumn(schedule, 140, 4, s, "R");
-		addDayColumn(schedule, 140, 5, s, "F");
+		addDayColumn(schedule, 100, 1, s, "M");
+		addDayColumn(schedule, 100, 2, s, "T");
+		addDayColumn(schedule, 100, 3, s, "W");
+		addDayColumn(schedule, 100, 4, s, "R");
+		addDayColumn(schedule, 100, 5, s, "F");
 		
-		schedule.setStyle("-fx-background-color:#FFF;"
-				+ "-fx-padding:20 0 0 0;");
+		schedule.setStyle(BGCOLOR+WHITE
+				+ PAD + "20 0 0 0;");
 		schedule.setAlignment(Pos.TOP_CENTER);
 		
 		return schedule;
@@ -104,10 +94,10 @@ public class SchedulePage implements Page{
 		{
 			Pane top = new Pane();
 			top.setStyle("-fx-border-style: hidden solid hidden hidden;"
-				+ "-fx-border-color:"+LIGHT_GREEN+";"
-				+ "-fx-background-color:#FFF;"
-				+ "-fx-background-radius:15 0 0 0;");
-			top.setPrefHeight(50);
+				+ BORCOLOR+Colors.LIGHT_GREEN+";"
+				+ BGCOLOR + WHITE
+				+ BGRADIUS + BRADNUM);
+			top.setPrefHeight(25);
 			top.setPrefWidth(columnwidth);
 			schedule.add(top, columnIndex, i);
 		}
@@ -115,10 +105,10 @@ public class SchedulePage implements Page{
 		//Top empty pane
 		Pane top = new Pane();
 		top.setStyle("-fx-border-style: solid solid hidden hidden;"
-			+ "-fx-border-color:"+LIGHT_GREEN+";"
-			+ "-fx-background-color:#FFF;"
-			+ "-fx-padding:10;"
-			+ "-fx-background-radius:15 0 0 0;");
+			+ BORCOLOR+Colors.LIGHT_GREEN+";"
+			+ BGCOLOR+ WHITE
+			+ PAD + "10;"
+			+ BGRADIUS + BRADNUM);
 		top.setPrefHeight(50);
 		top.setPrefWidth(columnwidth);
 		schedule.add(top, columnIndex, 1);
@@ -126,29 +116,32 @@ public class SchedulePage implements Page{
 		//Adds a column for the specified day of the week at the provided column index.
 		for(Course course : s.getCourses())
 		{
-			System.out.println(course);
-			System.out.println(day);
+			
 			
 			if(course.onDay(day))
 			{					
 				Label courseBlock = new Label("("+course.name+")");
-				courseBlock.setStyle("-fx-border-style:solid;"
-						+ "-fx-border-color: "+DARK_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+";"
-						+ "-fx-text-fill:"+DARK_GREEN+";"
+				courseBlock.setStyle(BSTYLE +"solid;"
+						+ BORCOLOR+Colors.DARK_GREEN+" "+Colors.DARK_GREEN+" "+Colors.LIGHT_GREEN+" "+Colors.DARK_GREEN+";"
+						+ TFILL+Colors.DARK_GREEN+";"
 						+ "-fx-font-size:.9em;"
-						+ "-fx-background-color: "+LIGHT_GREEN+";"
-						+ "-fx-padding:4;");
+
+						+ BGCOLOR+Colors.LIGHT_GREEN+";"
+						+ PAD + "1;");
+
 				courseBlock.setPrefWidth(columnwidth);
 				courseBlock.setAlignment(Pos.BASELINE_RIGHT);
 				schedule.add(courseBlock, columnIndex, getRowFromTime(course.getStart()));
 				
 				Label courseBlock2 = new Label("");
 				courseBlock2.setStyle("-fx-border-style:hidden solid solid solid;"
-						+ "-fx-border-color: "+DARK_GREEN+";"
-						+ "-fx-text-fill:"+DARK_GREEN+";"
-						+ "-fx-font-size:.9em;"
-						+ "-fx-background-color: "+LIGHT_GREEN+";"
-						+ "-fx-padding:4;");
+						+ BORCOLOR+Colors.DARK_GREEN+";"
+						+ TFILL+Colors.DARK_GREEN+";"
+						+ FSIZE+".9em;"
+
+						+ BGCOLOR+Colors.LIGHT_GREEN+";"
+						+ PAD + "1;");
+
 				courseBlock2.setPrefWidth(columnwidth);
 				courseBlock2.setAlignment(Pos.BASELINE_RIGHT);
 				schedule.add(courseBlock2, columnIndex, getRowFromTime(course.getEnd()));
@@ -159,11 +152,13 @@ public class SchedulePage implements Page{
 					{
 						Pane blankpane = new Pane();
 						blankpane.setStyle("-fx-border-style:hidden solid hidden solid ;"
-								+ "-fx-border-color: "+LIGHT_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+";"
-								+ "-fx-text-fill:"+DARK_GREEN+";"
-								+ "-fx-font-size:.9em;"
-								+ "-fx-background-color: "+LIGHT_GREEN+";"
-								+ "-fx-padding:4;");
+								+ BORCOLOR+Colors.LIGHT_GREEN+" "+Colors.DARK_GREEN+" "+Colors.LIGHT_GREEN+" "+Colors.DARK_GREEN+";"
+								+ TFILL+Colors.DARK_GREEN+";"
+								+ FSIZE+".9em;"
+
+								+ BGCOLOR+Colors.LIGHT_GREEN+";"
+								+ PAD + "1;");
+
 						blankpane.setPrefWidth(columnwidth);
 						schedule.add(blankpane, columnIndex, i);
 					}
@@ -175,10 +170,10 @@ public class SchedulePage implements Page{
 		//Bottom empty pane
 				Pane bottom = new Pane();
 				bottom.setStyle("-fx-border-style: hidden solid solid hidden;"
-					+ "-fx-border-color:"+LIGHT_GREEN+";"
-					+ "-fx-background-color:#FFF;"
-					+ "-fx-padding:10;"
-					+ "-fx-background-radius:15 0 0 0;");
+					+ BORCOLOR+Colors.LIGHT_GREEN+";"
+					+  BGCOLOR +  WHITE
+					+ PAD + "10;"
+					+ BGRADIUS+ BRADNUM);
 				bottom.setPrefHeight(50);
 				bottom.setPrefWidth(columnwidth);
 				schedule.add(bottom, columnIndex, 34);
@@ -188,7 +183,7 @@ public class SchedulePage implements Page{
 	private VBox getBottomPane()
 	{
 		VBox bottom = new VBox();
-		bottom.setStyle("-fx-background-color:#FFFFFF");
+		bottom.setStyle(BGCOLOR + "#FFFFFF");
 		
 		
 		
@@ -204,37 +199,37 @@ public class SchedulePage implements Page{
 	//Bottom pane functions below
 	private Button getAddClassButton()
 	{
-		Button addClass = new Button();
+		Button addClass1 = new Button();
 		Image addClassImage = new Image(getClass().getResourceAsStream("resources/addIcon_64px.png"), 
 				32, 32, false, false);
-		addClass.setGraphic(new ImageView(addClassImage));
-		addClass.setText("Add New Class");
-		addClass.setPrefWidth(300);
-		addClass.setStyle("-fx-graphic-text-gap: 10;"
+		addClass1.setGraphic(new ImageView(addClassImage));
+		addClass1.setText("Add New Class");
+		addClass1.setPrefWidth(300);
+		addClass1.setStyle("-fx-graphic-text-gap: 10;"
 				+ "-fx-border:none;"
-				+ "-fx-background-color:"+DARK_GREEN+";"
-				+ "-fx-font-size:1.6em;"
-				+ "-fx-text-fill:#FFF");
+				+BGCOLOR+Colors.DARK_GREEN+";"
+				+ FSIZE+"1.6em;"
+				+ TFILL + WHITE);
 		
-		return addClass;
+		return addClass1;
 	}
 	
 	private Button getPushButton()
 	{
-		Button pushClass = new Button();
+		Button pushClass1 = new Button();
 		Image pushClassImage = new Image(getClass().getResourceAsStream("resources/pushIcon_64px.png"), 
 				32, 32, false, false);
-		pushClass.setGraphic(new ImageView(pushClassImage));
-		pushClass.setText("Push to Student Center");
-		pushClass.setPrefWidth(300);
-		pushClass.setStyle("-fx-graphic-text-gap: 10;"
+		pushClass1.setGraphic(new ImageView(pushClassImage));
+		pushClass1.setText("Push to Student Center");
+		pushClass1.setPrefWidth(300);
+		pushClass1.setStyle("-fx-graphic-text-gap: 10;"
 				+ "-fx-border:none;"
-				+ "-fx-background-color:"+DARK_GREEN+";"
-				+ "-fx-font-size:1.6em;"
-				+ "-fx-text-fill:#FFF;"
+				+ BGCOLOR+Colors.DARK_GREEN+";"
+				+ FSIZE+"1.6em;"
+				+ TFILL+ WHITE
 				+ "-fx-content-display:right");
 		
-		return pushClass;
+		return pushClass1;
 	}
 	
 	private int getRowFromTime(Time time)
@@ -262,11 +257,13 @@ public class SchedulePage implements Page{
 			
 			Label time = new Label(Integer.toString(timestamp.getPeriodHour())+" "+timestamp.period);
 			time.setStyle("-fx-border-style:solid solid hidden solid;"
-					+ "-fx-border-color: "+LIGHT_GREEN+";"
-					+ "-fx-text-fill:#FFF; "
-					+ "-fx-font-size:1.1em;"
-					+ "-fx-background-color: "+DARK_GREEN+";"
-					+ "-fx-padding:4;");
+					+ BORCOLOR+Colors.LIGHT_GREEN+";"
+					+ TFILL + "#FFF; "
+					+ FSIZE+"1.1em;"
+
+					+ BGCOLOR+Colors.DARK_GREEN+";"
+					+ PAD + "1;");
+
 			time.setPrefWidth(columnwidth);
 			time.setAlignment(Pos.BASELINE_RIGHT);
 			schedule.add(time, 0, getRowFromTime(timestamp));
@@ -274,11 +271,11 @@ public class SchedulePage implements Page{
 			/*Creates an empty cell for use with half hour marks.*/
 			Pane emptyCell = new Pane();
 			emptyCell.setStyle("-fx-border-style:hidden solid hidden solid;"
-					+ "-fx-border-color: "+LIGHT_GREEN+";"
-					+ "-fx-text-fill:#FFF; "
-					+ "-fx-font-size:1.1em;"
-					+ "-fx-background-color: "+DARK_GREEN+";"
-					+ "-fx-padding:1;");
+					+ BORCOLOR+Colors.LIGHT_GREEN+";"
+					+ TFILL+ "#FFF; "
+					+ FSIZE+ "1.1em;"
+					+ BGCOLOR+Colors.DARK_GREEN+";"
+					+ PAD + "1;");
 			schedule.add(emptyCell, 0, getRowFromTime(timestamp)+1);
 			
 			hour++;
@@ -288,27 +285,27 @@ public class SchedulePage implements Page{
 	private void addLeftColumn(GridPane schedule, int columnwidth)
 	{
 		//Top empty pane
-		Pane left_top = new Pane();
-		left_top.setStyle("fx-border-color:"+LIGHT_GREEN+";"
-				+ "-fx-background-color:"+LIGHT_GREEN+";"
-				+ "-fx-padding:10;"
-				+ "-fx-background-radius:15 0 0 0;");
-		left_top.setPrefHeight(50);
-		left_top.setPrefWidth(columnwidth);
-		schedule.add(left_top, 0, 1);
+		Pane lefttop = new Pane();
+		lefttop.setStyle(BORCOLOR+Colors.LIGHT_GREEN+";"
+				+ BGCOLOR+Colors.LIGHT_GREEN+";"
+				+ PAD + "10;"
+				+ BGRADIUS + BRADNUM);
+		lefttop.setPrefHeight(25);
+		lefttop.setPrefWidth(columnwidth);
+		schedule.add(lefttop, 0, 1);
 				
 		//Add labels for times
 		addTimeLabels(schedule, columnwidth);
 		
 		//Bottom empty pane
-		Pane left_bottom = new Pane();
-		left_bottom.setStyle("fx-border-color:"+LIGHT_GREEN+";"
-				+ "-fx-background-color:"+LIGHT_GREEN+";"
-				+ "-fx-padding:10;"
-				+ "-fx-background-radius:0 0 0 15;");
-		left_bottom.setPrefHeight(50);
-		left_bottom.setPrefWidth(columnwidth);
-		schedule.add(left_bottom, 0, 34);
+		Pane leftbottom = new Pane();
+		leftbottom.setStyle(BORCOLOR+Colors.LIGHT_GREEN+";"
+				+ BGCOLOR+Colors.LIGHT_GREEN+";"
+				+ PAD + "10;"
+				+ BGRADIUS +BRADNUM);
+		leftbottom.setPrefHeight(25);
+		leftbottom.setPrefWidth(columnwidth);
+		schedule.add(leftbottom, 0, 34);
 	}
 	
 }

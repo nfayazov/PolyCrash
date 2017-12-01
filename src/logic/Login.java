@@ -85,11 +85,11 @@ public class Login extends Application implements Page{
 	      top.setAlignment(Pos.BOTTOM_CENTER);
 	      top.getChildren().addAll(title);
 	      top.setPrefHeight(350);
-		  top.setStyle("-fx-background-color: " + DARK_GREEN);
+		  top.setStyle("-fx-background-color: " + Colors.DARK_GREEN);
 	 
 	      Label title1 = new Label("Sign in with your calpoly.edu information");
 	      title1.setFont(new Font("Cambria", 20));
-	      title1.setTextFill(Color.web(DARK_GREEN));
+	      title1.setTextFill(Color.web(Colors.DARK_GREEN));
 	      title1.setPadding(new Insets(10, 10, 10, 10));
 	      
 	      VBox vbox = new VBox();
@@ -98,7 +98,7 @@ public class Login extends Application implements Page{
 	      vbox.setAlignment(Pos.BOTTOM_CENTER);
 	      vbox.getChildren().add(title1);
 	      
-	      error1.setTextFill(Color.web(DARK_GREEN));
+	      error1.setTextFill(Color.web(Colors.DARK_GREEN));
 	      vbox.getChildren().add(error1);
 
 		  username.setPromptText("Username");
@@ -110,7 +110,7 @@ public class Login extends Application implements Page{
 	      root.setCenter(enter);
 	      vbox.getChildren().add(enter);
 
-	      errorLogin.setTextFill(Color.web(DARK_GREEN));
+	      errorLogin.setTextFill(Color.web(Colors.DARK_GREEN));
 	      vbox.getChildren().add(errorLogin);
 	      
 		  

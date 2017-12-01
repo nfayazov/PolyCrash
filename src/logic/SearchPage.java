@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Map;
+
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.scene.Node;
@@ -15,8 +17,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -70,7 +70,7 @@ public class SearchPage extends Application implements Page
 		grid.add(searchField, 1, 1);
 
 		final String fxBorder = "-fx-border:none;";
-		final String fxBackground = "-fx-background-color:"+DARK_GREEN+";";
+		final String fxBackground = "-fx-background-color:"+ Colors.DARK_GREEN+";";
 		final String fxTextFill = "-fx-text-fill:#FFF";
 		Button btn = new Button("Search");
 		btn.setStyle("-fx-graphic-text-gap: 5;"
@@ -126,11 +126,9 @@ public class SearchPage extends Application implements Page
         final Text targetClassTimings = new Text();
         grid.add(targetClassTimings, 3, 6);
         
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-        	 
-            public void handle(ActionEvent e) {
+        btn.setOnAction(click -> {
                 targetClassName.setFill(Color.DARKGREEN);
-                String style = "-fx-font-color: " + LIGHT_GREEN;
+                String style = "-fx-font-color: " + Colors.LIGHT_GREEN;
             		targetClassName.setStyle(style);
             		
             		targetClassTimings.setFill(Color.DARKGREEN);
@@ -150,16 +148,22 @@ public class SearchPage extends Application implements Page
                 }
                 
                 //need to get relevant information about that class to display information about it.
-                final String classTimes = "MWF 3:00 - 4:00 PM";
+                Course selected = db.findCourse(selectedClass);
+                final String classDays = selected.getDays();
+                final Time classStart = selected.getStart();
+                final Time classEnd = selected.getEnd();
+                final String start = Time.toString(classEnd);
+                final String end = Time.toString(classStart);
+                final String times = classDays + " " + start + " - " + end;
                 final String classProfessor = "Falessi";
-                final int waitlistLength = 0;
+                final int waitlistLength = db.waitlistDb.get(selected).size();
                 final String quartersOffered = "F W";
                 final int estimatedCrashing = 0;
                 
                 
                 targetClassName.setText(selectedClass);
                 targetClassName.setFont(new Font(fontType, 17));
-                targetClassTimings.setText(classTimes);
+                targetClassTimings.setText(times);
                 targetClassTimings.setFont((new Font(fontType, 17)));
                 targetClassProfessor.setText(classProfessor);
                 targetClassProfessor.setFont(new Font(fontType, 17));
@@ -177,8 +181,7 @@ public class SearchPage extends Application implements Page
                 viewBtn.getChildren().add(viewClass);
                 grid.add(viewBtn, 0, 6);
                 
-                viewClass.setOnAction(new EventHandler<ActionEvent>() {
-                	public void handle(ActionEvent e)
+                viewClass.setOnAction(event ->
                 	{
                 		
                 		final Stage popupStage =new Stage();
@@ -198,9 +201,9 @@ public class SearchPage extends Application implements Page
                 		courseTitle.setFont(new Font(fontType, 15));
                 		popGrid.add(courseTitle, 0, 2);
                 		
-                		Text courseTimings = new Text(classTimes);
-                		courseTimings.setFont(new Font(fontType, 15));
-                		popGrid.add(courseTimings, 0, 3);
+                		Text courseTimings1 = new Text(times);
+                		courseTimings1.setFont(new Font(fontType, 15));
+                		popGrid.add(courseTimings1, 0, 3);
                 		
                 		Text courseProfessor = new Text(classProfessor);
                 		courseProfessor.setFont(new Font(fontType, 15));
@@ -228,23 +231,18 @@ public class SearchPage extends Application implements Page
                 		
                 		
                 		
-                		Button button1= new Button("Close");
-                		button1.setStyle(fxTestGap
+                		Button close= new Button("Close");
+                		close.setStyle(fxTestGap
                 				+ fxBorder
                 				+ fxBackground
                 				+ fxFontSize
                 				+ fxTextFill);
-                		button1.setOnAction(new EventHandler<ActionEvent>() {
-                			public void handle(ActionEvent e)
-                			{
-                				popupStage.close();
-                			}
-                		});
+                		close.setOnAction(event2 ->
+                				popupStage.close()
+                		);
                 		Scene scene1= new Scene(popGrid, 500, 200);
                 		popupStage.setScene(scene1);
                 		popupStage.showAndWait();
-                		
-                	}
                 });
                 
                 final Button addToSchedule = new Button("Add to Schedule");
@@ -258,14 +256,13 @@ public class SearchPage extends Application implements Page
                 addBtn.getChildren().add(addToSchedule);
                 grid.add(addBtn, 4, 6);
                 
-                addToSchedule.setOnAction(new EventHandler<ActionEvent>() {
-                	public void handle(ActionEvent e)
-                	{
-                		System.out.println("Send this information to Schedule");
-                	}
+                addToSchedule.setOnAction(event -> {
+                		Map<String, Student> studentList = db.getStudentTable();
+                		Student student = studentList.get(username);
+                		student.addCourse(selected);
                 });
             }
-        });
+        );
         return grid;
 	}
 
