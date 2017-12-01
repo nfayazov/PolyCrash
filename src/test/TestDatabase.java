@@ -21,7 +21,7 @@ public class TestDatabase {
 	@Test
 	public void testDB2() {
 		Database db = Database.getInstance();
-		assertEquals(db.getStudentTable().size(), 1000);
+		assertEquals(db.getStudentTable().size(), 1001);
 	}
 	
 	@Test
@@ -43,8 +43,7 @@ public class TestDatabase {
 		Teacher teacher = new Teacher("Davide","Falessi");
 		Course course = db.findCourse("CSC 101-1");
 		ArrayList<Student> arr = db.waitlistDb.get(course);
-		Student student = arr.get(12);
-		System.out.println("viscocity" + teacher.viscocity);
+		Student student = arr.get(10);
 		System.out.println(db.getProbability(course, student, teacher));
 		assertTrue(db.getProbability(course, student, teacher) != 0);
 	}
