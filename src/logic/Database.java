@@ -263,8 +263,8 @@ public class Database {
 		if (waitlistDb.containsKey(course)){
 			ArrayList<Student> students = waitlistDb.get(course);
 			if (students.indexOf(student) != -1) {
-				offset = teacher.viscocity - students.indexOf(student)+1;				
-				probability = .75 + (1/(teacher.viscocity*5)) * offset;
+				offset = teacher.getViscosity() - students.indexOf(student)+1;				
+				probability = .75 + (1/(teacher.getViscosity()*5)) * offset;
 				probability = probability > 1 ? 1 : probability;
 				probability = probability < 0 ? 0 : probability;
 				return probability;

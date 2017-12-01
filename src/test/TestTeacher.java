@@ -16,6 +16,6 @@ public class TestTeacher {
 	@Test
 	public void testTeacher2() {
 		Teacher teacher = new Teacher("Davide", "Falessi");
-		assertTrue(teacher.viscocity < 10.0);
+		assertTrue(teacher.getViscosity() < 10.0);
 	}
 }
