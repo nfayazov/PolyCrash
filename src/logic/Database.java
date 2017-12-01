@@ -16,11 +16,11 @@ public class Database {
 	static int numCourses = 100;
 	static int numCoursesPerStudent = 4;
 
-	public Map<String, Student> studentDb;
-	public Map<String, Teacher> teacherDb;
+	private Map<String, Student> studentDb;
+	private Map<String, Teacher> teacherDb;
 	private Set<Course> courseDb;
-	public Map<Course, ArrayList<Student>> courseLookupDb;
-	public Map<Course, ArrayList<Student>> waitlistDb;
+	private Map<Course, ArrayList<Student>> courseLookupDb;
+	private Map<Course, ArrayList<Student>> waitlistDb;
 	
 	private Database() {
 		makeTeacherTable();
@@ -36,6 +36,14 @@ public class Database {
 	
 	public Schedule getScheduleByUsername(String username) {
 		return studentDb.get(username).getSchedule();
+	}
+	
+	public Map<Course, ArrayList<Student>> getWaitlistDb() {
+		return waitlistDb;
+	}
+	
+	public Map<String, Teacher> getTeacherDb() {
+		return teacherDb;
 	}
 	
 	private void makeTeacherTable() {
@@ -146,7 +154,7 @@ public class Database {
 				waitlisted = new ArrayList<>();
 			}
 			waitlisted.add(student);
-			student.waitlist.put(course, waitlisted.size()+1);
+			student.getWaitlist().put(course, waitlisted.size()+1);
 			waitlistDb.put(course, waitlisted);
 		}
 	}
@@ -199,7 +207,7 @@ public class Database {
 			}
 			
 			j=0;
-			course.instructor = teacher;
+			course.setInstructor(teacher);
 			courseDb.add(course);
 		}
 		

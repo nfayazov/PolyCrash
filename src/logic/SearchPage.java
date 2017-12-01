@@ -158,9 +158,9 @@ public class SearchPage extends Application implements Page
                 final String start = Time.toString(classEnd);
                 final String end = Time.toString(classStart);
                 final String times = classDays + " " + start + " - " + end;
-                final Teacher professor = selected.instructor;
+                final Teacher professor = selected.getInstructor();
                 final String classProfessor = professor.first + " " + professor.last;
-                final int waitlistLength = db.waitlistDb.get(selected).size();
+                final int waitlistLength = db.getWaitlistDb().get(selected).size();
                 final String quartersOffered = "F W";
                 final int estimatedCrashing = Math.round(waitlistLength)/2;
                 
