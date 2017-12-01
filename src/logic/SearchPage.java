@@ -187,8 +187,7 @@ public class SearchPage extends Application implements Page
                 viewBtn.getChildren().add(viewClass);
                 grid.add(viewBtn, 0, 6);
                 
-                viewClass.setOnAction(new EventHandler<ActionEvent>() {
-                	public void handle(ActionEvent e)
+                viewClass.setOnAction(event ->
                 	{
                 		
                 		final Stage popupStage =new Stage();
@@ -238,23 +237,18 @@ public class SearchPage extends Application implements Page
                 		
                 		
                 		
-                		Button button1= new Button("Close");
-                		button1.setStyle(fxTestGap
+                		Button close= new Button("Close");
+                		close.setStyle(fxTestGap
                 				+ fxBorder
                 				+ fxBackground
                 				+ fxFontSize
                 				+ fxTextFill);
-                		button1.setOnAction(new EventHandler<ActionEvent>() {
-                			public void handle(ActionEvent e)
-                			{
-                				popupStage.close();
-                			}
-                		});
+                		close.setOnAction(event2 ->
+                				popupStage.close()
+                		);
                 		Scene scene1= new Scene(popGrid, 500, 200);
                 		popupStage.setScene(scene1);
                 		popupStage.showAndWait();
-                		
-                	}
                 });
                 
                 final Button addToSchedule = new Button("Add to Schedule");
@@ -268,14 +262,10 @@ public class SearchPage extends Application implements Page
                 addBtn.getChildren().add(addToSchedule);
                 grid.add(addBtn, 4, 6);
                 
-                addToSchedule.setOnAction(new EventHandler<ActionEvent>() {
-                	public void handle(ActionEvent e)
-                	{
-                		System.out.println("Send this information to Schedule");
+                addToSchedule.setOnAction(event -> {
                 		Map<String, Student> studentList = db.getStudentTable();
                 		Student student = studentList.get(username);
                 		student.addCourse(selected);
-                	}
                 });
             }
         });
