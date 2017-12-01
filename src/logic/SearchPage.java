@@ -28,13 +28,11 @@ public class SearchPage extends Application implements Page
 	Label label1;
 	Button button1;
 	int i = 1;
-	private String username;
 	final Database db = Database.getInstance();
 	Map<String, Student> studentList = db.getStudentTable();
 	Student student;
 	
 	public SearchPage(String username) {
-		this.username = username;
 		student = studentList.get(username);
 	}
 	
@@ -135,10 +133,10 @@ public class SearchPage extends Application implements Page
                 String style = "-fx-font-color: " + Colors.LIGHT_GREEN;
             		targetClassName.setStyle(style);
             		
-            		targetClassTimings.setFill(Color.web(Colors.DARK_GREEN));//setFill(Color.DARKGREEN);
+            		targetClassTimings.setFill(Color.web(Colors.DARK_GREEN));
             		targetClassTimings.setStyle(style);
             		
-            		targetClassProfessor.setFill(Color.web(Colors.DARK_GREEN));//setFill(Color.DARKGREEN);
+            		targetClassProfessor.setFill(Color.web(Colors.DARK_GREEN));
             		targetClassProfessor.setStyle(style);
                 
                 final String selectedClass = searchField.getText();
@@ -163,7 +161,7 @@ public class SearchPage extends Application implements Page
                 final String classProfessor = professor.first + " " + professor.last;
                 final int waitlistLength = db.getWaitlistDb().get(selected).size();
                 final String quartersOffered = "F W";
-                final int estimatedCrashing = Math.round(waitlistLength)/2;
+                final int estimatedCrashing = waitlistLength/2;
                 
                 
                 targetClassName.setText(selectedClass);
