@@ -24,13 +24,15 @@ public class SchedulePage implements Page{
 	public Button pushClass;
 	
 	
-	static final String BSTYLE = "-fx-border-style:solid;";
+	static final String BSTYLE = "-fx-border-style: ";
 	static final String BORCOLOR = "-fx-border-color: ";
 	static final String TFILL = "-fx-text-fill: ";
 
 	static final String BGCOLOR = "-fx-background-color: ";
 	static final String WHITE = "#FFF;";
 	static final String PAD = "-fx-padding: ";
+	static final String BGRADIUS = "-fx-background-radius: ";
+	static final String FSIZE = "-fx-font-size: ";
 
 	public SchedulePage(Schedule s) {
 		this.s = s;
@@ -93,7 +95,7 @@ public class SchedulePage implements Page{
 			top.setStyle("-fx-border-style: hidden solid hidden hidden;"
 				+ BORCOLOR+LIGHT_GREEN+";"
 				+ BGCOLOR + WHITE
-				+ "-fx-background-radius:15 0 0 0;");
+				+ BGRADIUS + "15 0 0 0;");
 			top.setPrefHeight(25);
 			top.setPrefWidth(columnwidth);
 			schedule.add(top, columnIndex, i);
@@ -105,7 +107,7 @@ public class SchedulePage implements Page{
 			+ BORCOLOR+LIGHT_GREEN+";"
 			+ BGCOLOR+ WHITE
 			+ PAD + "10;"
-			+ "-fx-background-radius:15 0 0 0;");
+			+ BGRADIUS + "15 0 0 0;");
 		top.setPrefHeight(50);
 		top.setPrefWidth(columnwidth);
 		schedule.add(top, columnIndex, 1);
@@ -118,7 +120,7 @@ public class SchedulePage implements Page{
 			if(course.onDay(day))
 			{					
 				Label courseBlock = new Label("("+course.name+")");
-				courseBlock.setStyle("-fx-border-style:solid;"
+				courseBlock.setStyle(BSTYLE +"solid;"
 						+ BORCOLOR+DARK_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+";"
 						+ TFILL+DARK_GREEN+";"
 						+ "-fx-font-size:.9em;"
@@ -134,7 +136,7 @@ public class SchedulePage implements Page{
 				courseBlock2.setStyle("-fx-border-style:hidden solid solid solid;"
 						+ BORCOLOR+DARK_GREEN+";"
 						+ TFILL+DARK_GREEN+";"
-						+ "-fx-font-size:.9em;"
+						+ FSIZE+".9em;"
 
 						+ BGCOLOR+LIGHT_GREEN+";"
 						+ PAD + "1;");
@@ -151,7 +153,7 @@ public class SchedulePage implements Page{
 						blankpane.setStyle("-fx-border-style:hidden solid hidden solid ;"
 								+ BORCOLOR+LIGHT_GREEN+" "+DARK_GREEN+" "+LIGHT_GREEN+" "+DARK_GREEN+";"
 								+ TFILL+DARK_GREEN+";"
-								+ "-fx-font-size:.9em;"
+								+ FSIZE+".9em;"
 
 								+ BGCOLOR+LIGHT_GREEN+";"
 								+ PAD + "1;");
@@ -170,7 +172,7 @@ public class SchedulePage implements Page{
 					+ BORCOLOR+LIGHT_GREEN+";"
 					+  BGCOLOR +  WHITE
 					+ PAD + "10;"
-					+ "-fx-background-radius:15 0 0 0;");
+					+ BGRADIUS+ "15 0 0 0;");
 				bottom.setPrefHeight(50);
 				bottom.setPrefWidth(columnwidth);
 				schedule.add(bottom, columnIndex, 34);
@@ -196,19 +198,19 @@ public class SchedulePage implements Page{
 	//Bottom pane functions below
 	private Button getAddClassButton()
 	{
-		Button addClass = new Button();
+		Button addClass1 = new Button();
 		Image addClassImage = new Image(getClass().getResourceAsStream("resources/addIcon_64px.png"), 
 				32, 32, false, false);
-		addClass.setGraphic(new ImageView(addClassImage));
-		addClass.setText("Add New Class");
-		addClass.setPrefWidth(300);
-		addClass.setStyle("-fx-graphic-text-gap: 10;"
+		addClass1.setGraphic(new ImageView(addClassImage));
+		addClass1.setText("Add New Class");
+		addClass1.setPrefWidth(300);
+		addClass1.setStyle("-fx-graphic-text-gap: 10;"
 				+ "-fx-border:none;"
 				+BGCOLOR+DARK_GREEN+";"
-				+ "-fx-font-size:1.6em;"
+				+ FSIZE+"1.6em;"
 				+ TFILL + WHITE);
 		
-		return addClass;
+		return addClass1;
 	}
 	
 	private Button getPushButton()
@@ -222,8 +224,8 @@ public class SchedulePage implements Page{
 		pushClass1.setStyle("-fx-graphic-text-gap: 10;"
 				+ "-fx-border:none;"
 				+ BGCOLOR+DARK_GREEN+";"
-				+ "-fx-font-size:1.6em;"
-				+ TFILL+ "#FFF;"
+				+ FSIZE+"1.6em;"
+				+ TFILL+ WHITE
 				+ "-fx-content-display:right");
 		
 		return pushClass1;
@@ -256,7 +258,7 @@ public class SchedulePage implements Page{
 			time.setStyle("-fx-border-style:solid solid hidden solid;"
 					+ BORCOLOR+LIGHT_GREEN+";"
 					+ TFILL + "#FFF; "
-					+ "-fx-font-size:1.1em;"
+					+ FSIZE+"1.1em;"
 
 					+ BGCOLOR+DARK_GREEN+";"
 					+ PAD + "1;");
@@ -269,8 +271,8 @@ public class SchedulePage implements Page{
 			Pane emptyCell = new Pane();
 			emptyCell.setStyle("-fx-border-style:hidden solid hidden solid;"
 					+ BORCOLOR+LIGHT_GREEN+";"
-					+ "-fx-text-fill: "+ "#FFF; "
-					+ "-fx-font-size:1.1em;"
+					+ TFILL+ "#FFF; "
+					+ FSIZE+ "1.1em;"
 					+ BGCOLOR+DARK_GREEN+";"
 					+ PAD + "1;");
 			schedule.add(emptyCell, 0, getRowFromTime(timestamp)+1);
@@ -286,7 +288,7 @@ public class SchedulePage implements Page{
 		lefttop.setStyle(BORCOLOR+LIGHT_GREEN+";"
 				+ BGCOLOR+LIGHT_GREEN+";"
 				+ PAD + "10;"
-				+ "-fx-background-radius:15 0 0 0;");
+				+ BGRADIUS + "15 0 0 0;");
 		lefttop.setPrefHeight(25);
 		lefttop.setPrefWidth(columnwidth);
 		schedule.add(lefttop, 0, 1);
@@ -299,7 +301,7 @@ public class SchedulePage implements Page{
 		leftbottom.setStyle(BORCOLOR+LIGHT_GREEN+";"
 				+ BGCOLOR+LIGHT_GREEN+";"
 				+ PAD + "10;"
-				+ "-fx-background-radius:0 0 0 15;");
+				+ BGRADIUS +"0 0 0 15;");
 		leftbottom.setPrefHeight(25);
 		leftbottom.setPrefWidth(columnwidth);
 		schedule.add(leftbottom, 0, 34);
