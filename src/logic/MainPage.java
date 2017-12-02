@@ -29,7 +29,6 @@ public class MainPage extends Application implements Page{
 	
 	
 	public void start(Stage stage) {
-		int i = 3;
 		db = Database.getInstance();
 		border = new BorderPane();
 		Login login = new Login();
